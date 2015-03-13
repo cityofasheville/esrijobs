@@ -6,11 +6,11 @@ import yaml
 
 def connsde( configkey ):
 
-  if configkey['out_folder_path'] is not None:
-    versions = arcpy.ListVersions(configkey['out_name'])
-  else:
-    versions = arcpy.ListVersions(os.path.join(configkey['out_folder_path'],configkey['out_name']))
-
+  #if configkey['out_folder_path'] is not None:
+  #  versions = arcpy.ListVersions(configkey['out_name'])
+  #else:
+  #  versions = arcpy.ListVersions(os.path.join(configkey['out_folder_path'],configkey['out_name']))
+  
   arcpy.CreateDatabaseConnection_management(configkey['out_folder_path'],
                                             configkey['out_name'],
                                             configkey['database_platform'],
@@ -25,28 +25,32 @@ def connsde( configkey ):
                                             configkey['version'],
                                             configkey['date'])
 
-  if configkey['out_folder_path'] is not None:
-    versions = arcpy.ListVersions(configkey['out_name'])
-  else:
-    versions = arcpy.ListVersions(os.path.join(configkey['out_folder_path'],configkey['out_name']))
-  print(versions)
+  #if configkey['out_folder_path'] is not None:
+  #  versions = arcpy.ListVersions(configkey['out_name'])
+  #else:
+  #  versions = arcpy.ListVersions(os.path.join(configkey['out_folder_path'],configkey['out_name']))
+  #print(versions)
 
 
 with open("config/config.yaml", 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 
-#print cfg
+print cfg
 
-#for section in cfg:
-    #print(section)
+for section in cfg:
+    print(section)
 
 print "\n"
 
 for key, value in cfg.items():
   connections =  cfg[key]
   for k in connections:
-    print k['out_folder_path']
+    print k['out_folder_path']+k['out_name']
     print "\n"
     connsde(k) 
-
+    if k['out_folder_path'] is not None:
+      versions = arcpy.ListVersions(k['out_folder_path']+k['out_name'])
+    else:
+      versions = arcpy.ListVersions(k['out_name'])
+    print(versions)
 
