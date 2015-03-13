@@ -4,3 +4,4 @@ config/*.yml
 versions/config/*.yaml
 versions/config/*.yml
 versions/*.sde
+versions/config/*.sde
