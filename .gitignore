@@ -1,4 +1,6 @@
-config/*
+config/*.yaml
+config/*.yml
 *.sde
-versions/config/*
+versions/config/*.yaml
+versions/config/*.yml
 versions/*.sde
