@@ -1,16 +1,20 @@
+#Manage Versions
 import arcpy
 import pprint
 import os
 from arcpy import env  
 import yaml
 
-def connsde( configkey ):
+#delete sde connections 
+def deleteconn(configkey):
+  if configkey['out_folder_path'] is None:
+    os.path.exists(configkey['out_name']) and os.remove(configkey['out_name'])
+  else:
+    os.path.exists(configkey['out_folder_path']+configkey['out_name']) and os.remove(configkey['out_folder_path']+configkey['out_name'])
 
-  #if configkey['out_folder_path'] is not None:
-  #  versions = arcpy.ListVersions(configkey['out_name'])
-  #else:
-  #  versions = arcpy.ListVersions(os.path.join(configkey['out_folder_path'],configkey['out_name']))
-  
+#create sde connections from config.yaml
+def connsde( configkey ):
+  deleteconn(configkey)  
   arcpy.CreateDatabaseConnection_management(configkey['out_folder_path'],
                                             configkey['out_name'],
                                             configkey['database_platform'],
@@ -24,29 +28,14 @@ def connsde( configkey ):
                                             configkey['version_type'],
                                             configkey['version'],
                                             configkey['date'])
-
-  #if configkey['out_folder_path'] is not None:
-  #  versions = arcpy.ListVersions(configkey['out_name'])
-  #else:
-  #  versions = arcpy.ListVersions(os.path.join(configkey['out_folder_path'],configkey['out_name']))
-  #print(versions)
-
-
+#get yaml configuration file
 with open("config/config.yaml", 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 
-print cfg
-
-for section in cfg:
-    print(section)
-
-print "\n"
-
+#traverse yaml create sde conenction string to remove,create, and alter versions
 for key, value in cfg.items():
   connections =  cfg[key]
   for k in connections:
-    print k['out_folder_path']+k['out_name']
-    print "\n"
     connsde(k) 
     if k['out_folder_path'] is not None:
       versions = arcpy.ListVersions(k['out_folder_path']+k['out_name'])
