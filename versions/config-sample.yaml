@@ -12,6 +12,16 @@ sde_connections:
   version_type: #
   version: #
   date: #
+  versions:
+    - version-name: test1
+      parent-version: sde.DEFAULT
+      access-permission: PUBLIC
+    - version-name: test2
+      parent-version: sde.DEFAULT
+      access-permission: PUBLIC
+    - version-name: test3
+      parent-version: sde.DEFAULT
+      access-permission: PUBLIC
 - out_folder_path: .
   out_name: name_two.sde
   database_platform: POSTGRESQL
@@ -25,3 +35,5 @@ sde_connections:
   version_type: #
   version: #
   date: #
+  versions: #
+
