@@ -4,7 +4,33 @@ import pprint
 import os
 from arcpy import env  
 import yaml
+import logging
+from logging import handlers
 
+# create logger with
+logger = logging.getLogger('application')
+logger.setLevel(logging.DEBUG)
+
+
+#setup loggin from config.yaml
+def emaillogger( configkey ):
+  MAILHOST = configkey['email-server']
+  FROM = configkey['email-to']
+  TO = configkey['email-to']
+  SUBJECT = configkey['email-subject']
+
+  smtpHandler =  logging.handlers.SMTPHandler(MAILHOST, FROM, TO, SUBJECT) 
+
+  infolog = logging.FileHandler('sde_versions.log')
+  infolog.setLevel(logging.ERROR)
+  formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+  infolog.setFormatter(formatter)
+
+  LOG = logging.getLogger() 
+  LOG.addHandler(smtpHandler) 
+
+  logger.addHandler(infolog)
+  logger.addHandler(LOG)
 
 #create version
 def createver(key,workspace):
@@ -18,15 +44,15 @@ def createver(key,workspace):
        #attemp to create new version
        try:
           arcpy.CreateVersion_management(workspace, k['parent-version'], k['version-name'], k['access-permission']) 
-        except:
-          print 'Failed'
+       except:
+          log.error("Create version " +  k['version-name'] + " Failed.")
        
        #Alter Version
        #attemp to alter version
        try:
          arcpy.AlterVersion_management(workspace,  k['version-name'],  k['version-name'], 'version for: '+ k['version-name'], k['access-permission'])
        except:
-         print 'Failed'
+         logger.error("Alter version " +  k['version-name'] + " Failed.")
 
 #delete version
 def deletever(key,workspace):
@@ -37,8 +63,8 @@ def deletever(key,workspace):
      if 'version-name' in key:
       try:
          arcpy.DeleteVersion_management(workspace, k['version-name'],) 
-       except:
-         print 'Failed'
+      except:
+         logger.error("Delete version " +  k['version-name'] + " Failed.")
 
 #delete sde connections 
 def deleteconn(configkey):
@@ -72,7 +98,13 @@ with open("config/config.yaml", 'r') as ymlfile:
 
 #traverse yaml create sde conenction string to remove,create, and alter versions
 for key, value in cfg.items():
-  connections =  cfg[key]
+  connections =  cfg['sde_connections']
+  emails = cfg['logging']
+
+  #loop keys setup loggind
+  for k in emails:
+    emaillogger(k)
+  
   #loop keys and create sde connection
   for k in connections:
     connsde(k)
@@ -81,6 +113,7 @@ for key, value in cfg.items():
   for k in connections:
     #loop version keys and delete versions if the exist
     if  'versions' in k:
+      ver = k['versions']
       if k['out_folder_path'] is not None:
         deletever(ver,k['out_folder_path']+k['out_name'])
       else:
@@ -90,14 +123,21 @@ for key, value in cfg.items():
   for k in connections:
        #loop version keys and compress sde this compress state tree
       if k['out_folder_path'] is not None:
-        arcpy.Compress_management(k['out_folder_path']+k['out_name'])
+        try:
+          arcpy.Compress_management(k['out_folder_path']+k['out_name'])
+        except:
+          logger.error("Compress version " +  k['out_folder_path']+k['out_name']  + " Failed.")
       else:
-        arcpy.Compress_management(k['out_name'])
-  
-  #create
+        try:
+          arcpy.Compress_management(k['out_name'])
+        except:
+          logger.error("Compress version " +  k['out_name'] + " Failed.")
+
+  #Create
   for k in connections:
-     #loop version keys and re-create versions
+    #loop version keys and re-create versions
     if  'versions' in k:
+      ver = k['versions']
       if k['out_folder_path'] is not None:
         createver(ver,k['out_folder_path']+k['out_name'])
       else:

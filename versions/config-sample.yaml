@@ -1,3 +1,8 @@
+logging:
+- email-server: emailhost
+  email-to: email @ domain
+  email-from: email @ domain
+  email-subject: Error with versioning!
 sde_connections:
 - out_folder_path: . 
   out_name: name_one.sde 
