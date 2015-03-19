@@ -5,3 +5,5 @@ versions/config/*.yaml
 versions/config/*.yml
 versions/*.sde
 versions/config/*.sde
+*.log
+versions/*.log

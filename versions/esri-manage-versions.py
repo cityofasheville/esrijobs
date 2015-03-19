@@ -93,7 +93,7 @@ def connsde( configkey ):
                                             configkey['version'],
                                             configkey['date'])
 #get yaml configuration file
-with open("config/config.yaml", 'r') as ymlfile:
+with open("config/config.yml", 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 
 #traverse yaml create sde conenction string to remove,create, and alter versions
