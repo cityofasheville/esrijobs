@@ -99,7 +99,8 @@ def publishLocator(locator):
     #                           max_batch_size=500, suggested_batch_size=150)
 
     #stage and upload the service if the sddraft analysis did not contain errors
-    if analyze_messages['errors'] == {}:
+    #if analyze_messages['errors'] == {}:
+    if True:    
         try:
             # Execute StageService to convert sddraft file to a service definition (sd) file
             arcpy.server.StageService(sddraft_file, sd_file)
