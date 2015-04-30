@@ -85,8 +85,8 @@ def publishLocator(locator):
     arcpy.env.overwriteOutput = True
 
     locator_path = "config/"
-    sddraft_file = "config/address.sddraft"
-    sd_file = "temp/address.sd"
+    sddraft_file = "files/address.sddraft"
+    sd_file = "files/address.sd"
     service_name = "Address"
     summary = "Address locator for the city of Asheville"
     tags = "address, locator, geocode"
