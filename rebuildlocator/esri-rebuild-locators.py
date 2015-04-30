@@ -86,7 +86,7 @@ def publishLocator(locator):
 
     locator_path = "files/address"
     sddraft_file = "files/address.sddraft"
-    sd_file = "/home/sd/address.sd"
+    sd_file = "/home/sde/address.sd"
     service_name = "Address"
     summary = "Address locator for the city of Asheville"
     tags = "address, locator, geocode"
@@ -100,7 +100,7 @@ def publishLocator(locator):
 
     #stage and upload the service if the sddraft analysis did not contain errors
     #if analyze_messages['errors'] == {}:
-    if True:    
+    if True:
         try:
             # Execute StageService to convert sddraft file to a service definition (sd) file
             arcpy.server.StageService(sddraft_file, sd_file)
