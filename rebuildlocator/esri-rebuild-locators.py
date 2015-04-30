@@ -86,17 +86,17 @@ def publishLocator(locator):
 
     locator_path = "files/address"
     sddraft_file = "files/address.sddraft"
-    sd_file = "files/address.sd"
+    sd_file = "/home/sd/address.sd"
     service_name = "Address"
     summary = "Address locator for the city of Asheville"
     tags = "address, locator, geocode"
     gis_server_connection_file = "config/simplicity.ags"
 
     #Create the sd draft file
-    analyze_messages  = arcpy.CreateGeocodeSDDraft(locator_path, sddraft_file, service_name,
-                               connection_file_path=gis_server_connection_file,
-                               summary=summary, tags=tags, max_result_size=20,
-                               max_batch_size=500, suggested_batch_size=150)
+    #analyze_messages  = arcpy.CreateGeocodeSDDraft(locator_path, sddraft_file, service_name,
+    #                           connection_file_path=gis_server_connection_file,
+    #                           summary=summary, tags=tags, max_result_size=20,
+    #                           max_batch_size=500, suggested_batch_size=150)
 
     #stage and upload the service if the sddraft analysis did not contain errors
     if analyze_messages['errors'] == {}:
@@ -129,12 +129,12 @@ for k in emails:
     emaillogger(k)
 
 #loop keys and create sde connection
-for k in connections:
-    connsde(k)
+#for k in connections:
+#    connsde(k)
 
 #loop keys and create ags connection
-for k in ags:
-    connags(k)
+#for k in ags:
+#    connags(k)
 
 
 #Create
