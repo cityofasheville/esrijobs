@@ -84,7 +84,7 @@ def publishLocator(locator):
     #Overwrite any existing outputs
     arcpy.env.overwriteOutput = True
 
-    locator_path = "config/"
+    locator_path = "config/address"
     sddraft_file = "files/address.sddraft"
     sd_file = "files/address.sd"
     service_name = "Address"
@@ -129,8 +129,8 @@ for k in emails:
     emaillogger(k)
 
 #loop keys and create sde connection
-#for k in connections:
-#    connsde(k)
+for k in connections:
+    connsde(k)
 
 #loop keys and create ags connection
 for k in ags:
