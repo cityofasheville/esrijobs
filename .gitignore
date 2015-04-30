@@ -5,5 +5,11 @@ versions/config/*.yaml
 versions/config/*.yml
 versions/*.sde
 versions/config/*.sde
+rebuildlocator/config/*.sde
+rebuildlocator/config/*.ags
+rebuildlocator/config/*.yaml
+rebuildlocator/config/*.yml
+rebuildlocator/*.sde
+rebuildlocator/*.ags
 *.log
 versions/*.log
