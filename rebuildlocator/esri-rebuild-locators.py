@@ -84,7 +84,7 @@ def publishLocator(locator):
     #Overwrite any existing outputs
     arcpy.env.overwriteOutput = True
 
-    locator_path = "config/address"
+    locator_path = "files/address"
     sddraft_file = "files/address.sddraft"
     sd_file = "files/address.sd"
     service_name = "Address"
