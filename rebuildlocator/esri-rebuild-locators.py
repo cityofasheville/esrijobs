@@ -77,6 +77,10 @@ def connsde( configkey ):
                                             configkey['date'])
 
 #create geocoder
+def createLocator(locator):
+    arcpy.RebuildAddressLocator_geocoding(locator)
+
+#rebuild geocoder
 def rebuildLocator(locator):
     arcpy.RebuildAddressLocator_geocoding(locator)
 
@@ -96,12 +100,11 @@ def publishLocator(locator):
     #Create the sd draft file
     analyze_messages  = arcpy.CreateGeocodeSDDraft(locator_path, sddraft_file, service_name,
                                connection_file_path=gis_server_connection_file,
-                               summary=summary, tags=tags, max_result_size=20,
-                               max_batch_size=500, suggested_batch_size=150)
+                               summary=summary, tags=tags)
 
     #stage and upload the service if the sddraft analysis did not contain errors
-    #if analyze_messages['errors'] == {}:
-    if True:
+    if analyze_messages['errors'] == {}:
+    #if True:
         try:
             # Execute StageService to convert sddraft file to a service definition (sd) file
             arcpy.server.StageService(sddraft_file, sd_file)
@@ -131,8 +134,8 @@ for k in emails:
     emaillogger(k)
 
 #loop keys and create sde connection
-#for k in connections:
-#    connsde(k)
+for k in connections:
+    connsde(k)
 
 #loop keys and create ags connection
 for k in ags:
@@ -144,8 +147,9 @@ for k in geocoder:
 #loop version keys and re-create versions
     if 'in_address_locator' in k:
         if k['in_address_locator'] is not None:
-#            rebuildLocator( k['in_address_locator'] )
-            publishLocator(k['in_address_locator'] )
+            rebuildLocator( k['in_address_locator'] )
+            print k
+            #publishLocator(k['in_address_locator'] )
 #if k['out_folder_path'] is not None:
 #    #print k['out_folder_path']+k['out_name']
 #    createlocator(k['out_folder_path']+k['out_name'])
