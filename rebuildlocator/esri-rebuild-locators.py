@@ -134,8 +134,8 @@ for k in emails:
 #    connsde(k)
 
 #loop keys and create ags connection
-#for k in ags:
-#    connags(k)
+for k in ags:
+    connags(k)
 
 
 #Create
