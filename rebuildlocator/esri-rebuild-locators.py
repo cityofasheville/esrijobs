@@ -84,46 +84,49 @@ def createLocator(locator):
 def rebuildLocator(locator):
     arcpy.RebuildAddressLocator_geocoding(locator)
 
-def publishLocator(locator):
+def publishLocator(info):
     #Overwrite any existing outputs
-    arcpy.env.overwriteOutput = True
-    arcpy.env.workspace = '/home/sde/esrijobs/rebuildlocator/files'
+    print info['workspace']
+    print info['service_name']
 
-    locator_path = "/home/sde/esrijobs/rebuildlocator/files/address"
-    sddraft_file = "/home/sde/esrijobs/rebuildlocator/files/address.sddraft"
-    sd_file = "/home/sde/esrijobs/rebuildlocator/files/address.sd"
-    service_name = "Address"
-    summary = "Address locator for the city of Asheville"
-    tags = "address, locator, geocode"
-    gis_server_connection_file = "/home/sde/esrijobs/rebuildlocator/config/simplicity.ags"
+    # arcpy.env.overwriteOutput = True
+    # arcpy.env.workspace = '/home/sde/esrijobs/rebuildlocator/files'
+    #
+    # locator_path = "/home/sde/esrijobs/rebuildlocator/files/address"
+    # sddraft_file = "/home/sde/esrijobs/rebuildlocator/files/address.sddraft"
+    # sd_file = "/home/sde/esrijobs/rebuildlocator/files/address.sd"
+    # service_name = "Address"
+    # summary = "Address locator for the city of Asheville"
+    # tags = "address, locator, geocode"
+    # gis_server_connection_file = "/home/sde/esrijobs/rebuildlocator/config/simplicity.ags"
+    #
+    # #Create the sd draft file
+    # analyze_messages  = arcpy.CreateGeocodeSDDraft(locator_path, sddraft_file, service_name,
+    #                            connection_file_path=gis_server_connection_file,
+    #                            summary=summary, tags=tags)
+    #
+    # #stage and upload the service if the sddraft analysis did not contain errors
+    # if analyze_messages['errors'] == {}:
+    # #if True:
+    #     try:
+    #         # Execute StageService to convert sddraft file to a service definition (sd) file
+    #         arcpy.server.StageService(sddraft_file, sd_file)
+    #         # Execute UploadServiceDefinition to publish the service definition file as a service
+    #         arcpy.server.UploadServiceDefinition(sd_file, gis_server_connection_file)
+    #         print "The geocode service was successfully published"
+    #     except arcpy.ExecuteError as ex:
+    #         print "An error occured"
+    #         print arcpy.GetMessages(2)
+    # else:
+    #     # if the sddraft analysis contained errors, display them
+    #     print "Error were returned when creating service definition draft"
+    #     pprint.pprint(analyze_messages['errors'], indent=2)
 
-    #Create the sd draft file
-    analyze_messages  = arcpy.CreateGeocodeSDDraft(locator_path, sddraft_file, service_name,
-                               connection_file_path=gis_server_connection_file,
-                               summary=summary, tags=tags)
-
-    #stage and upload the service if the sddraft analysis did not contain errors
-    if analyze_messages['errors'] == {}:
-    #if True:
-        try:
-            # Execute StageService to convert sddraft file to a service definition (sd) file
-            arcpy.server.StageService(sddraft_file, sd_file)
-            # Execute UploadServiceDefinition to publish the service definition file as a service
-            arcpy.server.UploadServiceDefinition(sd_file, gis_server_connection_file)
-            print "The geocode service was successfully published"
-        except arcpy.ExecuteError as ex:
-            print "An error occured"
-            print arcpy.GetMessages(2)
-    else:
-        # if the sddraft analysis contained errors, display them
-        print "Error were returned when creating service definition draft"
-        pprint.pprint(analyze_messages['errors'], indent=2)
 #get yaml configuration file
 with open("config/config.yml", 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 
 #traverse yaml create sde conenction string to remove,create, and alter versions
-#for key, value in cfg.items():
 connections =  cfg['sde_connections']
 geocoder = cfg['geocoder']
 ags = cfg['ags_connections']
@@ -141,17 +144,10 @@ for k in connections:
 for k in ags:
     connags(k)
 
-
 #Create
 for k in geocoder:
 #loop version keys and re-create versions
     if 'in_address_locator' in k:
         if k['in_address_locator'] is not None:
             rebuildLocator( k['in_address_locator'] )
-            print k
-            #publishLocator(k['in_address_locator'] )
-#if k['out_folder_path'] is not None:
-#    #print k['out_folder_path']+k['out_name']
-#    createlocator(k['out_folder_path']+k['out_name'])
-#else:
-#    createlocator(k['out_folder_path'])
+            publishLocator(k)
