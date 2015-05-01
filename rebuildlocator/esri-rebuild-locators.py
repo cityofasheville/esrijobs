@@ -103,7 +103,7 @@ def publishLocator(info):
     folder_name =info['folder_name']
     summary = info['summary']
     tags = info['tags']
-    max_candidate = info['max_candidate']
+    max_candidates = info['max_candidates']
 
     max_batch_size = info['max_batch_size']
     suggested_batch_size = info['max_batch_size']
