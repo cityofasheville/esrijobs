@@ -93,10 +93,10 @@ def publishLocator(locator):
     gis_server_connection_file = "config/simplicity.ags"
 
     #Create the sd draft file
-    #analyze_messages  = arcpy.CreateGeocodeSDDraft(locator_path, sddraft_file, service_name,
-    #                           connection_file_path=gis_server_connection_file,
-    #                           summary=summary, tags=tags, max_result_size=20,
-    #                           max_batch_size=500, suggested_batch_size=150)
+    analyze_messages  = arcpy.CreateGeocodeSDDraft(locator_path, sddraft_file, service_name,
+                               connection_file_path=gis_server_connection_file,
+                               summary=summary, tags=tags, max_result_size=20,
+                               max_batch_size=500, suggested_batch_size=150)
 
     #stage and upload the service if the sddraft analysis did not contain errors
     #if analyze_messages['errors'] == {}:
