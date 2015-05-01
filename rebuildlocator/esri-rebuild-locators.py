@@ -87,40 +87,56 @@ def rebuildLocator(locator):
 def publishLocator(info):
     #Overwrite any existing outputs
     print info['workspace']
-    print info['service_name']
+    print
 
-    # arcpy.env.overwriteOutput = True
-    # arcpy.env.workspace = '/home/sde/esrijobs/rebuildlocator/files'
-    #
-    # locator_path = "/home/sde/esrijobs/rebuildlocator/files/address"
-    # sddraft_file = "/home/sde/esrijobs/rebuildlocator/files/address.sddraft"
-    # sd_file = "/home/sde/esrijobs/rebuildlocator/files/address.sd"
-    # service_name = "Address"
-    # summary = "Address locator for the city of Asheville"
-    # tags = "address, locator, geocode"
-    # gis_server_connection_file = "/home/sde/esrijobs/rebuildlocator/config/simplicity.ags"
-    #
-    # #Create the sd draft file
-    # analyze_messages  = arcpy.CreateGeocodeSDDraft(locator_path, sddraft_file, service_name,
-    #                            connection_file_path=gis_server_connection_file,
-    #                            summary=summary, tags=tags)
-    #
-    # #stage and upload the service if the sddraft analysis did not contain errors
-    # if analyze_messages['errors'] == {}:
-    # #if True:
-    #     try:
-    #         # Execute StageService to convert sddraft file to a service definition (sd) file
-    #         arcpy.server.StageService(sddraft_file, sd_file)
-    #         # Execute UploadServiceDefinition to publish the service definition file as a service
-    #         arcpy.server.UploadServiceDefinition(sd_file, gis_server_connection_file)
-    #         print "The geocode service was successfully published"
-    #     except arcpy.ExecuteError as ex:
-    #         print "An error occured"
-    #         print arcpy.GetMessages(2)
-    # else:
-    #     # if the sddraft analysis contained errors, display them
-    #     print "Error were returned when creating service definition draft"
-    #     pprint.pprint(analyze_messages['errors'], indent=2)
+    arcpy.env.overwriteOutput = True
+    arcpy.env.workspace = info['workspace']
+
+    loc_path = info['loc_path']
+    out_sddraft = info['out_sddraft']
+    service_name = info['service_name']
+
+    server_type = info['server_type']
+    connection_file_path = info['connection_file_path']
+    copy_data_to_server = info['copy_data_to_server']
+
+    folder_name =info['folder_name']
+    summary = info['summary']
+    tags = info['tags']
+    max_candidate = info['max_candidate']
+
+    max_batch_size = info['max_batch_size']
+    suggested_batch_size = info['max_batch_size']
+    supported_operations = info['supported_operations']
+
+    #stagging
+    out_service_definition = info['out_service_definition']
+
+    #Create the sd draft file
+    analyze_messages  = arcpy.CreateGeocodeSDDraft (loc_path, out_sddraft, service_name,
+                                    server_type, connection_file_path, copy_data_to_server,
+                                    folder_name, summary, tags, max_candidates,
+                                    max_batch_size, suggested_batch_size, supported_operations)
+    #Create the sd draft file
+    #analyze_messages  = arcpy.CreateGeocodeSDDraft(locator_path, sddraft_file, service_name,
+    #                           connection_file_path=gis_server_connection_file,
+    #                           summary=summary, tags=tags)
+
+    #stage and upload the service if the sddraft analysis did not contain errors
+    if analyze_messages['errors'] == {}:
+        try:
+            # Execute StageService to convert sddraft file to a service definition (sd) file
+            arcpy.server.StageService(out_sddraft, out_service_definition)
+            # Execute UploadServiceDefinition to publish the service definition file as a service
+            arcpy.server.UploadServiceDefinition(out_service_definition, connection_file_path)
+            print "The geocode service was successfully published"
+        except arcpy.ExecuteError as ex:
+            print "An error occured"
+            print arcpy.GetMessages(2)
+    else:
+        # if the sddraft analysis contained errors, display them
+        print "Error were returned when creating service definition draft"
+        pprint.pprint(analyze_messages['errors'], indent=2)
 
 #get yaml configuration file
 with open("config/config.yml", 'r') as ymlfile:
