@@ -86,7 +86,7 @@ def publishLocator(locator):
 
     locator_path = "files/address"
     sddraft_file = "files/address.sddraft"
-    sd_file = "/home/sde/address.sd"
+    sd_file = "files/address.sd"
     service_name = "Address"
     summary = "Address locator for the city of Asheville"
     tags = "address, locator, geocode"
