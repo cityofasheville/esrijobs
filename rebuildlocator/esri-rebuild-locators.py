@@ -83,14 +83,15 @@ def rebuildLocator(locator):
 def publishLocator(locator):
     #Overwrite any existing outputs
     arcpy.env.overwriteOutput = True
+    arcpy.env.workspace = '/home/sde/esrijobs/rebuildlocator/files'
 
-    locator_path = "files/address"
-    sddraft_file = "files/address.sddraft"
-    sd_file = "address.sd"
+    locator_path = "/home/sde/esrijobs/rebuildlocator/files/address"
+    sddraft_file = "/home/sde/esrijobs/rebuildlocator/files/address.sddraft"
+    sd_file = "/home/sde/esrijobs/rebuildlocator/files/address.sd"
     service_name = "Address"
     summary = "Address locator for the city of Asheville"
     tags = "address, locator, geocode"
-    gis_server_connection_file = "config/simplicity.ags"
+    gis_server_connection_file = "/home/sde/esrijobs/rebuildlocator/config/simplicity.ags"
 
     #Create the sd draft file
     analyze_messages  = arcpy.CreateGeocodeSDDraft(locator_path, sddraft_file, service_name,
