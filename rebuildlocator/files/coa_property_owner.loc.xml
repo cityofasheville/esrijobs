@@ -1,0 +1,6845 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locators xsi:noNamespaceSchemaLocation="LocatorStyle.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<locator>
+		<name>General</name>
+		<desc>Single Field</desc><version>10.2</version>
+		<revision>$Revision: 33$</revision>
+		<revision_date>$Date: 3/30/2012 3:14:34 PM$</revision_date>
+		<!-- The input field names and their grammar references. The caption is used as the display label 
+    for the input field. The recognized_name tag contains the preferred field name for the input field 
+    in the table of addresses. -->
+		<inputs>
+			<default_input name="Single Line Input" length="100" grammar_ref="Location">
+				<caption xml:lang="en">Key</caption>
+				<recognized_name>Address</recognized_name>
+				<recognized_name>Addr</recognized_name>
+				<recognized_name>Address_1</recognized_name>
+				<recognized_name>Customer_Address</recognized_name>
+				<recognized_name>Name</recognized_name>
+			</default_input>
+			<input name="SingleKey" length="100">
+				<caption xml:lang="en">Key</caption>
+				<recognized_name>Address</recognized_name>
+				<recognized_name>Addr</recognized_name>
+				<recognized_name>Address_1</recognized_name>
+				<recognized_name>Customer_Address</recognized_name>
+			</input>
+		</inputs>
+		<grammar>
+			<multiline_grammar>
+				<multiline_def>
+					<alt>
+						<field_ref ref="SingleKey"/>
+						<elt ref="Location"/>
+						<result tag="Address">
+							<search_value ref="addressSearch"/>
+							<format_ref ref="key_field_format"/>
+						</result>
+					</alt>
+				</multiline_def>
+			</multiline_grammar>
+			<spelling>
+				<character_equivalency_table name="default">
+					<!--deprecated; used for backward compatibility with 10.0SP2 and earlier-->
+					<noise_chars list=".,'‘`´'‘&quot;; AOEIUYaoeiuyÀÁÄÅÓÔÕÖØàáâãäåðòóôõöøĀāăĄąŐőÈÉÍèéêëìíîïĒēĖėęěĪīĮįİıЁёŪūůűųÚÜ" cost="0.1"/>
+					<allowed_penalties list="0,1,1,1,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5"/>
+					<double_chars list="bcdfghjklmnpqrstvwxz" cost="0.1"/>
+					<entry from="sch" to="sh" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="ph" to="f" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="sion" to="tion" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="au" to="aw" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="er" to="re" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="ey" to="y" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="ea" to="ee" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="ieux" to="ew" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="ieux" to="ue" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="eux" to="ew" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="eux" to="ue" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="err" to="air" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="oe" to="ow" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="o" to="ow" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="ui" to="wa" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="sh" to="t" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="ch" to="t" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="eau" to="ow" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="eau" to="oe" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="eau" to="o" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="gd" to="gd" spell="50" cost="0.1" type="group"/>
+					<entry from="-' " to="-' " spell="90" cost="0.1" type="group"/>
+					<entry from="AOaoÀÁÄÅÓÔÕÖØàáâãäåðòóôõöøĀāăĄąŐő" to="AOaoÀÁÄÅÓÔÕÖØàáâãäåðòóôõöøĀāăĄąŐő" spell="80" cost="0.1" type="group"/>
+					<entry from="EIeiÈÉÍèéêëìíîïĒēĖėęěĪīĮįİıЁё" to="EIeiÈÉÍèéêëìíîïĒēĖėęěĪīĮįİıЁё" spell="90" cost="0.1" type="group"/>
+					<entry from="AIaiÀÁÄÅÍÚÜàáâãäåìíîïùúûüĀāăĄąĪīĮįİıŪūůűų" to="AIaiÀÁÄÅÍÚÜàáâãäåìíîïùúûüĀāăĄąĪīĮįİıŪūůűų" spell="80" cost="0.1" type="group"/>
+					<entry from="UuYyIiÍìíîïýÿĪīĮįİı" to="UuYyIiÍìíîïýÿĪīĮįİı" spell="80" cost="0.1" type="group"/>
+					<entry from="BDFPVbdfpv" to="BDFPVbdfpv" spell="80" cost="0.1" type="group"/>
+					<entry from="CcGKSgksÇçĆćČčğĢģĶķŚśŞşŠš" to="CcGKSgksÇçĆćČčğĢģĶķŚśŞşŠš" spell="80" cost="0.1" type="group"/>
+					<entry from="GgCJcjÇçĆćČčğĢģ" to="GgCJcjÇçĆćČčğĢģ" spell="80" cost="0.1" type="group"/>
+					<entry from="Hhћ" to="Hhћ" spell="90" cost="0.1" type="group"/>
+					<entry from="JjGgğĢģ" to="JjGgğĢģ" spell="90" cost="0.1" type="group"/>
+					<entry from="KkCcÇçĆćČčĶķ" to="KkCcÇçĆćČčĶķ" spell="90" cost="0.1" type="group"/>
+					<entry from="QqKk" to="QqKk" spell="90" cost="0.1" type="group"/>
+					<entry from="CScsÇçĆćČčŚśŞşŠš" to="CScsÇçĆćČčŚśŞşŠš" spell="90" cost="0.1" type="group"/>
+					<entry from="XxHhZz" to="XxHhZz" spell="80" cost="0.1" type="group"/>
+					<entry from="ZzŹźŻżŽž" to="ZzŹźŻżŽž" spell="90" cost="0.1" type="group"/>
+					<entry from="DTdtĎďĐđŢţŤť" to="DTdtĎďĐđŢţŤť" spell="90" cost="0.1" type="group"/>
+					<entry from="Ll1ĻļĽľŁł" to="Ll1ĻļĽľŁł" spell="90" cost="0.1" type="group"/>
+					<entry from="MNmnÑñńŅņŇň" to="MNmnÑñńŅņŇň" spell="90" cost="0.1" type="group"/>
+					<entry from="RrŕŘř" to="RrŕŘř" spell="90" cost="0.1" type="group"/>
+					<entry from="WwVv" to="WwVv" spell="90" cost="0.1" type="group"/>
+					<entry from="jh" to="jh" spell="90" cost="0.1" type="group"/>
+					<entry from="sz" to="sz" spell="90" cost="0.1" type="group"/>
+					<!-- end of deprecated -->
+					<spelling_parameters>
+						<noise_chars list=".,'‘`´'‘&quot;; AOEIUYaoeiuyÀÁÄÅÓÔÕÖØàáâãäåðòóôõöøĀāăĄąŐőÈÉÍèéêëìíîïĒēĖėęěĪīĮįİıЁёŪūůűųÚÜ" cost="0.1" spell="100"/>
+						<allowed_penalties list="0" spell="100"/>
+						<allowed_penalties list="0,1,1,1,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5" spell="90"/>
+						<allowed_penalties list="1,1,2,2,3,3,4,4,5" spell="50"/>
+						<double_chars list="cdfglmnprst" cost="0.1" spell="90"/>
+						<double_chars list="bcdfghklmnprst" cost="0.1" spell="70"/>
+						<double_chars list="bcdfghjklmnpqrstvwxz" cost="0.1" spell="50"/>
+						<ignore_end_chars list="'s" cost="0.1" spell="90"/>
+						<ignore_end_chars list="'se" cost="0.1" spell="70"/>
+						<entry from="sch" to="sh" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="ph" to="f" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="sion" to="tion" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="au" to="aw" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="er" to="re" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="ey" to="y" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="ea" to="ee" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+						<!-- Spelling sensitivity of 50 or less -->
+						<entry from="ieux" to="ew" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="ieux" to="ue" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="eux" to="ew" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="eux" to="ue" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="err" to="air" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="oe" to="ow" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="o" to="ow" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="ui" to="wa" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="sh" to="t" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="ch" to="t" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="eau" to="ow" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="eau" to="oe" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="eau" to="o" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="gd" to="gd" spell="50" cost="0.1" type="group"/>
+						<!-- Spelling sensitivity of 50 or less -->
+						<entry from="-' " to="-' " spell="90" cost="0.1" type="group"/>
+						<entry from="AOaoÀÁÄÅÓÔÕÖØàáâãäåðòóôõöøĀāăĄąŐő" to="AOaoÀÁÄÅÓÔÕÖØàáâãäåðòóôõöøĀāăĄąŐő" spell="80" cost="0.1" type="group"/>
+						<entry from="EIeiÈÉÍèéêëìíîïĒēĖėęěĪīĮįİıЁё" to="EIeiÈÉÍèéêëìíîïĒēĖėęěĪīĮįİıЁё" spell="90" cost="0.1" type="group"/>
+						<entry from="AIaiÀÁÄÅÍÚÜàáâãäåìíîïùúûüĀāăĄąĪīĮįİıŪūůűų" to="AIaiÀÁÄÅÍÚÜàáâãäåìíîïùúûüĀāăĄąĪīĮįİıŪūůűų" spell="80" cost="0.1" type="group"/>
+						<entry from="UuYyIiÍìíîïýÿĪīĮįİı" to="UuYyIiÍìíîïýÿĪīĮįİı" spell="80" cost="0.1" type="group"/>
+						<entry from="BDFPVbdfpv" to="BDFPVbdfpv" spell="80" cost="0.1" type="group"/>
+						<entry from="CcGKSgksÇçĆćČčğĢģĶķŚśŞşŠš" to="CcGKSgksÇçĆćČčğĢģĶķŚśŞşŠš" spell="80" cost="0.1" type="group"/>
+						<entry from="GgCJcjÇçĆćČčğĢģ" to="GgCJcjÇçĆćČčğĢģ" spell="80" cost="0.1" type="group"/>
+						<entry from="Hhћ" to="Hhћ" spell="90" cost="0.1" type="group"/>
+						<entry from="JjGgğĢģ" to="JjGgğĢģ" spell="90" cost="0.1" type="group"/>
+						<entry from="KkCcÇçĆćČčĶķ" to="KkCcÇçĆćČčĶķ" spell="90" cost="0.1" type="group"/>
+						<entry from="QqKk" to="QqKk" spell="90" cost="0.1" type="group"/>
+						<entry from="CScsÇçĆćČčŚśŞşŠš" to="CScsÇçĆćČčŚśŞşŠš" spell="90" cost="0.1" type="group"/>
+						<entry from="XxHhZz" to="XxHhZz" spell="80" cost="0.1" type="group"/>
+						<entry from="ZzŹźŻżŽž" to="ZzŹźŻżŽž" spell="90" cost="0.1" type="group"/>
+						<entry from="DTdtĎďĐđŢţŤť" to="DTdtĎďĐđŢţŤť" spell="90" cost="0.1" type="group"/>
+						<entry from="Ll1ĻļĽľŁł" to="Ll1ĻļĽľŁł" spell="90" cost="0.1" type="group"/>
+						<entry from="MNmnÑñńŅņŇň" to="MNmnÑñńŅņŇň" spell="90" cost="0.1" type="group"/>
+						<entry from="RrŕŘř" to="RrŕŘř" spell="90" cost="0.1" type="group"/>
+						<entry from="WwVv" to="WwVv" spell="90" cost="0.1" type="group"/>
+						<entry from="jh" to="jh" spell="90" cost="0.1" type="group"/>
+						<entry from="sz" to="sz" spell="90" cost="0.1" type="group"/>
+					</spelling_parameters>
+				</character_equivalency_table>
+				<character_equivalency_table name="scoring">
+					<!-- deprecated; used for backward compatibility with 10.0SP2 and earlier -->
+					<noise_chars list=".,'‘`´'‘&quot;;" cost="0"/>
+					<allowed_penalties list="0,1,1,1,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5"/>
+					<double_chars list="bcdfghjklmnpqrstvwxz" cost="0.1"/>
+					<entry from="sch" to="sh" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="ph" to="f" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="sion" to="tion" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="au" to="aw" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="er" to="re" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="ey" to="y" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="ea" to="ee" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="- " to="- " spell="90" cost="0.0" type="group"/>
+					<entry from="' " to="' " spell="90" cost="0.0" type="group"/>
+					<entry from="AOaoÀÁÄÅÓÔÕÖØàáâãäåðòóôõöøĀāăĄąŐő" to="AOaoÀÁÄÅÓÔÕÖØàáâãäåðòóôõöøĀāăĄąŐő" spell="80" cost="0.1" type="group"/>
+					<entry from="EIeiÈÉÍèéêëìíîïĒēĖėęěĪīĮįİıЁё" to="EIeiÈÉÍèéêëìíîïĒēĖėęěĪīĮįİıЁё" spell="90" cost="0.1" type="group"/>
+					<entry from="AIaiÀÁÄÅÍÚÜàáâãäåìíîïùúûüĀāăĄąĪīĮįİıŪūůűų" to="AIaiÀÁÄÅÍÚÜàáâãäåìíîïùúûüĀāăĄąĪīĮįİıŪūůűų" spell="80" cost="0.1" type="group"/>
+					<entry from="UuYyIiÍìíîïýÿĪīĮįİı" to="UuYyIiÍìíîïýÿĪīĮįİı" spell="80" cost="0.1" type="group"/>
+					<entry from="BDFPVbdfpv" to="BDFPVbdfpv" spell="50" cost="0.1" type="group"/>
+					<entry from="CcGKSgksÇçĆćČčğĢģĶķŚśŞşŠš" to="CcGKSgksÇçĆćČčğĢģĶķŚśŞşŠš" spell="50" cost="0.1" type="group"/>
+					<entry from="GgCJcjÇçĆćČčğĢģ" to="GgCJcjÇçĆćČčğĢģ" spell="80" cost="0.1" type="group"/>
+					<entry from="Hhћ" to="Hhћ" spell="90" cost="0.1" type="group"/>
+					<entry from="JjGgğĢģ" to="JjGgğĢģ" spell="90" cost="0.1" type="group"/>
+					<entry from="KkCcÇçĆćČčĶķ" to="KkCcÇçĆćČčĶķ" spell="90" cost="0.1" type="group"/>
+					<entry from="QqKk" to="QqKk" spell="90" cost="0.1" type="group"/>
+					<entry from="CScsÇçĆćČčŚśŞşŠš" to="CScsÇçĆćČčŚśŞşŠš" spell="90" cost="0.1" type="group"/>
+					<entry from="XxHhZz" to="XxHhZz" spell="80" cost="0.1" type="group"/>
+					<entry from="ZzŹźŻżŽž" to="ZzŹźŻżŽž" spell="90" cost="0.1" type="group"/>
+					<entry from="DTdtĎďĐđŢţŤť" to="DTdtĎďĐđŢţŤť" spell="90" cost="0.1" type="group"/>
+					<entry from="Ll1ĻļĽľŁł" to="Ll1ĻļĽľŁł" spell="90" cost="0.1" type="group"/>
+					<entry from="MNmnÑñńŅņŇň" to="MNmnÑñńŅņŇň" spell="90" cost="0.1" type="group"/>
+					<entry from="RrŕŘř" to="RrŕŘř" spell="90" cost="0.1" type="group"/>
+					<entry from="WwVv" to="WwVv" spell="90" cost="0.1" type="group"/>
+					<entry from="jh" to="jh" spell="90" cost="0.1" type="group"/>
+					<entry from="sz" to="sz" spell="90" cost="0.1" type="group"/>
+					<entry from="ieux" to="ew" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="ieux" to="ue" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="eux" to="ew" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="eux" to="ue" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="err" to="air" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="oe" to="ow" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="o" to="ow" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="ui" to="wa" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="sh" to="t" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="ch" to="t" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="eau" to="ow" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="eau" to="oe" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="eau" to="o" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+					<entry from="gd" to="gd" spell="50" cost="0.1" type="group"/>
+					<!-- end of deprecated -->
+					<spelling_parameters>
+						<noise_chars list=".,'‘`´'‘&quot;;" cost="0" spell="100"/>
+						<allowed_penalties list="0" spell="100"/>
+						<allowed_penalties list="0,1,1,1,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5" spell="90"/>
+						<allowed_penalties list="1,1,2,3,5" spell="50"/>
+						<double_chars list="cdfglmnprst" cost="0.1" spell="90"/>
+						<double_chars list="bcdfghklmnprst" cost="0.1" spell="70"/>
+						<double_chars list="bcdfghjklmnpqrstvwxz" cost="0.1" spell="50"/>
+						<ignore_end_chars list="'s" cost="0.1" spell="90"/>
+						<ignore_end_chars list="'se" cost="0.1" spell="70"/>
+						<entry from="sch" to="sh" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="ph" to="f" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="sion" to="tion" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="au" to="aw" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="er" to="re" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="ey" to="y" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="ea" to="ee" spell="90" cost="0.1" type="simple" bidirectional="true"/>
+						<!-- Spelling sensitivity of 50 or less -->
+						<entry from="ieux" to="ew" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="ieux" to="ue" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="eux" to="ew" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="eux" to="ue" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="err" to="air" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="oe" to="ow" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="o" to="ow" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="ui" to="wa" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="sh" to="t" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="ch" to="t" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="eau" to="ow" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="eau" to="oe" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="eau" to="o" spell="50" cost="0.1" type="simple" bidirectional="true"/>
+						<entry from="gd" to="gd" spell="50" cost="0.1" type="group"/>
+						<!-- Spelling sensitivity of 50 or less -->
+						<entry from="- " to="- " spell="90" cost="0.0" type="group"/>
+						<entry from="' " to="' " spell="90" cost="0.0" type="group"/>
+						<entry from="AOaoÀÁÄÅÓÔÕÖØàáâãäåðòóôõöøĀāăĄąŐő" to="AOaoÀÁÄÅÓÔÕÖØàáâãäåðòóôõöøĀāăĄąŐő" spell="80" cost="0.1" type="group"/>
+						<entry from="EIeiÈÉÍèéêëìíîïĒēĖėęěĪīĮįİıЁё" to="EIeiÈÉÍèéêëìíîïĒēĖėęěĪīĮįİıЁё" spell="90" cost="0.1" type="group"/>
+						<entry from="AIaiÀÁÄÅÍÚÜàáâãäåìíîïùúûüĀāăĄąĪīĮįİıŪūůűų" to="AIaiÀÁÄÅÍÚÜàáâãäåìíîïùúûüĀāăĄąĪīĮįİıŪūůűų" spell="80" cost="0.1" type="group"/>
+						<entry from="UuYyIiÍìíîïýÿĪīĮįİı" to="UuYyIiÍìíîïýÿĪīĮįİı" spell="80" cost="0.1" type="group"/>
+						<entry from="BDFPVbdfpv" to="BDFPVbdfpv" spell="50" cost="0.1" type="group"/>
+						<entry from="CcGKSgksÇçĆćČčğĢģĶķŚśŞşŠš" to="CcGKSgksÇçĆćČčğĢģĶķŚśŞşŠš" spell="50" cost="0.1" type="group"/>
+						<entry from="GgCJcjÇçĆćČčğĢģ" to="GgCJcjÇçĆćČčğĢģ" spell="80" cost="0.1" type="group"/>
+						<entry from="Hhћ" to="Hhћ" spell="90" cost="0.1" type="group"/>
+						<entry from="JjGgğĢģ" to="JjGgğĢģ" spell="90" cost="0.1" type="group"/>
+						<entry from="KkCcÇçĆćČčĶķ" to="KkCcÇçĆćČčĶķ" spell="90" cost="0.1" type="group"/>
+						<entry from="QqKk" to="QqKk" spell="90" cost="0.1" type="group"/>
+						<entry from="CScsÇçĆćČčŚśŞşŠš" to="CScsÇçĆćČčŚśŞşŠš" spell="90" cost="0.1" type="group"/>
+						<entry from="XxHhZz" to="XxHhZz" spell="80" cost="0.1" type="group"/>
+						<entry from="ZzŹźŻżŽž" to="ZzŹźŻżŽž" spell="90" cost="0.1" type="group"/>
+						<entry from="DTdtĎďĐđŢţŤť" to="DTdtĎďĐđŢţŤť" spell="90" cost="0.1" type="group"/>
+						<entry from="Ll1ĻļĽľŁł" to="Ll1ĻļĽľŁł" spell="90" cost="0.1" type="group"/>
+						<entry from="MNmnÑñńŅņŇň" to="MNmnÑñńŅņŇň" spell="90" cost="0.1" type="group"/>
+						<entry from="RrŕŘř" to="RrŕŘř" spell="90" cost="0.1" type="group"/>
+						<entry from="WwVv" to="WwVv" spell="90" cost="0.1" type="group"/>
+						<entry from="jh" to="jh" spell="90" cost="0.1" type="group"/>
+						<entry from="sz" to="sz" spell="90" cost="0.1" type="group"/>
+					</spelling_parameters>
+				</character_equivalency_table>
+			</spelling>
+			<section desc="Aliases">
+				<alias_list name="PlaceNameAliases">
+					<alias_list_ref ref="FullPlaceNameAliases"/>
+					<alias_list_ref ref="CountryAliases"/>
+					<alias_list_ref ref="StateAliases"/>
+					<alias_list_ref ref="CityAliases"/>
+				</alias_list>
+				<alias_list name="FullPlaceNameAliases">
+					<alias_def>
+						<alt>admin</alt>
+						<alt>administrative</alt>
+					</alias_def>
+					<alias_def>
+						<alt>alternate</alt>
+						<alt>alt</alt>
+					</alias_def>
+					<alias_def>
+						<alt>building</alt>
+						<alt>buildings</alt>
+						<alt>bldg</alt>
+					</alias_def>
+					<alias_def>
+						<alt>census designated place</alt>
+						<alt>census</alt>
+						<alt>cdp</alt>
+					</alias_def>
+					<alias_def>
+						<alt>disneyland</alt>
+						<alt>disney</alt>
+					</alias_def>
+					<alias_def>
+						<alt>division</alt>
+						<alt>div</alt>
+						<alt>divisions</alt>
+					</alias_def>
+					<alias_def>
+						<alt>international</alt>
+						<alt>int</alt>
+						<alt>intl</alt>
+						<alt>internatl</alt>
+					</alias_def>
+					<alias_def>
+						<alt>national</alt>
+						<alt>nat</alt>
+						<alt>natl</alt>
+					</alias_def>
+					<alias_def>
+						<alt>post Office</alt>
+						<alt>PO</alt>
+					</alias_def>
+					<alias_def>
+						<alt>postal</alt>
+						<alt>postal Code</alt>
+						<alt>PC</alt>
+					</alias_def>
+					<alias_def>
+						<alt>power</alt>
+						<alt>pwr</alt>
+					</alias_def>
+					<alias_def>
+						<alt>railroad</alt>
+						<alt>rail road</alt>
+						<alt>rr</alt>
+						<alt>rail</alt>
+					</alias_def>
+					<alias_def>
+						<alt>reserve</alt>
+						<alt>reverves</alt>
+						<alt>res</alt>
+						<alt>resv</alt>
+					</alias_def>
+					<alias_def>
+						<alt>road</alt>
+						<alt>rd</alt>
+					</alias_def>
+					<alias_def>
+						<alt>siding</alt>
+						<alt>sidings</alt>
+						<alt>side</alt>
+					</alias_def>
+					<alias_def>
+						<alt>state</alt>
+						<alt>st</alt>
+					</alias_def>
+					<alias_def>
+						<alt>territory</alt>
+						<alt>territories</alt>
+					</alias_def>
+					<alias_def>
+						<alt>air force</alt>
+						<alt>united states air force</alt>
+						<alt>usaf</alt>
+					</alias_def>
+					<!--<alias_list_ref ref="CityAliases"/>
+          <alias_list_ref ref="StateAliases"/>
+          <alias_list_ref ref="CountryAliases"/>-->
+				</alias_list>
+				<alias_list name="TypeAliases">
+					<alias_def>
+						<alt>1st order</alt>
+						<alt>first order</alt>
+					</alias_def>
+					<alias_def>
+						<alt>2nd order</alt>
+						<alt>second order</alt>
+					</alias_def>
+					<alias_def>
+						<alt>3rd order</alt>
+						<alt>third order</alt>
+					</alias_def>
+					<alias_def>
+						<alt>4th order</alt>
+						<alt>fourth order</alt>
+					</alias_def>
+					<alias_def>
+						<alt>abandoned</alt>
+						<alt>abnd</alt>
+					</alias_def>
+					<alias_def>
+						<alt>administrative</alt>
+						<alt>admin</alt>
+						<alt>administration</alt>
+						<alt>administrations</alt>
+					</alias_def>
+					<alias_def>
+						<alt>African Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>agency</alt>
+						<alt>agencies</alt>
+					</alias_def>
+					<alias_def>
+						<alt>agricultural</alt>
+						<alt>ag</alt>
+						<alt>agriculture</alt>
+						<alt>farm</alt>
+						<alt>farms</alt>
+						<alt>farming</alt>
+						<alt>farmstead</alt>
+						<alt>cultivated</alt>
+						<alt>cultivate</alt>
+						<alt>cultivation</alt>
+						<alt>plantation</alt>
+						<alt>plantations</alt>
+						<alt>ranch</alt>
+						<alt>ranches</alt>
+					</alias_def>
+					<alias_def>
+						<alt>airport</alt>
+						<alt>airports</alt>
+						<alt>airbase</alt>
+						<alt>airbases</alt>
+						<alt>airfield</alt>
+						<alt>airfields</alt>
+					</alias_def>
+					<alias_def>
+						<alt>alley</alt>
+						<alt>alleys</alt>
+					</alias_def>
+					<alias_def>
+						<alt>American Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>amphitheater</alt>
+						<alt>amphitheaters</alt>
+						<alt>amphitheatre</alt>
+						<alt>amphitheatres</alt>
+						<alt>stadium</alt>
+						<alt>stadiums</alt>
+						<alt>theatre</alt>
+						<alt>theatres</alt>
+						<alt>concert hall</alt>
+						<alt>concert halls</alt>
+					</alias_def>
+					<alias_def>
+						<alt>amusement park</alt>
+						<alt>amusement parks</alt>
+						<alt>theme park</alt>
+						<alt>theme parks</alt>
+					</alias_def>
+					<alias_def>
+						<alt>anabranch</alt>
+						<alt>anabranches</alt>
+					</alias_def>
+					<alias_def>
+						<alt>anchorage</alt>
+						<alt>anchorages</alt>
+					</alias_def>
+					<alias_def>
+						<alt>ancient</alt>
+						<alt>old</alt>
+						<alt>historic</alt>
+						<alt>historical</alt>
+					</alias_def>
+					<alias_def>
+						<alt>apron</alt>
+						<alt>aprons</alt>
+					</alias_def>
+					<alias_def>
+						<alt>aqueduct</alt>
+						<alt>aqueducts</alt>
+					</alias_def>
+					<alias_def>
+						<alt>arch</alt>
+						<alt>arches</alt>
+					</alias_def>
+					<alias_def>
+						<alt>area</alt>
+						<alt>areas</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Argentinean Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>artillery</alt>
+						<alt>bomb</alt>
+						<alt>bombing</alt>
+					</alias_def>
+					<alias_def>
+						<alt>astronomical</alt>
+						<alt>astronomy</alt>
+					</alias_def>
+					<alias_def>
+						<alt>asylum</alt>
+						<alt>asylums</alt>
+					</alias_def>
+					<alias_def>
+						<alt>athletic </alt>
+						<alt>stadium</alt>
+						<alt>stadiums</alt>
+						<alt>track</alt>
+						<alt>tracks</alt>
+						<alt>sports</alt>
+						<alt>sport</alt>
+						<alt>sporting</alt>
+					</alias_def>
+					<alias_def>
+						<alt>atoll</alt>
+						<alt>atolls</alt>
+					</alias_def>
+					<alias_def>
+						<alt>atomic</alt>
+						<alt>nuclear</alt>
+					</alias_def>
+					<alias_def>
+						<alt>atm</alt>
+						<alt>automatic teller machine</alt>
+						<alt>atms</alt>
+						<alt>atm machine</alt>
+						<alt>atm machines</alt>
+						<alt>cash machine</alt>
+						<alt>cash machines</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Australian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Austrian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>auto</alt>
+						<alt>autos</alt>
+						<alt>automobile</alt>
+						<alt>automobiles</alt>
+						<alt>car</alt>
+						<alt>cars</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Azerbaijan Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Balkan Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Baltic Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>bank</alt>
+						<alt>banks</alt>
+						<alt>finance</alt>
+						<alt>financial</alt>
+					</alias_def>
+					<alias_def>
+						<alt>bar</alt>
+						<alt>bars</alt>
+						<alt>pub</alt>
+						<alt>pubs</alt>
+						<alt>alcohol</alt>
+						<alt>beer</alt>
+						<alt>liquor</alt>
+						<alt>spirits</alt>
+						<alt>drinks</alt>
+						<alt>nightlife</alt>
+						<alt>cocktail</alt>
+						<alt>cocktails</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Barbecue</alt>
+						<alt>Southern Food</alt>
+						<alt>BBQ</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>base</alt>
+						<alt>bases</alt>
+						<alt>facility</alt>
+						<alt>facilities</alt>
+						<alt>post</alt>
+						<alt>posts</alt>
+					</alias_def>
+					<alias_def>
+						<alt>basin</alt>
+						<alt>basins</alt>
+					</alias_def>
+					<alias_def>
+						<alt>battlefield</alt>
+						<alt>battlefields</alt>
+					</alias_def>
+					<alias_def>
+						<alt>bay</alt>
+						<alt>bays</alt>
+						<alt>bight</alt>
+						<alt>bights</alt>
+						<alt>sound</alt>
+						<alt>sounds</alt>
+					</alias_def>
+					<alias_def>
+						<alt>beach</alt>
+						<alt>beaches</alt>
+					</alias_def>
+					<alias_def>
+						<alt>bed</alt>
+						<alt>beds</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Belgian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Belorussian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>bend</alt>
+						<alt>bends</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Bengali</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Bistro</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>bench</alt>
+						<alt>benches</alt>
+					</alias_def>
+					<alias_def>
+						<alt>blowhole</alt>
+						<alt>blowholes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>blowout</alt>
+						<alt>blowouts</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Bohemian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Bookstore</alt>
+						<alt>book</alt>
+						<alt>books</alt>
+						<alt ref="shopping"/>
+					</alias_def>
+					<alias_def>
+						<alt>Border Crossing</alt>
+						<alt>border crossings</alt>
+						<alt>border</alt>
+						<alt>borders</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Borough</alt>
+						<alt>boroughs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>boulder</alt>
+						<alt>boulders</alt>
+					</alias_def>
+					<alias_def>
+						<alt>boundary</alt>
+						<alt>boundaries</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Bowling</alt>
+						<alt>bowl</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Brasilian Food</alt>
+						<alt>Brazilian</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Breakfast</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>breakwater</alt>
+						<alt>breakwaters</alt>
+						<alt>jetty</alt>
+						<alt>jetties</alt>
+						<alt>seawall</alt>
+						<alt>seawalls</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Brewpub</alt>
+						<alt>brewpubs</alt>
+						<alt>pub</alt>
+						<alt>pubs</alt>
+						<alt>beer</alt>
+						<alt>brewery</alt>
+						<alt>breweries</alt>
+						<alt>ale</alt>
+						<alt>alehouse</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>bridge</alt>
+						<alt>bridges</alt>
+					</alias_def>
+					<alias_def>
+						<alt>British Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Bruneian Food</alt>
+						<alt>asian</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Burgers</alt>
+						<alt>burger</alt>
+						<alt>hamburger</alt>
+						<alt>hamburgers</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>building</alt>
+						<alt>buildings</alt>
+						<alt>structure</alt>
+						<alt>structures</alt>
+						<alt>edifice</alt>
+						<alt>edifices</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Bus Station</alt>
+						<alt>bus stations</alt>
+						<alt>bus</alt>
+						<alt>buses</alt>
+						<alt>transportation</alt>
+						<alt>public transportation</alt>
+						<alt>bus depot</alt>
+						<alt>bus depots</alt>
+						<alt>bus stop</alt>
+						<alt>bus stops</alt>
+					</alias_def>
+					<alias_def>
+						<alt>butte</alt>
+						<alt>buttes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>cairn</alt>
+						<alt>cairns</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Cajun Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>caldera</alt>
+						<alt>calderas</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Californian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>camp</alt>
+						<alt>camps</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Campground</alt>
+						<alt>campgrounds</alt>
+						<alt>camping</alt>
+						<alt>campsite</alt>
+						<alt>campsites</alt>
+						<alt>camp</alt>
+						<alt>camps</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Canadian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>canal</alt>
+						<alt>canals</alt>
+					</alias_def>
+					<alias_def>
+						<alt>cannery</alt>
+						<alt>canneries</alt>
+					</alias_def>
+					<alias_def>
+						<alt>canton</alt>
+						<alt>cantons</alt>
+					</alias_def>
+					<alias_def>
+						<alt>canyon</alt>
+						<alt>canyons</alt>
+						<alt>cyn</alt>
+						<alt>cnyn</alt>
+						<alt>gorge</alt>
+						<alt>gorges</alt>
+					</alias_def>
+					<alias_def>
+						<alt>capital</alt>
+						<alt>capitals</alt>
+					</alias_def>
+					<alias_def>
+						<alt>caravan</alt>
+						<alt>caravans</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Cargo</alt>
+						<alt>freight</alt>
+						<alt>shipping</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Caribbean Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Casino</alt>
+						<alt>casinos</alt>
+						<alt>gambling</alt>
+						<alt>gambling hall</alt>
+					</alias_def>
+					<alias_def>
+						<alt>castle</alt>
+						<alt>castles</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Caucasian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>causeway</alt>
+						<alt>causeways</alt>
+					</alias_def>
+					<alias_def>
+						<alt>cave</alt>
+						<alt>caves</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Cemetery</alt>
+						<alt>cemeteries</alt>
+						<alt>burial</alt>
+						<alt>burial ground</alt>
+						<alt>burial grounds</alt>
+						<alt>grave</alt>
+						<alt>graves</alt>
+					</alias_def>
+					<alias_def>
+						<alt>center</alt>
+						<alt>centers</alt>
+						<alt>centre</alt>
+						<alt>centres</alt>
+					</alias_def>
+					<alias_def>
+						<alt>channel</alt>
+						<alt>channels</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Chicken</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Chilean Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Chinese Food</alt>
+						<alt>asian</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Cinema</alt>
+						<alt>cinemas</alt>
+						<alt>movie</alt>
+						<alt>movies</alt>
+						<alt>theater</alt>
+						<alt>theaters</alt>
+						<alt>theatre</alt>
+						<alt>theatres</alt>
+						<alt>film</alt>
+						<alt>films</alt>
+					</alias_def>
+					<alias_def>
+						<alt>cirque</alt>
+						<alt>cirques</alt>
+					</alias_def>
+					<alias_def>
+						<alt>City Hall</alt>
+						<alt>city halls</alt>
+						<alt>city government</alt>
+						<alt>mayor</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Civic</alt>
+						<alt>community</alt>
+					</alias_def>
+					<alias_def>
+						<alt>clearing</alt>
+						<alt>clearings</alt>
+					</alias_def>
+					<alias_def>
+						<alt>cliff</alt>
+						<alt>cliffs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>clinic</alt>
+						<alt>clinics</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Clothing Store</alt>
+						<alt>clothing</alt>
+						<alt>clothes</alt>
+						<alt>apparel</alt>
+						<alt ref="shopping"/>
+					</alias_def>
+					<alias_def>
+						<alt>coal</alt>
+						<alt>coalfield</alt>
+						<alt>coalfields</alt>
+					</alias_def>
+					<alias_def>
+						<alt>coast</alt>
+						<alt>coasts</alt>
+						<alt>coastal</alt>
+					</alias_def>
+					<alias_def>
+						<alt>coconut</alt>
+						<alt>coconuts</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Coffee Shop</alt>
+						<alt>coffee shops</alt>
+						<alt>coffee</alt>
+						<alt>cafe</alt>
+						<alt>cafes</alt>
+						<alt>coffeehouse</alt>
+						<alt>coffeehouses</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>college</alt>
+						<alt>colleges</alt>
+						<alt>university</alt>
+						<alt>universities</alt>
+						<alt>univ</alt>
+						<alt>higher education</alt>
+						<alt>education</alt>
+						<alt>school</alt>
+						<alt>schools</alt>
+						<alt>academy</alt>
+						<alt>academies</alt>
+					</alias_def>
+					<alias_def>
+						<alt>colony</alt>
+						<alt>colonies</alt>
+					</alias_def>
+					<alias_def>
+						<alt>commune</alt>
+						<alt>communes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>communication </alt>
+						<alt>communications</alt>
+						<alt>comm</alt>
+					</alias_def>
+					<alias_def>
+						<alt>community</alt>
+						<alt>communities</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Commuter Rail</alt>
+						<alt>train</alt>
+						<alt>trains</alt>
+						<alt>metro</alt>
+						<alt>metros</alt>
+						<alt>subway</alt>
+						<alt>subways</alt>
+						<alt>transit</alt>
+						<alt>transits</alt>
+						<alt>transportation</alt>
+						<alt>public transportation</alt>
+						<alt>public transit</alt>
+					</alias_def>
+					<alias_def>
+						<alt>complex</alt>
+						<alt>complexes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>concession </alt>
+						<alt>concessions</alt>
+					</alias_def>
+					<alias_def>
+						<alt>cone</alt>
+						<alt>cones</alt>
+					</alias_def>
+					<alias_def>
+						<alt>confluence</alt>
+						<alt>confluences</alt>
+					</alias_def>
+					<alias_def>
+						<alt>congressional</alt>
+						<alt>congress</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Consumer Electronics </alt>
+						<alt>electronics</alt>
+						<alt ref="shopping"/>
+					</alias_def>
+					<alias_def>
+						<alt>Continental Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>continent</alt>
+						<alt>continents</alt>
+						<alt>continental</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Convenience Store</alt>
+						<alt>market</alt>
+						<alt>markets</alt>
+						<alt>marketplace</alt>
+						<alt>marketplaces</alt>
+						<alt ref="shopping"/>
+					</alias_def>
+					<alias_def>
+						<alt>Convention</alt>
+						<alt>conventions</alt>
+						<alt>exhibition</alt>
+						<alt>exhibitions</alt>
+					</alias_def>
+					<alias_def>
+						<alt>copper</alt>
+						<alt>cu</alt>
+					</alias_def>
+					<alias_def>
+						<alt>cordillera</alt>
+						<alt>cordilleras</alt>
+					</alias_def>
+					<alias_def>
+						<alt>corporation</alt>
+						<alt>corporations</alt>
+						<alt>company</alt>
+						<alt>companies</alt>
+						<alt>business</alt>
+						<alt>businesses</alt>
+					</alias_def>
+					<alias_def>
+						<alt>corral</alt>
+						<alt>corrals</alt>
+						<alt>pen</alt>
+						<alt>pens</alt>
+					</alias_def>
+					<alias_def>
+						<alt>corridor</alt>
+						<alt>corridors</alt>
+					</alias_def>
+					<alias_def>
+						<alt>country</alt>
+						<alt>countries</alt>
+						<alt>independent political entity</alt>
+					</alias_def>
+					<alias_def>
+						<alt>county</alt>
+						<alt>counties</alt>
+					</alias_def>
+					<alias_def>
+						<alt>County Council</alt>
+						<alt>county government</alt>
+					</alias_def>
+					<alias_def>
+						<alt>courthouse</alt>
+						<alt>courthouses</alt>
+						<alt>court house</alt>
+						<alt>court houses</alt>
+						<alt>justice</alt>
+						<alt>court</alt>
+						<alt>courts</alt>
+						<alt>court of law</alt>
+					</alias_def>
+					<alias_def>
+						<alt>crater</alt>
+						<alt>craters</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Creole Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Creperie</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>cut</alt>
+						<alt>cuts</alt>
+					</alias_def>
+					<alias_def>
+						<alt>dairy</alt>
+						<alt>dairies</alt>
+					</alias_def>
+					<alias_def>
+						<alt>dam</alt>
+						<alt>dams</alt>
+						<alt>weir</alt>
+						<alt>weirs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>dealership</alt>
+						<alt>dealerships</alt>
+						<alt>dealer</alt>
+						<alt>dealers</alt>
+						<alt>sales</alt>
+						<alt>seller</alt>
+						<alt>sellers</alt>
+						<alt>retailer</alt>
+						<alt>retailers</alt>
+						<alt ref="shopping"/>
+					</alias_def>
+					<alias_def>
+						<alt>Delivery Entrance</alt>
+						<alt>delivery</alt>
+						<alt>deliveries</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Department Store</alt>
+						<alt ref="shopping"/>
+					</alias_def>
+					<alias_def>
+						<alt>depot</alt>
+						<alt>depots</alt>
+					</alias_def>
+					<alias_def>
+						<alt>depression</alt>
+						<alt>depressions</alt>
+					</alias_def>
+					<alias_def>
+						<alt>desert</alt>
+						<alt>deserts</alt>
+					</alias_def>
+					<alias_def>
+						<alt>dispensary</alt>
+						<alt>dispensaries</alt>
+					</alias_def>
+					<alias_def>
+						<alt>distributary</alt>
+						<alt>distributaries</alt>
+					</alias_def>
+					<alias_def>
+						<alt>district</alt>
+						<alt>districts</alt>
+						<alt>area</alt>
+						<alt>areas</alt>
+					</alias_def>
+					<alias_def>
+						<alt>ditch</alt>
+						<alt>ditches</alt>
+					</alias_def>
+					<alias_def>
+						<alt>divide</alt>
+						<alt>divides</alt>
+					</alias_def>
+					<alias_def>
+						<alt>division</alt>
+						<alt>divisions</alt>
+						<alt>entity</alt>
+						<alt>entities</alt>
+					</alias_def>
+					<alias_def>
+						<alt>dock</alt>
+						<alt>docks</alt>
+						<alt>docking</alt>
+						<alt>dockyard</alt>
+						<alt>dockyards</alt>
+						<alt>boatyard</alt>
+						<alt>boatyards</alt>
+						<alt>dry dock</alt>
+						<alt>dry docks</alt>
+					</alias_def>
+					<alias_def>
+						<alt>dome</alt>
+						<alt>domes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>drainage</alt>
+						<alt>drain</alt>
+					</alias_def>
+					<alias_def>
+						<alt>dry lake</alt>
+						<alt>dry lakes</alt>
+						<alt>pan</alt>
+						<alt>pans</alt>
+						<alt>salt pan</alt>
+						<alt>salt pans</alt>
+					</alias_def>
+					<alias_def>
+						<alt>dry stream</alt>
+						<alt>dry streams</alt>
+					</alias_def>
+					<alias_def>
+						<alt>dune</alt>
+						<alt>dunes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Dutch Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>East European Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>economic</alt>
+						<alt>economy</alt>
+						<alt>economies</alt>
+					</alias_def>
+					<alias_def>
+						<alt>embassy</alt>
+						<alt>ambassador</alt>
+						<alt>ambassadors</alt>
+						<alt>diplomatic</alt>
+						<alt>diplomat</alt>
+						<alt>diplomacy</alt>
+					</alias_def>
+					<alias_def>
+						<alt>emirate</alt>
+						<alt>emirates</alt>
+					</alias_def>
+					<alias_def>
+						<alt>escarpment</alt>
+						<alt>escarpments</alt>
+						<alt>scarp</alt>
+						<alt>scarps</alt>
+					</alias_def>
+					<alias_def>
+						<alt>estate</alt>
+						<alt>estates</alt>
+					</alias_def>
+					<alias_def>
+						<alt>estuary</alt>
+						<alt>estuaries</alt>
+					</alias_def>
+					<alias_def>
+						<alt>evaporation pond</alt>
+						<alt>evaporation ponds</alt>
+					</alias_def>
+					<alias_def>
+						<alt>exit</alt>
+						<alt>exits</alt>
+					</alias_def>
+					<alias_def>
+						<alt>facility</alt>
+						<alt>facilities</alt>
+					</alias_def>
+					<alias_def>
+						<alt>factory</alt>
+						<alt>factories</alt>
+					</alias_def>
+					<alias_def>
+						<alt>fan</alt>
+						<alt>fans</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Fast Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>ferry</alt>
+						<alt>ferries</alt>
+					</alias_def>
+					<alias_def>
+						<alt>field</alt>
+						<alt>fields</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Filipino Food</alt>
+						<alt>asian</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Finnish Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>fishing</alt>
+						<alt>fish</alt>
+						<alt>fishponds</alt>
+					</alias_def>
+					<alias_def>
+						<alt>fissure</alt>
+						<alt>fissures</alt>
+					</alias_def>
+					<alias_def>
+						<alt>fjord</alt>
+						<alt>fjords</alt>
+					</alias_def>
+					<alias_def>
+						<alt>flat</alt>
+						<alt>flats</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Fondue</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>ford</alt>
+						<alt>fords</alt>
+						<alt>crossing</alt>
+						<alt>crossings</alt>
+					</alias_def>
+					<alias_def>
+						<alt>forest</alt>
+						<alt>forests</alt>
+						<alt>woods</alt>
+					</alias_def>
+					<alias_def>
+						<alt>fort</alt>
+						<alt>forts</alt>
+						<alt>fortress</alt>
+						<alt>fortresses</alt>
+					</alias_def>
+					<alias_def>
+						<alt>foundry</alt>
+						<alt>foundries</alt>
+					</alias_def>
+					<alias_def>
+						<alt>fracture</alt>
+						<alt>fractures</alt>
+					</alias_def>
+					<alias_def>
+						<alt>French Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>furrow</alt>
+						<alt>furrows</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Fusion</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>gap</alt>
+						<alt>gaps</alt>
+					</alias_def>
+					<alias_def>
+						<alt>garden</alt>
+						<alt>gardens</alt>
+					</alias_def>
+					<alias_def>
+						<alt>gasfield</alt>
+						<alt>gasfields</alt>
+						<alt>gas field</alt>
+						<alt>gas fields</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Gasoline</alt>
+						<alt>gas</alt>
+						<alt>petrol</alt>
+						<alt>petroleum</alt>
+						<alt>fuel</alt>
+					</alias_def>
+					<alias_def>
+						<alt>gate</alt>
+						<alt>gates</alt>
+						<alt>entrance</alt>
+						<alt>entrances</alt>
+					</alias_def>
+					<alias_def>
+						<alt>German Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>geyser</alt>
+						<alt>geysers</alt>
+					</alias_def>
+					<alias_def>
+						<alt>ghat</alt>
+						<alt>ghats</alt>
+					</alias_def>
+					<alias_def>
+						<alt>glacier</alt>
+						<alt>glaciers</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Goan</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>gold</alt>
+						<alt>au</alt>
+					</alias_def>
+					<alias_def>
+						<alt>golf course</alt>
+						<alt>golf courses</alt>
+						<alt>golf</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Government</alt>
+						<alt>bureaucracy</alt>
+						<alt>governance</alt>
+					</alias_def>
+					<alias_def>
+						<alt>governorate</alt>
+						<alt>governorates</alt>
+						<alt>state</alt>
+						<alt>states</alt>
+						<alt>province</alt>
+						<alt>provinces</alt>
+					</alias_def>
+					<alias_def>
+						<alt>grassland</alt>
+						<alt>grasslands</alt>
+						<alt>savanna</alt>
+						<alt>savannas</alt>
+						<alt>shrubland</alt>
+						<alt>shrublands</alt>
+						<alt>meadow</alt>
+						<alt>meadows</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Greek Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Grill</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Grocery</alt>
+						<alt>groceries</alt>
+						<alt>supermarket</alt>
+						<alt>supermarkets</alt>
+						<alt>market</alt>
+						<alt>markets</alt>
+						<alt ref="shopping"/>
+					</alias_def>
+					<alias_def>
+						<alt>grove</alt>
+						<alt>groves</alt>
+					</alias_def>
+					<alias_def>
+						<alt>guest house</alt>
+						<alt>guest houses</alt>
+						<alt>guesthouse</alt>
+						<alt>guesthouses</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Gujarati</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>gulf</alt>
+						<alt>gulfs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>gully</alt>
+						<alt>gullies</alt>
+					</alias_def>
+					<alias_def>
+						<alt>hammock</alt>
+						<alt>hammocks</alt>
+					</alias_def>
+					<alias_def>
+						<alt>hanging valley</alt>
+						<alt>hanging valleys</alt>
+					</alias_def>
+					<alias_def>
+						<alt>harbor</alt>
+						<alt>harbors</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Hawaiian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>headland</alt>
+						<alt>headlands</alt>
+					</alias_def>
+					<alias_def>
+						<alt>headquarters</alt>
+						<alt>HQ</alt>
+					</alias_def>
+					<alias_def>
+						<alt>headwaters</alt>
+						<alt>river source</alt>
+						<alt>river sources</alt>
+					</alias_def>
+					<alias_def>
+						<alt>heath</alt>
+						<alt>heaths</alt>
+					</alias_def>
+					<alias_def>
+						<alt>heliport</alt>
+						<alt>heliports</alt>
+						<alt>helicopter</alt>
+						<alt>helicopters</alt>
+					</alias_def>
+					<alias_def>
+						<alt>highway</alt>
+						<alt>highways</alt>
+						<alt>freeway</alt>
+						<alt>freeways</alt>
+						<alt>interstate</alt>
+						<alt>interstates</alt>
+					</alias_def>
+					<alias_def>
+						<alt>hill</alt>
+						<alt>hills</alt>
+						<alt>knoll</alt>
+						<alt>knolls</alt>
+					</alias_def>
+					<alias_def>
+						<alt>historical</alt>
+						<alt>history</alt>
+						<alt>landmark</alt>
+						<alt>landmarks</alt>
+					</alias_def>
+					<alias_def>
+						<alt>hole</alt>
+						<alt>holes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Home Improvement</alt>
+						<alt>hardware</alt>
+						<alt>do it yourself</alt>
+						<alt>lumber</alt>
+						<alt ref="shopping"/>
+					</alias_def>
+					<alias_def>
+						<alt>Home Specialty</alt>
+						<alt>home specialties</alt>
+						<alt>home furnishing</alt>
+						<alt>home furnishings</alt>
+						<alt>furnishings</alt>
+						<alt ref="shopping"/>
+					</alias_def>
+					<alias_def>
+						<alt>hospital</alt>
+						<alt>hospitals</alt>
+						<alt>medical</alt>
+						<alt>medicine</alt>
+						<alt>doctors</alt>
+						<alt>physicians</alt>
+						<alt>health care</alt>
+						<alt>healthcare</alt>
+						<alt>surgeons</alt>
+						<alt>emergency</alt>
+						<alt>emergency room</alt>
+						<alt>emergency rooms</alt>
+						<alt>er</alt>
+						<alt>urgent care</alt>
+					</alias_def>
+					<alias_def>
+						<alt>hot spring</alt>
+						<alt>hot springs</alt>
+						<alt>spring</alt>
+						<alt>springs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>hotel</alt>
+						<alt>hotels</alt>
+						<alt>motel</alt>
+						<alt>motels</alt>
+						<alt>lodging</alt>
+						<alt>accomodations</alt>
+						<alt>resort</alt>
+						<alt>resorts</alt>
+					</alias_def>
+					<alias_def>
+						<alt>house</alt>
+						<alt>houses</alt>
+						<alt>home</alt>
+						<alt>homes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>housing development</alt>
+						<alt>housing developments</alt>
+						<alt>subdivision</alt>
+						<alt>subdivisions</alt>
+						<alt>residential</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Hungarian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>hunting</alt>
+						<alt>hunt</alt>
+					</alias_def>
+					<alias_def>
+						<alt>hut</alt>
+						<alt>huts</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Hyderabadi</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>hydroelectric</alt>
+						<alt>hydroelectricity</alt>
+						<alt>hydro </alt>
+						<alt>hydroelectric power</alt>
+						<alt>hydro power</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Ice Cream</alt>
+						<alt>ice cream parlor</alt>
+						<alt>ice cream parlors</alt>
+						<alt>ice cream sop</alt>
+						<alt>ice cream shops</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Ice Skating Rink</alt>
+						<alt>skating</alt>
+						<alt>ice rink</alt>
+						<alt>ice rinks</alt>
+						<alt>ice skating</alt>
+						<alt>ice skating rinks</alt>
+					</alias_def>
+					<alias_def>
+						<alt>icecap</alt>
+						<alt>icecaps</alt>
+					</alias_def>
+					<alias_def>
+						<alt>independent</alt>
+						<alt>indep</alt>
+						<alt>ind</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Indian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Indonesian Food</alt>
+						<alt>asian</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>industrial</alt>
+						<alt>industry</alt>
+					</alias_def>
+					<alias_def>
+						<alt>inlet</alt>
+						<alt>inlets</alt>
+						<alt>cove</alt>
+						<alt>coves</alt>
+					</alias_def>
+					<alias_def>
+						<alt>inspection</alt>
+						<alt>inspect</alt>
+					</alias_def>
+					<alias_def>
+						<alt>institute</alt>
+						<alt>institution</alt>
+					</alias_def>
+					<alias_def>
+						<alt>interdune</alt>
+						<alt>interdunes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>intermittent</alt>
+						<alt>inter</alt>
+					</alias_def>
+					<alias_def>
+						<alt>International Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Irish Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>iron</alt>
+						<alt>fe</alt>
+					</alias_def>
+					<alias_def>
+						<alt>irrigation</alt>
+						<alt>irrigated</alt>
+						<alt>irrigate</alt>
+						<alt>irr</alt>
+					</alias_def>
+					<alias_def>
+						<alt>island</alt>
+						<alt>islands</alt>
+						<alt>isle</alt>
+						<alt>islet</alt>
+					</alias_def>
+					<alias_def>
+						<alt>israeli</alt>
+						<alt>israelis</alt>
+					</alias_def>
+					<alias_def>
+						<alt>isthmus</alt>
+						<alt>isthmuses</alt>
+						<alt>isthmi</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Italian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Jain</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Japanese Food</alt>
+						<alt>asian</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Jewish Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>junction</alt>
+						<alt>junctions</alt>
+						<alt>jct</alt>
+						<alt>jctn</alt>
+					</alias_def>
+					<alias_def>
+						<alt>karst</alt>
+						<alt>karst topography</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Konkani</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Korean Food</alt>
+						<alt>asian</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Kosher Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>lagoon</alt>
+						<alt>lagoons</alt>
+					</alias_def>
+					<alias_def>
+						<alt>lake</alt>
+						<alt>lakes</alt>
+						<alt>reservoir</alt>
+						<alt>reservoirs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>landing</alt>
+						<alt>landings</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Language</alt>
+						<alt>languages</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Latin American Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>ledge</alt>
+						<alt>ledges</alt>
+					</alias_def>
+					<alias_def>
+						<alt>leper</alt>
+						<alt>lepers</alt>
+						<alt>leprosarium</alt>
+					</alias_def>
+					<alias_def>
+						<alt>levee</alt>
+						<alt>leveees</alt>
+						<alt>dike</alt>
+						<alt>dikes</alt>
+						<alt>dyke</alt>
+						<alt>dykes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>library</alt>
+						<alt>libraries</alt>
+						<alt>books</alt>
+					</alias_def>
+					<alias_def>
+						<alt>lighthouse</alt>
+						<alt>lighthouses</alt>
+						<alt>beacon</alt>
+						<alt>beacons</alt>
+					</alias_def>
+					<alias_def>
+						<alt>limekiln</alt>
+						<alt>limekilns</alt>
+					</alias_def>
+					<alias_def>
+						<alt>locality</alt>
+						<alt>localities</alt>
+					</alias_def>
+					<alias_def>
+						<alt>lock</alt>
+						<alt>locks</alt>
+					</alias_def>
+					<alias_def>
+						<alt>logging</alt>
+						<alt>loggers</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Maharashtrian</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>maintenance</alt>
+						<alt>repair</alt>
+						<alt>repairs</alt>
+						<alt>service</alt>
+						<alt>services</alt>
+						<alt>garage</alt>
+						<alt>garages</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Malaysian Food</alt>
+						<alt>asian</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>mall</alt>
+						<alt>malls</alt>
+						<alt>shopping center</alt>
+						<alt>shopping centers</alt>
+						<alt>shopping centre</alt>
+						<alt>shopping centres</alt>
+						<alt ref="shopping"/>
+					</alias_def>
+					<alias_def>
+						<alt>Maltese Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Malvani</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>maneuver</alt>
+						<alt>maneuvers</alt>
+						<alt>manoeuvre </alt>
+						<alt>manoeuvre s</alt>
+					</alias_def>
+					<alias_def>
+						<alt>mangrove</alt>
+						<alt>mangroves</alt>
+					</alias_def>
+					<alias_def>
+						<alt>marina</alt>
+						<alt>marinas</alt>
+					</alias_def>
+					<alias_def>
+						<alt>maritime</alt>
+						<alt>marine</alt>
+					</alias_def>
+					<alias_def>
+						<alt>market</alt>
+						<alt>markets</alt>
+					</alias_def>
+					<alias_def>
+						<alt>marker</alt>
+						<alt>markers</alt>
+					</alias_def>
+					<alias_def>
+						<alt>mesa</alt>
+						<alt>mesas</alt>
+					</alias_def>
+					<alias_def>
+						<alt>meteorological</alt>
+						<alt>meteorology</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Mexican Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Middle Eastern Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>military</alt>
+						<alt>martial</alt>
+					</alias_def>
+					<alias_def>
+						<alt>mill</alt>
+						<alt>mills</alt>
+					</alias_def>
+					<alias_def>
+						<alt>mine</alt>
+						<alt>mines</alt>
+						<alt>mining</alt>
+						<alt>works</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Moghlai</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>monastery</alt>
+						<alt>monasteries</alt>
+						<alt>convent</alt>
+						<alt>convents</alt>
+						<alt>hermitage</alt>
+						<alt>hermitages</alt>
+					</alias_def>
+					<alias_def>
+						<alt>monument</alt>
+						<alt>monuments</alt>
+						<alt>landmark</alt>
+						<alt>landmarks</alt>
+					</alias_def>
+					<alias_def>
+						<alt>moraine</alt>
+						<alt>moraines</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Moroccan Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>mosque</alt>
+						<alt>mosques</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Motorcycle</alt>
+						<alt>motorcycles</alt>
+						<alt>motorbike</alt>
+						<alt>motorbikes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>mound</alt>
+						<alt>mounds</alt>
+					</alias_def>
+					<alias_def>
+						<alt>mountain</alt>
+						<alt>mountains</alt>
+						<alt>mount</alt>
+						<alt>mt</alt>
+					</alias_def>
+					<alias_def>
+						<alt>mud</alt>
+						<alt>muddy</alt>
+					</alias_def>
+					<alias_def>
+						<alt>municipality</alt>
+						<alt>municipalities</alt>
+					</alias_def>
+					<alias_def>
+						<alt>munitions</alt>
+						<alt>ammunition</alt>
+						<alt>weapon</alt>
+						<alt>weapons</alt>
+					</alias_def>
+					<alias_def>
+						<alt>museum</alt>
+						<alt>museums</alt>
+					</alias_def>
+					<alias_def>
+						<alt>nature</alt>
+						<alt>natural</alt>
+						<alt>wildlife</alt>
+					</alias_def>
+					<alias_def>
+						<alt>naval</alt>
+						<alt>navy</alt>
+						<alt>military</alt>
+					</alias_def>
+					<alias_def>
+						<alt>navigation</alt>
+						<alt>navigate</alt>
+					</alias_def>
+					<alias_def>
+						<alt>nightlife</alt>
+						<alt>nightclub</alt>
+						<alt>nightclubs</alt>
+						<alt>club</alt>
+						<alt>clubs</alt>
+						<alt>discotheque</alt>
+						<alt>discotheques</alt>
+						<alt>disco</alt>
+						<alt>discos</alt>
+						<alt>dancing</alt>
+						<alt>dance club</alt>
+						<alt>dance clubs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>North Indian</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>novitiate</alt>
+						<alt>novitiates</alt>
+					</alias_def>
+					<alias_def>
+						<alt>nunatak</alt>
+						<alt>nunataks</alt>
+					</alias_def>
+					<alias_def>
+						<alt>nursery</alt>
+						<alt>nurseries</alt>
+					</alias_def>
+					<alias_def>
+						<alt>oasis</alt>
+						<alt>oases</alt>
+					</alias_def>
+					<alias_def>
+						<alt>oblast</alt>
+						<alt>oblasts</alt>
+					</alias_def>
+					<alias_def>
+						<alt>observation</alt>
+						<alt>ovserve</alt>
+					</alias_def>
+					<alias_def>
+						<alt>observatory</alt>
+						<alt>observatories</alt>
+					</alias_def>
+					<alias_def>
+						<alt>ocean</alt>
+						<alt>oceans</alt>
+						<alt>sea</alt>
+						<alt>seas</alt>
+					</alias_def>
+					<alias_def>
+						<alt>office</alt>
+						<alt>offices</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Office Supply</alt>
+						<alt>office supplies</alt>
+						<alt>office service</alt>
+						<alt>office services</alt>
+						<alt ref="shopping"/>
+					</alias_def>
+					<alias_def>
+						<alt>oil </alt>
+						<alt>petroleum</alt>
+						<alt>oilfield</alt>
+						<alt>oilfields</alt>
+					</alias_def>
+					<alias_def>
+						<alt>olive</alt>
+						<alt>olives</alt>
+					</alias_def>
+					<alias_def>
+						<alt>opera</alt>
+						<alt>operas</alt>
+					</alias_def>
+					<alias_def>
+						<alt>orchard</alt>
+						<alt>orchards</alt>
+					</alias_def>
+					<alias_def>
+						<alt>ore treatment plant</alt>
+						<alt>ore treatment plants</alt>
+						<alt>treatment plant</alt>
+						<alt>treatment plants</alt>
+					</alias_def>
+					<alias_def>
+						<alt>oxbow lake</alt>
+						<alt>oxbow lakes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>pagoda</alt>
+						<alt>pagodas</alt>
+					</alias_def>
+					<alias_def>
+						<alt>palace</alt>
+						<alt>palaces</alt>
+					</alias_def>
+					<alias_def>
+						<alt>palm tree</alt>
+						<alt>palm</alt>
+					</alias_def>
+					<alias_def>
+						<alt>parish</alt>
+						<alt>parishes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>park</alt>
+						<alt>parks</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Park and Ride</alt>
+						<alt>commute</alt>
+						<alt>carpool</alt>
+						<alt>car pool</alt>
+						<alt>commuting</alt>
+						<alt>carpooling</alt>
+					</alias_def>
+					<alias_def>
+						<alt>parking lot</alt>
+						<alt>parking lots</alt>
+						<alt>parking</alt>
+						<alt>parking garage</alt>
+						<alt>parking garages</alt>
+						<alt>parking area</alt>
+					</alias_def>
+					<alias_def>
+						<alt>pass</alt>
+						<alt>passes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Pastries</alt>
+						<alt>pastry</alt>
+						<alt>bakery</alt>
+						<alt>bakeries</alt>
+						<alt>donut</alt>
+						<alt>donuts</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>peak</alt>
+						<alt>peaks</alt>
+						<alt>summit</alt>
+						<alt>summits</alt>
+					</alias_def>
+					<alias_def>
+						<alt>pen</alt>
+						<alt>pens</alt>
+						<alt>sheepfold</alt>
+						<alt>sheepfolds</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Performing Arts</alt>
+						<alt>stage</alt>
+						<alt>stages</alt>
+						<alt>theater</alt>
+						<alt>theaters</alt>
+						<alt>theatre</alt>
+						<alt>theatres</alt>
+						<alt>playhouse</alt>
+						<alt>playhouses</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Pharmacy</alt>
+						<alt>pharmacies</alt>
+						<alt>drug</alt>
+						<alt>drugs</alt>
+						<alt>prescriptions</alt>
+						<alt>medicine</alt>
+						<alt>drugstore</alt>
+						<alt>drugstores</alt>
+						<alt ref="shopping"/>
+					</alias_def>
+					<alias_def>
+						<alt>phosphate works</alt>
+						<alt>phosphate</alt>
+					</alias_def>
+					<alias_def>
+						<alt>pier</alt>
+						<alt>piers</alt>
+					</alias_def>
+					<alias_def>
+						<alt>pine</alt>
+						<alt>pines</alt>
+					</alias_def>
+					<alias_def>
+						<alt>pinnacle</alt>
+						<alt>pinnacles</alt>
+					</alias_def>
+					<alias_def>
+						<alt>pipeline</alt>
+						<alt>pipelines</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Pizza</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Place of Worship</alt>
+						<alt>places of worship</alt>
+						<alt>worship</alt>
+						<alt>religion</alt>
+						<alt>religious</alt>
+						<alt>church</alt>
+						<alt>churches</alt>
+						<alt>temple</alt>
+						<alt>temples</alt>
+						<alt>worship place</alt>
+						<alt>worship places</alt>
+					</alias_def>
+					<alias_def>
+						<alt>plain</alt>
+						<alt>plains</alt>
+					</alias_def>
+					<alias_def>
+						<alt>plant</alt>
+						<alt>plants</alt>
+					</alias_def>
+					<alias_def>
+						<alt>plateau</alt>
+						<alt>plateaus</alt>
+					</alias_def>
+					<alias_def>
+						<alt>POI</alt>
+						<alt>POIs</alt>
+						<alt>point of interest</alt>
+						<alt>points of interest</alt>
+					</alias_def>
+					<alias_def>
+						<alt>point</alt>
+						<alt>points</alt>
+						<alt>peninsula</alt>
+						<alt>peninsulas</alt>
+						<alt>cape</alt>
+						<alt>capes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>police</alt>
+						<alt>law</alt>
+						<alt>law enforcement</alt>
+						<alt>emergency</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Polish Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>political</alt>
+						<alt>politics</alt>
+						<alt>pol</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Polynesian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>pond</alt>
+						<alt>ponds</alt>
+					</alias_def>
+					<alias_def>
+						<alt>pool</alt>
+						<alt>pools</alt>
+					</alias_def>
+					<alias_def>
+						<alt>populated</alt>
+						<alt>population</alt>
+					</alias_def>
+					<alias_def>
+						<alt>port</alt>
+						<alt>ports</alt>
+					</alias_def>
+					<alias_def>
+						<alt>portage</alt>
+						<alt>portages</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Portuguese Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>post office</alt>
+						<alt>post offices</alt>
+						<alt>postal</alt>
+					</alias_def>
+					<alias_def>
+						<alt>postal code</alt>
+						<alt>zip code</alt>
+					</alias_def>
+					<alias_def>
+						<alt>power</alt>
+						<alt>energy</alt>
+					</alias_def>
+					<alias_def>
+						<alt>prefecture</alt>
+						<alt>prefectures</alt>
+					</alias_def>
+					<alias_def>
+						<alt>prison</alt>
+						<alt>prisons</alt>
+						<alt>jail</alt>
+						<alt>jails</alt>
+						<alt>detention</alt>
+						<alt>labor camp</alt>
+						<alt>labor camps</alt>
+					</alias_def>
+					<alias_def>
+						<alt>promenade</alt>
+						<alt>promontory</alt>
+						<alt>province</alt>
+					</alias_def>
+					<alias_def>
+						<alt>public</alt>
+						<alt>communal</alt>
+						<alt>common</alt>
+					</alias_def>
+					<alias_def>
+						<alt>pumping</alt>
+						<alt>pump</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Punjabi</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>pyramid</alt>
+						<alt>pyramids</alt>
+					</alias_def>
+					<alias_def>
+						<alt>quarry</alt>
+						<alt>quarries</alt>
+					</alias_def>
+					<alias_def>
+						<alt>quarter</alt>
+						<alt>quarters</alt>
+					</alias_def>
+					<alias_def>
+						<alt>quay</alt>
+						<alt>quays</alt>
+						<alt>wharf</alt>
+						<alt>wharfs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>racetrack</alt>
+						<alt>racetracks</alt>
+						<alt>track</alt>
+						<alt>tracks</alt>
+						<alt>racing</alt>
+					</alias_def>
+					<alias_def>
+						<alt>radio</alt>
+						<alt>radios</alt>
+					</alias_def>
+					<alias_def>
+						<alt>raion</alt>
+						<alt>raions</alt>
+						<alt>rayon</alt>
+						<alt>rayons</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Rajasthani</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>range</alt>
+						<alt>ranges</alt>
+					</alias_def>
+					<alias_def>
+						<alt>ravine</alt>
+						<alt>ravines</alt>
+					</alias_def>
+					<alias_def>
+						<alt>reach</alt>
+						<alt>reaches</alt>
+					</alias_def>
+					<alias_def>
+						<alt>reef</alt>
+						<alt>reefs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>refinery</alt>
+						<alt>refineries</alt>
+					</alias_def>
+					<alias_def>
+						<alt>reformatory</alt>
+						<alt>reformatories</alt>
+					</alias_def>
+					<alias_def>
+						<alt>refugee</alt>
+						<alt>refugees</alt>
+					</alias_def>
+					<alias_def>
+						<alt>rental</alt>
+						<alt>rentals</alt>
+						<alt>rent</alt>
+					</alias_def>
+					<alias_def>
+						<alt>research</alt>
+						<alt>researchers</alt>
+					</alias_def>
+					<alias_def>
+						<alt>reserve</alt>
+						<alt>reserves</alt>
+						<alt>preserve</alt>
+						<alt>preserves</alt>
+						<alt>reservation</alt>
+						<alt>reservations</alt>
+					</alias_def>
+					<alias_def>
+						<alt>resort</alt>
+						<alt>resorts</alt>
+					</alias_def>
+					<alias_def>
+						<alt>resthouse</alt>
+						<alt>resthouses</alt>
+					</alias_def>
+					<alias_def>
+						<alt>restroom</alt>
+						<alt>restrooms</alt>
+						<alt>bathroom</alt>
+						<alt>bathrooms</alt>
+						<alt>toilet</alt>
+						<alt>toilets</alt>
+						<alt>Rest Area</alt>
+						<alt>rest areas</alt>
+					</alias_def>
+					<alias_def>
+						<alt>retreat</alt>
+						<alt>retreats</alt>
+					</alias_def>
+					<alias_def>
+						<alt>ridge</alt>
+						<alt>ridges</alt>
+					</alias_def>
+					<alias_def>
+						<alt>rise</alt>
+						<alt>rises</alt>
+					</alias_def>
+					<alias_def>
+						<alt>road</alt>
+						<alt>roads</alt>
+						<alt>street</alt>
+						<alt>streets</alt>
+						<alt>rd</alt>
+						<alt>st</alt>
+					</alias_def>
+					<alias_def>
+						<alt>roadstead</alt>
+						<alt>roadsteads</alt>
+					</alias_def>
+					<alias_def>
+						<alt>rock</alt>
+						<alt>rocks</alt>
+						<alt>rocky</alt>
+						<alt>stone</alt>
+						<alt>stones</alt>
+						<alt>stony</alt>
+					</alias_def>
+					<alias_def>
+						<alt>rockfall</alt>
+						<alt>rockfalls</alt>
+						<alt>rockslide</alt>
+						<alt>rockslides</alt>
+					</alias_def>
+					<alias_def>
+						<alt>rookery</alt>
+						<alt>rookeries</alt>
+					</alias_def>
+					<alias_def>
+						<alt>route</alt>
+						<alt>routes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>ruin</alt>
+						<alt>ruins</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Russian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>sabkha</alt>
+						<alt>sabkhas</alt>
+						<alt>sebkha</alt>
+						<alt>sebkhas</alt>
+					</alias_def>
+					<alias_def>
+						<alt>saddle</alt>
+						<alt>saddles</alt>
+					</alias_def>
+					<alias_def>
+						<alt>salt</alt>
+						<alt>saline</alt>
+						<alt>salty</alt>
+					</alias_def>
+					<alias_def>
+						<alt>sanatorium</alt>
+						<alt>sanatoriums</alt>
+						<alt>sanitarium</alt>
+						<alt>sanitariums</alt>
+					</alias_def>
+					<alias_def>
+						<alt>sand</alt>
+						<alt>sandy</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Sandwich</alt>
+						<alt>sandwiches</alt>
+						<alt>deli</alt>
+						<alt>delis</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>satellite</alt>
+						<alt>satellites</alt>
+					</alias_def>
+					<alias_def>
+						<alt>sawmill</alt>
+						<alt>sawmills</alt>
+						<alt>mill</alt>
+						<alt>mills</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Scandinavian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>school</alt>
+						<alt>schools</alt>
+						<alt>education</alt>
+						<alt>academy</alt>
+						<alt>academies</alt>
+						<alt>prep school</alt>
+					</alias_def>
+					<alias_def>
+						<alt>scientific</alt>
+						<alt>science</alt>
+						<alt>scientist</alt>
+						<alt>scientists</alt>
+					</alias_def>
+					<alias_def>
+						<alt>scrubland</alt>
+						<alt>scrublands</alt>
+						<alt>scrub</alt>
+						<alt>brush</alt>
+					</alias_def>
+					<alias_def>
+						<alt>seachannel</alt>
+						<alt>seachannels</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Seafood</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>seamount</alt>
+						<alt>seamounts</alt>
+					</alias_def>
+					<alias_def>
+						<alt>seat</alt>
+						<alt>seats</alt>
+					</alias_def>
+					<alias_def>
+						<alt>service</alt>
+						<alt>services</alt>
+					</alias_def>
+					<alias_def>
+						<alt>settlement</alt>
+						<alt>settlements</alt>
+					</alias_def>
+					<alias_def>
+						<alt>shelf</alt>
+						<alt>shelves</alt>
+					</alias_def>
+					<alias_def>
+						<alt>shoal</alt>
+						<alt>shoals</alt>
+						<alt>spit</alt>
+						<alt>spits</alt>
+						<alt>sandbar</alt>
+						<alt>sandbars</alt>
+						<alt>bar</alt>
+						<alt>bars</alt>
+					</alias_def>
+					<alias_def>
+						<alt>shore</alt>
+						<alt>shrine</alt>
+					</alias_def>
+					<alias_def>
+						<alt>siding</alt>
+						<alt>sidings</alt>
+					</alias_def>
+					<alias_def>
+						<alt>sill</alt>
+						<alt>sills</alt>
+					</alias_def>
+					<alias_def>
+						<alt>sinkhole</alt>
+						<alt>sinkholes</alt>
+						<alt>hole</alt>
+						<alt>holes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>site</alt>
+						<alt>sites</alt>
+						<alt>place</alt>
+						<alt>places</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Ski</alt>
+						<alt>skiing</alt>
+						<alt>snowboard</alt>
+						<alt>snowboarding</alt>
+						<alt>snow</alt>
+						<alt>snow sports</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Ski Lift</alt>
+						<alt>ski lifts</alt>
+						<alt>lift</alt>
+						<alt>lifts</alt>
+					</alias_def>
+					<alias_def>
+						<alt>slide</alt>
+						<alt>slides</alt>
+					</alias_def>
+					<alias_def>
+						<alt>slope</alt>
+						<alt>slopes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>sluice</alt>
+						<alt>sluices</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Snacks</alt>
+						<alt>snack</alt>
+						<alt>beverages</alt>
+						<alt>beverage</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>snowfield</alt>
+						<alt>snowfields</alt>
+						<alt>snow</alt>
+					</alias_def>
+					<alias_def>
+						<alt>sound</alt>
+						<alt>sounds</alt>
+					</alias_def>
+					<alias_def>
+						<alt>South American Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>South Indian</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Southeast Asian Food</alt>
+						<alt>asian</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Southwestern Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>spa</alt>
+						<alt>spas</alt>
+					</alias_def>
+					<alias_def>
+						<alt>space</alt>
+						<alt>astronaut</alt>
+						<alt>astronauts</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Spanish Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Specialty</alt>
+						<alt>specialties</alt>
+						<alt ref="shopping"/>
+					</alias_def>
+					<alias_def>
+						<alt>spillway</alt>
+						<alt>spillways</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Sporting Goods</alt>
+						<alt>sporting</alt>
+						<alt>sports</alt>
+						<alt ref="shopping"/>
+					</alias_def>
+					<alias_def>
+						<alt>spring</alt>
+						<alt>springs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>spur</alt>
+						<alt>spurs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>square</alt>
+						<alt>aquares</alt>
+					</alias_def>
+					<alias_def>
+						<alt>stable</alt>
+						<alt>stables</alt>
+						<alt>horse</alt>
+						<alt>horses</alt>
+					</alias_def>
+					<alias_def>
+						<alt>state</alt>
+						<alt>states</alt>
+					</alias_def>
+					<alias_def>
+						<alt>station</alt>
+						<alt>stations</alt>
+						<alt>post</alt>
+						<alt>posts</alt>
+						<alt>area</alt>
+						<alt>areas</alt>
+						<alt>facility</alt>
+						<alt>facilities</alt>
+						<alt>base</alt>
+						<alt>bases</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Steak House</alt>
+						<alt>steak houses</alt>
+						<alt>steakhouse</alt>
+						<alt>steakhouses</alt>
+						<alt>steak</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>steps</alt>
+						<alt>stairs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>stop</alt>
+						<alt>stops</alt>
+					</alias_def>
+					<alias_def>
+						<alt>strait</alt>
+						<alt>straits</alt>
+						<alt>narrows</alt>
+					</alias_def>
+					<alias_def>
+						<alt>stream</alt>
+						<alt>streams</alt>
+						<alt>river</alt>
+						<alt>rivers</alt>
+						<alt>creek</alt>
+						<alt>creeks</alt>
+						<alt>watercourse</alt>
+						<alt>watercourses</alt>
+					</alias_def>
+					<alias_def>
+						<alt>sugar</alt>
+						<alt>white sugar</alt>
+						<alt>sucrose</alt>
+						<alt>sugar cane</alt>
+						<alt>sugar beets</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Surinamese Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Sushi</alt>
+						<alt>asian</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>swamp</alt>
+						<alt>swamps</alt>
+						<alt>marsh</alt>
+						<alt>marshes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>swimming</alt>
+						<alt>swim</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Swiss Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>tablemount</alt>
+						<alt>tablemounts</alt>
+						<alt>guyot</alt>
+						<alt>guyots</alt>
+					</alias_def>
+					<alias_def>
+						<alt>talus</alt>
+						<alt>scree</alt>
+					</alias_def>
+					<alias_def>
+						<alt>tank</alt>
+						<alt>tanks</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Tapas</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>temple</alt>
+						<alt>temples</alt>
+					</alias_def>
+					<alias_def>
+						<alt>terminal</alt>
+						<alt>terminals</alt>
+					</alias_def>
+					<alias_def>
+						<alt>terrace</alt>
+						<alt>terraces</alt>
+					</alias_def>
+					<alias_def>
+						<alt>territory</alt>
+						<alt>territories</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Thai Food</alt>
+						<alt>asian</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>tidal</alt>
+						<alt>tide</alt>
+						<alt>tides</alt>
+					</alias_def>
+					<alias_def>
+						<alt>tomb</alt>
+						<alt>tombs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>tongue</alt>
+						<alt>tongues</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Tourist Attraction</alt>
+						<alt>tourist attractions</alt>
+						<alt>tourism</alt>
+						<alt>tourist</alt>
+						<alt>tourists</alt>
+						<alt>Tourist Information</alt>
+						<alt>tourism information</alt>
+						<alt>tourist info</alt>
+						<alt>tourism info</alt>
+					</alias_def>
+					<alias_def>
+						<alt>tower</alt>
+						<alt>towers</alt>
+					</alias_def>
+					<alias_def>
+						<alt>traffic circle</alt>
+						<alt>traffic circles</alt>
+						<alt>roundabout</alt>
+						<alt>roundabouts</alt>
+						<alt>rotary</alt>
+						<alt>rotaries</alt>
+					</alias_def>
+					<alias_def>
+						<alt>trail</alt>
+						<alt>trails</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Train</alt>
+						<alt>trains</alt>
+						<alt>rail</alt>
+						<alt>railway</alt>
+						<alt>railways</alt>
+						<alt>railroad</alt>
+						<alt>railroads</alt>
+						<alt>rr</alt>
+						<alt>transportation</alt>
+						<alt>transit</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Transportation</alt>
+						<alt>transit</alt>
+					</alias_def>
+					<alias_def>
+						<alt>tree</alt>
+						<alt>trees</alt>
+					</alias_def>
+					<alias_def>
+						<alt>trench</alt>
+						<alt>trenches</alt>
+					</alias_def>
+					<alias_def>
+						<alt>triangulation </alt>
+						<alt>triangulate</alt>
+					</alias_def>
+					<alias_def>
+						<alt>tribal</alt>
+						<alt>tribes</alt>
+						<alt>tribe</alt>
+					</alias_def>
+					<alias_def>
+						<alt>trough</alt>
+						<alt>troughs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Truck</alt>
+						<alt>trucks</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Truck Stop</alt>
+						<alt>truck stops</alt>
+						<alt>truck plaza</alt>
+						<alt>truck plazas</alt>
+					</alias_def>
+					<alias_def>
+						<alt>tunnel</alt>
+						<alt>tunnels</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Turkish Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Ukrainian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>underground</alt>
+						<alt>subterranean</alt>
+						<alt>subsurface</alt>
+						<alt>sub surface</alt>
+					</alias_def>
+					<alias_def>
+						<alt>unit</alt>
+						<alt>units</alt>
+					</alias_def>
+					<alias_def>
+						<alt>upland</alt>
+						<alt>uplands</alt>
+					</alias_def>
+					<alias_def>
+						<alt>used</alt>
+						<alt>pre owned</alt>
+						<alt>preowned</alt>
+					</alias_def>
+					<alias_def>
+						<alt>valley</alt>
+						<alt>valleys</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Vegan Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Vegetarian Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>Venezuelan Food</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>veterinary</alt>
+						<alt>veterinarian</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Vietnamese Food</alt>
+						<alt>asian</alt>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt>village</alt>
+						<alt>villages</alt>
+					</alias_def>
+					<alias_def>
+						<alt>winery</alt>
+						<alt>wineries</alt>
+						<alt>wine</alt>
+						<alt>vineyard</alt>
+						<alt>vineyards</alt>
+					</alias_def>
+					<alias_def>
+						<alt>volcano</alt>
+						<alt>volcanos</alt>
+						<alt>volcanic</alt>
+					</alias_def>
+					<alias_def>
+						<alt>wadi</alt>
+						<alt>wadis</alt>
+						<alt>wadies</alt>
+					</alias_def>
+					<alias_def>
+						<alt>wall</alt>
+						<alt>walls</alt>
+					</alias_def>
+					<alias_def>
+						<alt>warehouse</alt>
+						<alt>warehouses</alt>
+						<alt>storehouse</alt>
+						<alt>storehouses</alt>
+					</alias_def>
+					<alias_def>
+						<alt>water</alt>
+						<alt>h2o</alt>
+					</alias_def>
+					<alias_def>
+						<alt>waterfall</alt>
+						<alt>waterfalls</alt>
+					</alias_def>
+					<alias_def>
+						<alt>waterhole</alt>
+						<alt>waterholes</alt>
+					</alias_def>
+					<alias_def>
+						<alt>waterworks</alt>
+						<alt>water supply</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Weigh</alt>
+						<alt>weight</alt>
+						<alt>scale</alt>
+						<alt>scales</alt>
+					</alias_def>
+					<alias_def>
+						<alt>well</alt>
+						<alt>wells</alt>
+					</alias_def>
+					<alias_def>
+						<alt>wetland</alt>
+						<alt>wetlands</alt>
+						<alt>bog</alt>
+						<alt>bogs</alt>
+						<alt>quagmire</alt>
+						<alt>quagmires</alt>
+						<alt>mire</alt>
+						<alt>mires</alt>
+						<alt>moor</alt>
+						<alt>moors</alt>
+					</alias_def>
+					<alias_def>
+						<alt>whirlpool</alt>
+						<alt>whirlpools</alt>
+					</alias_def>
+					<alias_def>
+						<alt>wildlife</alt>
+						<alt>animal</alt>
+						<alt>animals</alt>
+						<alt>zoo</alt>
+						<alt>zoos</alt>
+					</alias_def>
+					<alias_def>
+						<alt>windmill</alt>
+						<alt>windmills</alt>
+					</alias_def>
+					<alias_def>
+						<alt>wreck</alt>
+						<alt>wrecks</alt>
+					</alias_def>
+					<alias_def>
+						<alt>yard</alt>
+						<alt>yards</alt>
+					</alias_def>
+					<alias_def>
+						<alt>zone</alt>
+						<alt>zones</alt>
+						<alt>area</alt>
+						<alt>areas</alt>
+						<alt>region</alt>
+						<alt>regions</alt>
+					</alias_def>
+					<alias_def>
+						<alt ref="restaurant"/>
+					</alias_def>
+					<alias_def>
+						<alt ref="shopping"/>
+					</alias_def>
+				</alias_list>
+				<alias_list name="CityAliases">
+					<alias_def>
+						<alt>afb</alt>
+						<alt>air force base</alt>
+						<alt>air reserve base</alt>
+						<alt>a f b</alt>
+						<alt>a r b</alt>
+						<alt>arb</alt>
+					</alias_def>
+					<alias_def>
+						<alt>beltway</alt>
+						<alt>belt</alt>
+					</alias_def>
+					<alias_def>
+						<alt>cliff</alt>
+						<alt>cliffs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>corner</alt>
+						<alt>corners</alt>
+					</alias_def>
+					<alias_def>
+						<alt>cove</alt>
+						<alt>coves</alt>
+					</alias_def>
+					<alias_def>
+						<alt>country</alt>
+						<alt>countries</alt>
+					</alias_def>
+					<alias_def>
+						<alt>crossing</alt>
+						<alt>xing</alt>
+					</alias_def>
+					<alias_def>
+						<alt>community</alt>
+						<alt>comm</alt>
+					</alias_def>
+					<alias_def>
+						<alt>colonel</alt>
+						<alt>col</alt>
+					</alias_def>
+					<alias_def>
+						<alt>crownview</alt>
+						<alt>crown view</alt>
+					</alias_def>
+					<alias_def>
+						<alt>dallas</alt>
+						<alt>fort worth</alt>
+						<alt>ft worth</alt>
+						<alt>dfw</alt>
+					</alias_def>
+					<alias_def>
+						<alt ref="east"/>
+					</alias_def>
+					<alias_def>
+						<alt>estate</alt>
+						<alt>estates</alt>
+					</alias_def>
+					<alias_def>
+						<alt>executive</alt>
+						<alt>exec</alt>
+					</alias_def>
+					<alias_def>
+						<alt>flat</alt>
+						<alt>flats</alt>
+					</alias_def>
+					<alias_def>
+						<alt>fork</alt>
+						<alt>forks</alt>
+					</alias_def>
+					<alias_def>
+						<alt>fort</alt>
+						<alt>ft</alt>
+					</alias_def>
+					<alias_def>
+						<alt>great</alt>
+						<alt>gt</alt>
+					</alias_def>
+					<alias_def>
+						<alt>garden</alt>
+						<alt>gardens</alt>
+					</alias_def>
+					<alias_def>
+						<alt>glen</alt>
+						<alt>glens</alt>
+					</alias_def>
+					<alias_def>
+						<alt>green</alt>
+						<alt>greens</alt>
+					</alias_def>
+					<alias_def>
+						<alt>grove</alt>
+						<alt>groves</alt>
+					</alias_def>
+					<alias_def>
+						<alt>hillcreek</alt>
+						<alt>hill creek</alt>
+					</alias_def>
+					<alias_def>
+						<alt>harbor</alt>
+						<alt>harbors</alt>
+					</alias_def>
+					<alias_def>
+						<alt>heights</alt>
+						<alt>height</alt>
+						<alt>hts</alt>
+						<alt>hgts</alt>
+					</alias_def>
+					<alias_def>
+						<alt>high</alt>
+						<alt>hi</alt>
+					</alias_def>
+					<alias_def>
+						<alt>hill</alt>
+						<alt>hills</alt>
+					</alias_def>
+					<alias_def>
+						<alt>hollow</alt>
+						<alt>hollows</alt>
+					</alias_def>
+					<alias_def>
+						<alt>hospital</alt>
+						<alt>hosp</alt>
+					</alias_def>
+					<alias_def>
+						<alt>institute</alt>
+						<alt>inst</alt>
+					</alias_def>
+					<alias_def>
+						<alt>industrial</alt>
+						<alt>ind</alt>
+					</alias_def>
+					<alias_def>
+						<alt>inlet</alt>
+						<alt>inlt</alt>
+					</alias_def>
+					<alias_def>
+						<alt>island</alt>
+						<alt>is</alt>
+						<alt>isle</alt>
+						<alt>islands</alt>
+					</alias_def>
+					<alias_def>
+						<alt>junction</alt>
+						<alt>jct</alt>
+						<alt>jction</alt>
+						<alt>jctn</alt>
+						<alt>junctn</alt>
+						<alt>juncton</alt>
+						<alt>junctions</alt>
+						<alt>jctns</alt>
+						<alt>jcts</alt>
+					</alias_def>
+					<alias_def>
+						<alt>key</alt>
+						<alt>keys</alt>
+					</alias_def>
+					<alias_def>
+						<alt>knoll</alt>
+						<alt>knolls</alt>
+					</alias_def>
+					<alias_def>
+						<alt>locality</alt>
+						<alt>loc</alt>
+					</alias_def>
+					<alias_def>
+						<alt>laguana</alt>
+						<alt>laguna</alt>
+					</alias_def>
+					<alias_def>
+						<alt>lake</alt>
+						<alt>lk</alt>
+						<alt>lakes</alt>
+						<alt>lks</alt>
+					</alias_def>
+					<alias_def>
+						<alt>la</alt>
+						<alt>los angeles</alt>
+					</alias_def>
+					<alias_def>
+						<alt>las vegas</alt>
+						<alt>lv</alt>
+						<alt>vegas</alt>
+					</alias_def>
+					<alias_def>
+						<alt>mac</alt>
+						<alt>mc</alt>
+					</alias_def>
+					<alias_def>
+						<alt>meadow</alt>
+						<alt>meadows</alt>
+					</alias_def>
+					<alias_def>
+						<alt>medical</alt>
+						<alt>med</alt>
+					</alias_def>
+					<alias_def>
+						<alt>memorial</alt>
+						<alt>mem</alt>
+					</alias_def>
+					<alias_def>
+						<alt>mile</alt>
+						<alt>mi</alt>
+					</alias_def>
+					<alias_def>
+						<alt>military</alt>
+						<alt>mil</alt>
+					</alias_def>
+					<alias_def>
+						<alt>millcreek</alt>
+						<alt>mill creek</alt>
+					</alias_def>
+					<alias_def>
+						<alt>mills ridge</alt>
+						<alt>mills</alt>
+					</alias_def>
+					<alias_def>
+						<alt>moscow</alt>
+						<alt>moskva</alt>
+					</alias_def>
+					<alias_def>
+						<alt>mountain</alt>
+						<alt>mt</alt>
+						<alt>mount</alt>
+						<alt>mnt</alt>
+						<alt>mtn</alt>
+						<alt>mntn</alt>
+						<alt>mountains</alt>
+						<alt>mntns</alt>
+						<alt>mtns</alt>
+					</alias_def>
+					<alias_def>
+						<alt ref="north"/>
+					</alias_def>
+					<alias_def>
+						<alt>national park</alt>
+						<alt>np</alt>
+						<alt>ntl pk</alt>
+					</alias_def>
+					<alias_def>
+						<alt>new york city</alt>
+						<alt>new york</alt>
+						<alt>nyc</alt>
+						<alt>ny</alt>
+					</alias_def>
+					<alias_def>
+						<alt>of</alt>
+						<alt>de</alt>
+					</alias_def>
+					<alias_def>
+						<alt>oilfield</alt>
+						<alt>oil field</alt>
+						<alt>oil fld</alt>
+					</alias_def>
+					<alias_def>
+						<alt>over falls</alt>
+						<alt>overfalls</alt>
+					</alias_def>
+					<alias_def>
+						<alt>park</alt>
+						<alt>pk</alt>
+						<alt>parc</alt>
+						<alt>prk</alt>
+						<alt>parks</alt>
+					</alias_def>
+					<alias_def>
+						<alt>place</alt>
+						<alt>pl</alt>
+					</alias_def>
+					<alias_def>
+						<alt>point</alt>
+						<alt>pt</alt>
+						<alt>points</alt>
+						<alt>pts</alt>
+					</alias_def>
+					<alias_def>
+						<alt>ranches</alt>
+						<alt>ranch</alt>
+						<alt>rancho</alt>
+						<alt>ranchos</alt>
+						<alt>rnch</alt>
+						<alt>rncho</alt>
+					</alias_def>
+					<alias_def>
+						<alt>reservation</alt>
+						<alt>res</alt>
+					</alias_def>
+					<alias_def>
+						<alt>ridge</alt>
+						<alt>rdg</alt>
+						<alt>rdge</alt>
+						<alt>ridges</alt>
+						<alt>rdgs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>river</alt>
+						<alt>rivers</alt>
+						<alt>rio</alt>
+						<alt>rios</alt>
+						<alt>riv</alt>
+						<alt>rivr</alt>
+						<alt>rvr</alt>
+					</alias_def>
+					<alias_def>
+						<alt>rodgers</alt>
+						<alt>rogers</alt>
+					</alias_def>
+					<alias_def>
+						<alt>saint</alt>
+						<alt>st</alt>
+					</alias_def>
+					<alias_def>
+						<alt>santa</alt>
+						<alt>san</alt>
+						<alt>santo</alt>
+						<alt>sta</alt>
+					</alias_def>
+					<alias_def>
+						<alt>shoal</alt>
+						<alt>shoals</alt>
+					</alias_def>
+					<alias_def>
+						<alt>shore</alt>
+						<alt>shores</alt>
+					</alias_def>
+					<alias_def>
+						<alt>salt lake city</alt>
+						<alt>slc</alt>
+						<alt>salt lake</alt>
+					</alias_def>
+					<alias_def>
+						<alt ref="south"/>
+					</alias_def>
+					<alias_def>
+						<alt>spring</alt>
+						<alt>springs</alt>
+					</alias_def>
+					<alias_def>
+						<alt>school</alt>
+						<alt>sch</alt>
+					</alias_def>
+					<alias_def>
+						<alt>stewart</alt>
+						<alt>stuart</alt>
+					</alias_def>
+					<alias_def>
+						<alt>terrace</alt>
+						<alt>ter</alt>
+						<alt>terr</alt>
+					</alias_def>
+					<alias_def>
+						<alt>township</alt>
+						<alt>twp</alt>
+						<alt>town</alt>
+					</alias_def>
+					<alias_def>
+						<alt>trail</alt>
+						<alt>tr</alt>
+					</alias_def>
+					<alias_def>
+						<alt>tunnel</alt>
+						<alt>tnl</alt>
+					</alias_def>
+					<alias_def>
+						<alt>university</alt>
+						<alt>uni</alt>
+						<alt>univ</alt>
+						<alt>state university</alt>
+						<alt>su</alt>
+					</alias_def>
+					<alias_def>
+						<alt>upper</alt>
+						<alt>up</alt>
+					</alias_def>
+					<alias_def>
+						<alt>valley</alt>
+						<alt>vly</alt>
+					</alias_def>
+					<alias_def>
+						<alt>verde</alt>
+						<alt>green</alt>
+					</alias_def>
+					<alias_def>
+						<alt>veterans</alt>
+						<alt>vets</alt>
+					</alias_def>
+					<alias_def>
+						<alt>villa</alt>
+						<alt>ville</alt>
+					</alias_def>
+					<alias_def>
+						<alt>village</alt>
+						<alt>villages</alt>
+					</alias_def>
+					<alias_def>
+						<alt ref="west"/>
+					</alias_def>
+				</alias_list>
+				<alias_list name="StateAliases">
+					<alias_def>
+						<alt>alaska</alt>
+						<alt>ak</alt>
+					</alias_def>
+					<alias_def>
+						<alt>alabama</alt>
+						<alt>al</alt>
+					</alias_def>
+					<alias_def>
+						<alt>arkansas</alt>
+						<alt>ar</alt>
+						<alt>ark</alt>
+					</alias_def>
+					<alias_def>
+						<alt>arizona</alt>
+						<alt>az</alt>
+						<alt>ariz</alt>
+					</alias_def>
+					<alias_def>
+						<alt>california</alt>
+						<alt>ca</alt>
+						<alt>calif</alt>
+						<alt>calfornia</alt>
+					</alias_def>
+					<alias_def>
+						<alt>colorado</alt>
+						<alt>co</alt>
+						<alt>colo</alt>
+					</alias_def>
+					<alias_def>
+						<alt>connecticut</alt>
+						<alt>ct</alt>
+						<alt>conn</alt>
+						<alt>conneticut</alt>
+					</alias_def>
+					<alias_def>
+						<alt>district of columbia</alt>
+						<alt>dc</alt>
+						<alt>d c</alt>
+					</alias_def>
+					<alias_def>
+						<alt>delaware</alt>
+						<alt>de</alt>
+						<alt>del</alt>
+					</alias_def>
+					<alias_def>
+						<alt>florida</alt>
+						<alt>fl</alt>
+						<alt>fla</alt>
+						<alt>flor</alt>
+					</alias_def>
+					<alias_def>
+						<alt>georgia</alt>
+						<alt>ga</alt>
+					</alias_def>
+					<alias_def>
+						<alt>hawaii</alt>
+						<alt>hi</alt>
+					</alias_def>
+					<alias_def>
+						<alt>iowa</alt>
+						<alt>ia</alt>
+					</alias_def>
+					<alias_def>
+						<alt>idaho</alt>
+						<alt>id</alt>
+						<alt>ida</alt>
+					</alias_def>
+					<alias_def>
+						<alt>illinois</alt>
+						<alt>il</alt>
+						<alt>ill</alt>
+					</alias_def>
+					<alias_def>
+						<alt>indiana</alt>
+						<alt>in</alt>
+					</alias_def>
+					<alias_def>
+						<alt>kansas</alt>
+						<alt>ks</alt>
+						<alt>kan</alt>
+						<alt>kans</alt>
+					</alias_def>
+					<alias_def>
+						<alt>kentucky</alt>
+						<alt>ky</alt>
+						<alt>ken</alt>
+						<alt>kent</alt>
+					</alias_def>
+					<alias_def>
+						<alt>louisiana</alt>
+						<alt>la</alt>
+					</alias_def>
+					<alias_def>
+						<alt>massachusetts</alt>
+						<alt>ma</alt>
+						<alt>mass</alt>
+					</alias_def>
+					<alias_def>
+						<alt>maryland</alt>
+						<alt>md</alt>
+					</alias_def>
+					<alias_def>
+						<alt>maine</alt>
+						<alt>me</alt>
+					</alias_def>
+					<alias_def>
+						<alt>michigan</alt>
+						<alt>mi</alt>
+						<alt>mich</alt>
+					</alias_def>
+					<alias_def>
+						<alt>minnesota</alt>
+						<alt>mn</alt>
+						<alt>minn</alt>
+					</alias_def>
+					<alias_def>
+						<alt>missouri</alt>
+						<alt>mo</alt>
+					</alias_def>
+					<alias_def>
+						<alt>mississippi</alt>
+						<alt>ms</alt>
+						<alt>miss</alt>
+					</alias_def>
+					<alias_def>
+						<alt>montana</alt>
+						<alt>mt</alt>
+						<alt>mont</alt>
+					</alias_def>
+					<alias_def>
+						<alt>north carolina</alt>
+						<alt>nc</alt>
+						<alt>n c</alt>
+						<alt>n carolina</alt>
+					</alias_def>
+					<alias_def>
+						<alt>north dakota</alt>
+						<alt>nd</alt>
+						<alt>n d</alt>
+						<alt>n dakota</alt>
+					</alias_def>
+					<alias_def>
+						<alt>nebraska</alt>
+						<alt>ne</alt>
+						<alt>neb</alt>
+						<alt>nebr</alt>
+					</alias_def>
+					<alias_def>
+						<alt>new hampshire</alt>
+						<alt>nh</alt>
+					</alias_def>
+					<alias_def>
+						<alt>new jersey</alt>
+						<alt>nj</alt>
+					</alias_def>
+					<alias_def>
+						<alt>new mexico</alt>
+						<alt>nm</alt>
+						<alt>n m</alt>
+						<alt>nmex</alt>
+					</alias_def>
+					<alias_def>
+						<alt>nevada</alt>
+						<alt>nv</alt>
+						<alt>nev</alt>
+					</alias_def>
+					<alias_def>
+						<alt>new york</alt>
+						<alt>ny</alt>
+						<alt>n y</alt>
+						<alt>nyork</alt>
+					</alias_def>
+					<alias_def>
+						<alt>ohio</alt>
+						<alt>oh</alt>
+						<alt>o</alt>
+					</alias_def>
+					<alias_def>
+						<alt>oklahoma</alt>
+						<alt>ok</alt>
+						<alt>okla</alt>
+					</alias_def>
+					<alias_def>
+						<alt>oregon</alt>
+						<alt>or</alt>
+						<alt>ore</alt>
+						<alt>oreg</alt>
+					</alias_def>
+					<alias_def>
+						<alt>pennsylvania</alt>
+						<alt>pa</alt>
+						<alt>penn</alt>
+						<alt>penna</alt>
+					</alias_def>
+					<alias_def>
+						<alt>rhode island</alt>
+						<alt>ri</alt>
+						<alt>r i</alt>
+					</alias_def>
+					<alias_def>
+						<alt>south carolina</alt>
+						<alt>sc</alt>
+						<alt>s c</alt>
+						<alt>s carolina</alt>
+					</alias_def>
+					<alias_def>
+						<alt>south dakota</alt>
+						<alt>sd</alt>
+						<alt>s d</alt>
+						<alt>s dakota</alt>
+					</alias_def>
+					<alias_def>
+						<alt>tennessee</alt>
+						<alt>tn</alt>
+						<alt>tenn</alt>
+					</alias_def>
+					<alias_def>
+						<alt>texas</alt>
+						<alt>tx</alt>
+						<alt>tex</alt>
+					</alias_def>
+					<alias_def>
+						<alt>utah</alt>
+						<alt>ut</alt>
+					</alias_def>
+					<alias_def>
+						<alt>virginia</alt>
+						<alt>va</alt>
+					</alias_def>
+					<alias_def>
+						<alt>vermont</alt>
+						<alt>vt</alt>
+					</alias_def>
+					<alias_def>
+						<alt>washington</alt>
+						<alt>wa</alt>
+						<alt>wash</alt>
+					</alias_def>
+					<alias_def>
+						<alt>wisconsin</alt>
+						<alt>wi</alt>
+						<alt>wis</alt>
+						<alt>wisc</alt>
+					</alias_def>
+					<alias_def>
+						<alt>west virginia</alt>
+						<alt>wv</alt>
+						<alt>w v</alt>
+						<alt>w va</alt>
+						<alt>w virginia</alt>
+					</alias_def>
+					<alias_def>
+						<alt>wyoming</alt>
+						<alt>wy</alt>
+						<alt>wyo</alt>
+					</alias_def>
+					<alias_def>
+						<alt>alberta</alt>
+						<alt>ab</alt>
+						<alt>alb</alt>
+					</alias_def>
+					<alias_def>
+						<alt>british columbia</alt>
+						<alt>bc</alt>
+						<alt>b c</alt>
+						<alt>british col</alt>
+					</alias_def>
+					<alias_def>
+						<alt>manitoba</alt>
+						<alt>mb</alt>
+						<alt>man</alt>
+					</alias_def>
+					<alias_def>
+						<alt>new brunswick</alt>
+						<alt>nb</alt>
+						<alt>n b</alt>
+						<alt>brunswick</alt>
+					</alias_def>
+					<alias_def>
+						<alt>new foundland and labrador</alt>
+						<alt>nl</alt>
+						<alt>n l</alt>
+						<alt>nfl</alt>
+						<alt>nf and l</alt>
+						<alt>nfld</alt>
+						<alt>new foundland</alt>
+					</alias_def>
+					<alias_def>
+						<alt>north west territories</alt>
+						<alt>nt</alt>
+						<alt>n t</alt>
+						<alt>nwt</alt>
+						<alt>n w t</alt>
+						<alt>north west territory</alt>
+					</alias_def>
+					<alias_def>
+						<alt>nova scotia</alt>
+						<alt>ns</alt>
+						<alt>n s</alt>
+					</alias_def>
+					<alias_def>
+						<alt>nunavut</alt>
+						<alt>nu</alt>
+						<alt>nun</alt>
+					</alias_def>
+					<alias_def>
+						<alt>ontario</alt>
+						<alt>on</alt>
+						<alt>ont</alt>
+					</alias_def>
+					<alias_def>
+						<alt>prince edward islands</alt>
+						<alt>pe</alt>
+						<alt>p e</alt>
+						<alt>pei</alt>
+						<alt>p e i</alt>
+						<alt>prince edward</alt>
+						<alt>prince edward island</alt>
+					</alias_def>
+					<alias_def>
+						<alt>quebec</alt>
+						<alt>qc</alt>
+						<alt>qu</alt>
+						<alt>que</alt>
+					</alias_def>
+					<alias_def>
+						<alt>saskatchewan</alt>
+						<alt>sk</alt>
+						<alt>sas</alt>
+						<alt>sask</alt>
+						<alt>saskat</alt>
+						<alt>saskatchevan</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Aguascalientes</alt>
+						<alt>Ag</alt>
+						<alt>Ags</alt>
+						<alt>Agu</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Baja California</alt>
+						<alt>Baja California Norte</alt>
+						<alt>BC</alt>
+						<alt>BCN</alt>
+						<alt>B C N</alt>
+						<alt>Baja Cali</alt>
+						<alt>Baja Ca</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Baja California Sur</alt>
+						<alt>BCS</alt>
+						<alt>B C S</alt>
+						<alt>Baja Cali Sur</alt>
+						<alt>Baja Ca Sur</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Campeche</alt>
+						<alt>Cm</alt>
+						<alt>Camp</alt>
+						<alt>Cam</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Chiapas</alt>
+						<alt>Cs</alt>
+						<alt>Chp</alt>
+						<alt>Chis</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Chihuahua</alt>
+						<alt>Ch</alt>
+						<alt>Chh</alt>
+						<alt>Chih</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Coahuila de Zaragoza</alt>
+						<alt>Ch</alt>
+						<alt>Chh</alt>
+						<alt>Coah</alt>
+						<alt>Coahuila</alt>
+						<alt>Coauhila</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Colima</alt>
+						<alt>Cl</alt>
+						<alt>Col</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Distrito Federal</alt>
+						<alt>DF</alt>
+						<alt>DIF</alt>
+						<alt>D F</alt>
+						<alt>Distrito</alt>
+						<alt>Federal Distrito</alt>
+						<alt>Federal District</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Durango</alt>
+						<alt>Dg</alt>
+						<alt>Dgo</alt>
+						<alt>Dur</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Federally Administered Territory</alt>
+						<alt>FAT</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Guanajuato</alt>
+						<alt>Gt</alt>
+						<alt>Gto</alt>
+						<alt>Gua</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Guerrero</alt>
+						<alt>Gr</alt>
+						<alt>Gro</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Hidalgo</alt>
+						<alt>Hg</alt>
+						<alt>Hgo</alt>
+						<alt>Hig</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Jalisco</alt>
+						<alt>Ja</alt>
+						<alt>Jal</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Mexico State</alt>
+						<alt>Mx</alt>
+						<alt>EM</alt>
+						<alt>ME</alt>
+						<alt>Mex</alt>
+						<alt>México</alt>
+						<alt>Mexico</alt>
+						<alt>EdoMex</alt>
+						<alt>Edo Mex</alt>
+						<alt>Edo de Mex</alt>
+						<alt>Estado de Mexico</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Michoacán de Ocampo</alt>
+						<alt>Mi</alt>
+						<alt>Mich</alt>
+						<alt>Mic</alt>
+						<alt>Michoacan</alt>
+						<alt>Michoacán</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Morelos</alt>
+						<alt>Mo</alt>
+						<alt>Mor</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Nayarit</alt>
+						<alt>Na</alt>
+						<alt>Nay</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Nuevo Leon</alt>
+						<alt>NL</alt>
+						<alt>NLE</alt>
+						<alt>N L</alt>
+						<alt>Nuevo León</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Oaxaca</alt>
+						<alt>Oa</alt>
+						<alt>Oax</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Puebla</alt>
+						<alt>Pb</alt>
+						<alt>Pue</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Queretaro Arteaga</alt>
+						<alt>Qe</alt>
+						<alt>Qro</alt>
+						<alt>Que</alt>
+						<alt>Querétaro</alt>
+						<alt>Queretaro</alt>
+						<alt>Querétaro Arteaga</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Quintana Roo</alt>
+						<alt>Qr</alt>
+						<alt>Q R</alt>
+						<alt>Qroo</alt>
+						<alt>Q roo</alt>
+						<alt>roo</alt>
+					</alias_def>
+					<alias_def>
+						<alt>San Luis Potosi</alt>
+						<alt>SL</alt>
+						<alt>SLP</alt>
+						<alt>S L P</alt>
+						<alt>San Luis Potosí</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Sinaloa</alt>
+						<alt>Si</alt>
+						<alt>Sin</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Sonora</alt>
+						<alt>So</alt>
+						<alt>Son</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Tabasco</alt>
+						<alt>Tb</alt>
+						<alt>Tab</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Tamaulipas</alt>
+						<alt>Tm</alt>
+						<alt>Tam</alt>
+						<alt>Tamps</alt>
+						<alt>Tamaulipa</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Tlaxcala</alt>
+						<alt>Tlx</alt>
+						<alt>Tlax</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Veracruz de Ignacio de la Llave</alt>
+						<alt>Ve</alt>
+						<alt>Ver</alt>
+						<alt>Veracruz</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Yucatan</alt>
+						<alt>Yu</alt>
+						<alt>Yuc</alt>
+						<alt>Yucatán</alt>
+						<alt>YUCAT</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Zacatecas</alt>
+						<alt>Za</alt>
+						<alt>Zac</alt>
+					</alias_def>
+				</alias_list>
+				<alias_list name="CountryAliases">
+					<alias_def>
+						<alt>Andorra</alt>
+						<alt>AD</alt>
+						<alt>AND</alt>
+					</alias_def>
+					<alias_def>
+						<alt>United Arab Emirates</alt>
+						<alt>AE</alt>
+						<alt>ARE</alt>
+						<alt>UAE</alt>
+						<alt>الإمارات العربية المتحدة</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Afghanistan</alt>
+						<alt>AF</alt>
+						<alt>AFG</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Antigua and Barbuda</alt>
+						<alt>AG</alt>
+						<alt>ATG</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Anguilla</alt>
+						<alt>AI</alt>
+						<alt>AIA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Albania</alt>
+						<alt>Shqipëria</alt>
+						<alt>AL</alt>
+						<alt>ALB</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Armenia</alt>
+						<alt>AM</alt>
+						<alt>ARM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Netherlands Antilles</alt>
+						<alt>AN</alt>
+						<alt>ANT</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Angola</alt>
+						<alt>AO</alt>
+						<alt>AGO</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Antarctica</alt>
+						<alt>AQ</alt>
+						<alt>ATA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Argentina</alt>
+						<alt>AR</alt>
+						<alt>ARG</alt>
+					</alias_def>
+					<alias_def>
+						<alt>American Samoa</alt>
+						<alt>AS</alt>
+						<alt>ASM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Austria</alt>
+						<alt>AT</alt>
+						<alt>AUT</alt>
+						<alt>Österreich</alt>
+						<alt>Oesterreich</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Australia</alt>
+						<alt>AU</alt>
+						<alt>AUS</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Aruba</alt>
+						<alt>AW</alt>
+						<alt>ABW</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Aland Islands</alt>
+						<alt>AX</alt>
+						<alt>ALA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Azerbaijan</alt>
+						<alt>AZ</alt>
+						<alt>AZE</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Bosnia and Herzegovina</alt>
+						<alt>BA</alt>
+						<alt>BIH</alt>
+						<alt>Bosna i Hercegovina</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Barbados</alt>
+						<alt>BB</alt>
+						<alt>BRB</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Bangladesh</alt>
+						<alt>BD</alt>
+						<alt>BGD</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Belgium</alt>
+						<alt>BE</alt>
+						<alt>BEL</alt>
+						<alt>België</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Burkina Faso</alt>
+						<alt>BF</alt>
+						<alt>BFA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Bulgaria</alt>
+						<alt>BG</alt>
+						<alt>BGR</alt>
+						<alt>България</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Bahrain</alt>
+						<alt>BH</alt>
+						<alt>BHR</alt>
+						<alt>البحرين</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Burundi</alt>
+						<alt>BI</alt>
+						<alt>BDI</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Benin</alt>
+						<alt>BJ</alt>
+						<alt>BEN</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Saint Barthélemy</alt>
+						<alt>Saint Barthelemy</alt>
+						<alt>Saint Barthelemy-France</alt>
+						<alt>Saint-Barthélemy-France</alt>
+						<alt>Saint Barts</alt>
+						<alt>BL</alt>
+						<alt>BLM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Bermuda</alt>
+						<alt>BM</alt>
+						<alt>BMU</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Brunei</alt>
+						<alt>BN</alt>
+						<alt>BRN</alt>
+						<alt>Brunei Darussalam</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Bolivia</alt>
+						<alt>BO</alt>
+						<alt>BOL</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Brazil</alt>
+						<alt>Brasil</alt>
+						<alt>BR</alt>
+						<alt>BRA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Bahamas</alt>
+						<alt>bahamas, the</alt>
+						<alt>the bahamas</alt>
+						<alt>BS</alt>
+						<alt>BHS</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Bhutan</alt>
+						<alt>BT</alt>
+						<alt>BTN</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Bouvet Island</alt>
+						<alt>BV</alt>
+						<alt>BVT</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Botswana</alt>
+						<alt>BW</alt>
+						<alt>BWA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Belarus</alt>
+						<alt>BY</alt>
+						<alt>BLR</alt>
+						<alt>Беларусь</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Belize</alt>
+						<alt>BZ</alt>
+						<alt>BLZ</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Canada</alt>
+						<alt>CA</alt>
+						<alt>CAN</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Cocos Islands</alt>
+						<alt>CC</alt>
+						<alt>CCK</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Congo - Kinshasa</alt>
+						<alt>Democratic Republic of Congo</alt>
+						<alt>Congo, Democratic Republic of</alt>
+						<alt>Congo Democratic Republic of</alt>
+						<alt>Democratic Republic of the Congo</alt>
+						<alt>Zaire</alt>
+						<alt>COD</alt>
+						<alt>CD</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Central African Republic</alt>
+						<alt>CF</alt>
+						<alt>CAF</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Congo - Brazzaville</alt>
+						<alt>Republic of the Congo</alt>
+						<alt>Congo, Republic of the</alt>
+						<alt>Congo Republic of the</alt>
+						<alt>Congo</alt>
+						<alt>Congo-Brazzaville</alt>
+						<alt>COG</alt>
+						<alt>CG</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Switzerland</alt>
+						<alt>CH</alt>
+						<alt>CHE</alt>
+						<alt>Suisse</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Ivory Coast</alt>
+						<alt>Cote D'Ivoire (Ivory Coast)</alt>
+						<alt>Cote D'Ivoire</alt>
+						<alt>Côte d'Ivoire</alt>
+						<alt>CIV</alt>
+						<alt>CI</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Cook Islands</alt>
+						<alt>CK</alt>
+						<alt>COK</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Chile</alt>
+						<alt>CL</alt>
+						<alt>CHL</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Cameroon</alt>
+						<alt>CM</alt>
+						<alt>CMR</alt>
+					</alias_def>
+					<alias_def>
+						<alt>China</alt>
+						<alt>CN</alt>
+						<alt>CHN</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Colombia</alt>
+						<alt>CO</alt>
+						<alt>COL</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Costa Rica</alt>
+						<alt>CR</alt>
+						<alt>CRI</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Serbia and Montenegro</alt>
+						<alt>CS</alt>
+						<alt>SCG</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Cuba</alt>
+						<alt>CU</alt>
+						<alt>CUB</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Cape Verde</alt>
+						<alt>CV</alt>
+						<alt>CPV</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Christmas Island</alt>
+						<alt>CX</alt>
+						<alt>CXR</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Cyprus</alt>
+						<alt>CY</alt>
+						<alt>CYP</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Czech Republic</alt>
+						<alt>CZ</alt>
+						<alt>CZE</alt>
+						<alt>Česká republika</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Germany</alt>
+						<alt>DE</alt>
+						<alt>DEU</alt>
+						<alt>Deutschland</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Djibouti</alt>
+						<alt>DJ</alt>
+						<alt>DJI</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Denmark</alt>
+						<alt>DK</alt>
+						<alt>DNK</alt>
+						<alt>Danmark</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Dominica</alt>
+						<alt>DM</alt>
+						<alt>DMA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Dominican Republic</alt>
+						<alt>DO</alt>
+						<alt>DOM</alt>
+						<alt>República Dominicana</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Algeria</alt>
+						<alt>DZ</alt>
+						<alt>DZA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Ecuador</alt>
+						<alt>EC</alt>
+						<alt>ECU</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Estonia</alt>
+						<alt>EE</alt>
+						<alt>EN</alt>
+						<alt>EST</alt>
+						<alt>Eesti</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Egypt</alt>
+						<alt>EG</alt>
+						<alt>EGY</alt>
+						<alt>مصر</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Western Sahara</alt>
+						<alt>EH</alt>
+						<alt>ESH</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Eritrea</alt>
+						<alt>ER</alt>
+						<alt>ERI</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Spain</alt>
+						<alt>ES</alt>
+						<alt>SP</alt>
+						<alt>ESP</alt>
+						<alt>Espainia</alt>
+						<alt>España</alt>
+						<alt>Espana</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Ethiopia</alt>
+						<alt>ET</alt>
+						<alt>ETH</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Finland</alt>
+						<alt>FI</alt>
+						<alt>FIN</alt>
+						<alt>Suomi</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Fiji</alt>
+						<alt>FJ</alt>
+						<alt>FJI</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Falkland Islands</alt>
+						<alt>Islas Malvinas</alt>
+						<alt>Falkland Islands (Islas Malvinas)</alt>
+						<alt>FLK</alt>
+						<alt>FK</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Micronesia</alt>
+						<alt>Micronesia, Federated States of</alt>
+						<alt>Micronesia Federated States of</alt>
+						<alt>Federated States of Micronesia</alt>
+						<alt>FM</alt>
+						<alt>FSM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Faroe Islands</alt>
+						<alt>FO</alt>
+						<alt>FRO</alt>
+					</alias_def>
+					<alias_def>
+						<alt>France</alt>
+						<alt>FR</alt>
+						<alt>FRA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Gabon</alt>
+						<alt>GA</alt>
+						<alt>GAB</alt>
+					</alias_def>
+					<alias_def>
+						<alt>United Kingdom</alt>
+						<alt>UK</alt>
+						<alt>U K</alt>
+						<alt>GB</alt>
+						<alt>GBR</alt>
+					</alias_def>
+					<alias_def>
+						<alt>England</alt>
+						<alt>United Kingdom</alt>
+						<alt>Great Britain</alt>
+						<alt>Britain</alt>
+						<alt>UK</alt>
+						<alt>UK</alt>
+						<alt>GB</alt>
+						<alt>GBR</alt>
+						<alt>ENG</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Scotland</alt>
+						<alt>United Kingdom</alt>
+						<alt>Great Britain</alt>
+						<alt>Britain</alt>
+						<alt>UK</alt>
+						<alt>U K</alt>
+						<alt>GB</alt>
+						<alt>GBR</alt>
+						<alt>SCT</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Wales</alt>
+						<alt>United Kingdom</alt>
+						<alt>Great Britain</alt>
+						<alt>Britain</alt>
+						<alt>UK</alt>
+						<alt>U K</alt>
+						<alt>GB</alt>
+						<alt>GBR</alt>
+						<alt>WAL</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Northern Ireland</alt>
+						<alt>United Kingdom</alt>
+						<alt>Great Britain</alt>
+						<alt>Britain</alt>
+						<alt>UK</alt>
+						<alt>UK</alt>
+						<alt>GB</alt>
+						<alt>GBR</alt>
+						<alt>NIR</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Grenada</alt>
+						<alt>GD</alt>
+						<alt>GRD</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Georgia</alt>
+						<alt>GE</alt>
+						<alt>GEO</alt>
+					</alias_def>
+					<alias_def>
+						<alt>French Guiana</alt>
+						<alt>French Guyana</alt>
+						<alt>Guiana</alt>
+						<alt>French-Guiana</alt>
+						<alt>French Guiana</alt>
+						<alt>Guyane-France</alt>
+						<alt>GF</alt>
+						<alt>GUF</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Guernsey</alt>
+						<alt>GG</alt>
+						<alt>GGY</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Ghana</alt>
+						<alt>GH</alt>
+						<alt>GHA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Gibraltar</alt>
+						<alt>GI</alt>
+						<alt>GIB</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Greenland</alt>
+						<alt>GL</alt>
+						<alt>GRL</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Gambia</alt>
+						<alt>GM</alt>
+						<alt>GMB</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Guinea</alt>
+						<alt>GN</alt>
+						<alt>GIN</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Guadeloupe</alt>
+						<alt>French-Guadeloupe</alt>
+						<alt>French Guadeloupe</alt>
+						<alt>Guadeloupe-France</alt>
+						<alt>GP</alt>
+						<alt>GLP</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Equatorial Guinea</alt>
+						<alt>GQ</alt>
+						<alt>GNQ</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Greece</alt>
+						<alt>GR</alt>
+						<alt>GRC</alt>
+						<alt>Ελλάδα</alt>
+						<alt>Ellada</alt>
+					</alias_def>
+					<alias_def>
+						<alt>South Georgia and the South Sandwich Islands</alt>
+						<alt>GS</alt>
+						<alt>SGS</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Guatemala</alt>
+						<alt>GT</alt>
+						<alt>GTM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Guam</alt>
+						<alt>GU</alt>
+						<alt>GUM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Guinea-Bissau</alt>
+						<alt>Republic of Guinea-Bissau</alt>
+						<alt>GW</alt>
+						<alt>GNB</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Guyana</alt>
+						<alt>GY</alt>
+						<alt>GUY</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Hong Kong</alt>
+						<alt>HongKong</alt>
+						<alt>Hong Kong-China</alt>
+						<alt>HK</alt>
+						<alt>HKG</alt>
+						<alt>香港-中國</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Heard Island and McDonald Islands</alt>
+						<alt>HM</alt>
+						<alt>HMD</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Honduras</alt>
+						<alt>HN</alt>
+						<alt>HND</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Croatia</alt>
+						<alt>HR</alt>
+						<alt>HRV</alt>
+						<alt>Hrvatska</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Haiti</alt>
+						<alt>HT</alt>
+						<alt>HTI</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Hungary</alt>
+						<alt>HU</alt>
+						<alt>HUN</alt>
+						<alt>Magyarország</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Indonesia</alt>
+						<alt>ID</alt>
+						<alt>IDN</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Ireland</alt>
+						<alt>IE</alt>
+						<alt>IRL</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Israel</alt>
+						<alt>IL</alt>
+						<alt>ISR</alt>
+						<alt>ישראל</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Isle of Man</alt>
+						<alt>IM</alt>
+						<alt>IMN</alt>
+					</alias_def>
+					<alias_def>
+						<alt>India</alt>
+						<alt>IN</alt>
+						<alt>IND</alt>
+					</alias_def>
+					<alias_def>
+						<alt>British Indian Ocean Territory</alt>
+						<alt>IO</alt>
+						<alt>IOT</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Iraq</alt>
+						<alt>IQ</alt>
+						<alt>IRQ</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Iran</alt>
+						<alt>IR</alt>
+						<alt>IRN</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Iceland</alt>
+						<alt>IS</alt>
+						<alt>ISL</alt>
+						<alt>Ísland</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Italy</alt>
+						<alt>IT</alt>
+						<alt>ITA</alt>
+						<alt>Italia</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Jersey</alt>
+						<alt>JE</alt>
+						<alt>JEY</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Jamaica</alt>
+						<alt>JM</alt>
+						<alt>JAM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Jordan</alt>
+						<alt>JO</alt>
+						<alt>JOR</alt>
+						<alt>الأردن</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Japan</alt>
+						<alt>JP</alt>
+						<alt>JPN</alt>
+						<alt>日本</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Kenya</alt>
+						<alt>KE</alt>
+						<alt>KEN</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Kyrgyzstan</alt>
+						<alt>KG</alt>
+						<alt>KGZ</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Cambodia</alt>
+						<alt>KH</alt>
+						<alt>KHM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Kiribati</alt>
+						<alt>KI</alt>
+						<alt>KIR</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Comoros</alt>
+						<alt>KM</alt>
+						<alt>COM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Saint Kitts and Nevis</alt>
+						<alt>KN</alt>
+						<alt>KNA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>North Korea</alt>
+						<alt>Korea, Democratic People's Republic</alt>
+						<alt>Korea Democratic People's Republic</alt>
+						<alt>Democratic People's Republic of Korea</alt>
+						<alt>KP</alt>
+						<alt>PRK</alt>
+					</alias_def>
+					<alias_def>
+						<alt>South Korea</alt>
+						<alt>KR</alt>
+						<alt>KOR</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Kosovo</alt>
+						<alt>Kosovë</alt>
+						<alt>KOS</alt>
+						<alt>RKS</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Kuwait</alt>
+						<alt>KW</alt>
+						<alt>KWT</alt>
+						<alt>الكويت</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Cayman Islands</alt>
+						<alt>KY</alt>
+						<alt>CYM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Kazakhstan</alt>
+						<alt>KZ</alt>
+						<alt>KAZ</alt>
+						<alt>Казахстан</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Laos</alt>
+						<alt>LA</alt>
+						<alt>LAO</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Lebanon</alt>
+						<alt>LB</alt>
+						<alt>LBN</alt>
+						<alt>Liban</alt>
+						<alt>لبنان</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Saint Lucia</alt>
+						<alt>LC</alt>
+						<alt>LCA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Liechtenstein</alt>
+						<alt>LI</alt>
+						<alt>LIE</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Sri Lanka</alt>
+						<alt>LK</alt>
+						<alt>LKA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Liberia</alt>
+						<alt>LR</alt>
+						<alt>LBR</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Lesotho</alt>
+						<alt>LS</alt>
+						<alt>LSO</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Lithuania</alt>
+						<alt>LT</alt>
+						<alt>LTU</alt>
+						<alt>Lietuva</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Luxembourg</alt>
+						<alt>LU</alt>
+						<alt>LUX</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Latvia</alt>
+						<alt>LV</alt>
+						<alt>LVA</alt>
+						<alt>Latvija</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Libya</alt>
+						<alt>LY</alt>
+						<alt>LBY</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Macao</alt>
+						<alt>MAC</alt>
+						<alt>Macau</alt>
+						<alt>澳門-中國</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Morocco</alt>
+						<alt>MA</alt>
+						<alt>MAR</alt>
+						<alt>Maroc</alt>
+						<alt>المغرب</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Monaco</alt>
+						<alt>MC</alt>
+						<alt>MCO</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Moldova</alt>
+						<alt>MD</alt>
+						<alt>MDA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Montenegro</alt>
+						<alt>ME</alt>
+						<alt>MNE</alt>
+						<alt>Crna Gora</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Saint Martin</alt>
+						<alt>MF</alt>
+						<alt>MAF</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Madagascar</alt>
+						<alt>MG</alt>
+						<alt>MDG</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Marshall Islands</alt>
+						<alt>MH</alt>
+						<alt>MHL</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Macedonia</alt>
+						<alt>Republic of Macedonia</alt>
+						<alt>F. Yugoslav Repub. of Macedonia</alt>
+						<alt>F Yugoslav Repub of Macedonia</alt>
+						<alt>MK</alt>
+						<alt>MKD</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Mali</alt>
+						<alt>ML</alt>
+						<alt>MLI</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Myanmar</alt>
+						<alt>Burma (Myanmar)</alt>
+						<alt>Burma</alt>
+						<alt>MM</alt>
+						<alt>MMR</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Mongolia</alt>
+						<alt>MN</alt>
+						<alt>MNG</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Macao</alt>
+						<alt>Macau</alt>
+						<alt>Macau-China</alt>
+						<alt>MO</alt>
+						<alt>MAC</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Northern Mariana Islands</alt>
+						<alt>MP</alt>
+						<alt>MNP</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Martinique</alt>
+						<alt>French-Martinique</alt>
+						<alt>French Martinique</alt>
+						<alt>Martinique-France</alt>
+						<alt>MQ</alt>
+						<alt>MTQ</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Mauritania</alt>
+						<alt>MR</alt>
+						<alt>MRT</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Montserrat</alt>
+						<alt>MS</alt>
+						<alt>MSR</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Malta</alt>
+						<alt>MT</alt>
+						<alt>MLT</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Mauritius</alt>
+						<alt>MU</alt>
+						<alt>MUS</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Maldives</alt>
+						<alt>MV</alt>
+						<alt>MDV</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Malawi</alt>
+						<alt>MW</alt>
+						<alt>MWI</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Mexico</alt>
+						<alt>MX</alt>
+						<alt>MEX</alt>
+						<alt>México</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Malaysia</alt>
+						<alt>MY</alt>
+						<alt>MYS</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Mozambique</alt>
+						<alt>MZ</alt>
+						<alt>MOZ</alt>
+						<alt>Moçambique</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Namibia</alt>
+						<alt>NA</alt>
+						<alt>NAM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>New Caledonia</alt>
+						<alt>NC</alt>
+						<alt>NCL</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Niger</alt>
+						<alt>NE</alt>
+						<alt>NER</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Norfolk Island</alt>
+						<alt>NF</alt>
+						<alt>NFK</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Nigeria</alt>
+						<alt>NG</alt>
+						<alt>NGA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Nicaragua</alt>
+						<alt>NI</alt>
+						<alt>NIC</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Netherlands</alt>
+						<alt>NL</alt>
+						<alt>NLD</alt>
+						<alt>Nederland</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Norway</alt>
+						<alt>NO</alt>
+						<alt>NOR</alt>
+						<alt>Norge</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Nepal</alt>
+						<alt>NP</alt>
+						<alt>NPL</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Nauru</alt>
+						<alt>NR</alt>
+						<alt>NRU</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Niue</alt>
+						<alt>NU</alt>
+						<alt>NIU</alt>
+					</alias_def>
+					<alias_def>
+						<alt>New Zealand</alt>
+						<alt>NZ</alt>
+						<alt>NZL</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Oman</alt>
+						<alt>OM</alt>
+						<alt>OMN</alt>
+						<alt>عمان</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Panama</alt>
+						<alt>PA</alt>
+						<alt>PAN</alt>
+						<alt>Panamá</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Peru</alt>
+						<alt>PE</alt>
+						<alt>PER</alt>
+						<alt>Perú</alt>
+					</alias_def>
+					<alias_def>
+						<alt>French Polynesia</alt>
+						<alt>PF</alt>
+						<alt>PYF</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Papua New Guinea</alt>
+						<alt>PG</alt>
+						<alt>PNG</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Philippines</alt>
+						<alt>PH</alt>
+						<alt>PHL</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Pakistan</alt>
+						<alt>PK</alt>
+						<alt>PAK</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Poland</alt>
+						<alt>PL</alt>
+						<alt>POL</alt>
+						<alt>Polska</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Saint Pierre and Miquelon</alt>
+						<alt>PM</alt>
+						<alt>SPM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Pitcairn</alt>
+						<alt>PN</alt>
+						<alt>PCN</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Puerto Rico</alt>
+						<alt>PR</alt>
+						<alt>PRI</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Palestinian Territory</alt>
+						<alt>PS</alt>
+						<alt>PSE</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Portugal</alt>
+						<alt>PT</alt>
+						<alt>PRT</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Palau</alt>
+						<alt>PW</alt>
+						<alt>PLW</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Paraguay</alt>
+						<alt>PY</alt>
+						<alt>PRY</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Qatar</alt>
+						<alt>QA</alt>
+						<alt>QAT</alt>
+						<alt>قطر</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Reunion</alt>
+						<alt>French-Reunion</alt>
+						<alt>French Reunion</alt>
+						<alt>Réunion-France</alt>
+						<alt>RE</alt>
+						<alt>REU</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Romania</alt>
+						<alt>RO</alt>
+						<alt>ROU</alt>
+						<alt>România</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Serbia</alt>
+						<alt>RS</alt>
+						<alt>SRB</alt>
+						<alt>Србија</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Russia</alt>
+						<alt>RU</alt>
+						<alt>RUS</alt>
+						<alt>Россия</alt>
+						<alt>Rossiya</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Rwanda</alt>
+						<alt>RW</alt>
+						<alt>RWA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Saudi Arabia</alt>
+						<alt>SA</alt>
+						<alt>SAU</alt>
+						<alt>السعودية</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Solomon Islands</alt>
+						<alt>SB</alt>
+						<alt>SLB</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Seychelles</alt>
+						<alt>SC</alt>
+						<alt>SYC</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Sudan</alt>
+						<alt>SD</alt>
+						<alt>SDN</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Sweden</alt>
+						<alt>SE</alt>
+						<alt>SWE</alt>
+						<alt>Sverige</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Singapore</alt>
+						<alt>SG</alt>
+						<alt>SGP</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Saint Helena</alt>
+						<alt>SH</alt>
+						<alt>SHN</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Slovenia</alt>
+						<alt>SI</alt>
+						<alt>SVN</alt>
+						<alt>Slovenija</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Svalbard and Jan Mayen</alt>
+						<alt>SJ</alt>
+						<alt>SJM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Slovakia</alt>
+						<alt>SK</alt>
+						<alt>SVK</alt>
+						<alt>Slovenská republika</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Sierra Leone</alt>
+						<alt>SL</alt>
+						<alt>SLE</alt>
+					</alias_def>
+					<alias_def>
+						<alt>San Marino</alt>
+						<alt>SM</alt>
+						<alt>SMR</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Senegal</alt>
+						<alt>SN</alt>
+						<alt>SEN</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Somalia</alt>
+						<alt>SO</alt>
+						<alt>SOM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Suriname</alt>
+						<alt>SR</alt>
+						<alt>SUR</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Sao Tome and Principe</alt>
+						<alt>ST</alt>
+						<alt>STP</alt>
+					</alias_def>
+					<alias_def>
+						<alt>El Salvador</alt>
+						<alt>SV</alt>
+						<alt>SLV</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Syria</alt>
+						<alt>SY</alt>
+						<alt>SYR</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Swaziland</alt>
+						<alt>SZ</alt>
+						<alt>SWZ</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Turks and Caicos Islands</alt>
+						<alt>TC</alt>
+						<alt>TCA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Chad</alt>
+						<alt>TD</alt>
+						<alt>TCD</alt>
+					</alias_def>
+					<alias_def>
+						<alt>French Southern Territories</alt>
+						<alt>TF</alt>
+						<alt>ATF</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Togo</alt>
+						<alt>TG</alt>
+						<alt>TGO</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Thailand</alt>
+						<alt>TH</alt>
+						<alt>THA</alt>
+						<alt>ประเทศไทย</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Tajikistan</alt>
+						<alt>TJ</alt>
+						<alt>TJK</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Tokelau</alt>
+						<alt>TK</alt>
+						<alt>TKL</alt>
+					</alias_def>
+					<alias_def>
+						<alt>East Timor</alt>
+						<alt>TL</alt>
+						<alt>TLS</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Turkmenistan</alt>
+						<alt>TM</alt>
+						<alt>TKM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Tunisia</alt>
+						<alt>TN</alt>
+						<alt>TUN</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Tonga</alt>
+						<alt>TO</alt>
+						<alt>TON</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Turkey</alt>
+						<alt>TR</alt>
+						<alt>TUR</alt>
+						<alt>Türkiye</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Trinidad and Tobago</alt>
+						<alt>TT</alt>
+						<alt>TTO</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Tuvalu</alt>
+						<alt>TV</alt>
+						<alt>TUV</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Taiwan</alt>
+						<alt>TW</alt>
+						<alt>TWN</alt>
+						<alt>台灣</alt>
+						<alt>Tai Wan</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Tanzania</alt>
+						<alt>TZ</alt>
+						<alt>TZA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Ukraine</alt>
+						<alt>UA</alt>
+						<alt>UKR</alt>
+						<alt>Україна</alt>
+						<alt>Ukraina</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Uganda</alt>
+						<alt>UG</alt>
+						<alt>UGA</alt>
+					</alias_def>
+					<alias_def>
+						<alt>United States Minor Outlying Islands</alt>
+						<alt>UM</alt>
+						<alt>UMI</alt>
+					</alias_def>
+					<alias_def>
+						<alt>United States of America</alt>
+						<alt>US</alt>
+						<alt>U S</alt>
+						<alt>USA</alt>
+						<alt>USA</alt>
+						<alt>America</alt>
+						<alt>United States</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Uruguay</alt>
+						<alt>UY</alt>
+						<alt>URY</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Uzbekistan</alt>
+						<alt>UZ</alt>
+						<alt>UZB</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Vatican</alt>
+						<alt>VA</alt>
+						<alt>VAT</alt>
+						<alt>Stato della Città del Vaticano</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Saint Vincent and the Grenadines</alt>
+						<alt>VC</alt>
+						<alt>VCT</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Venezuela</alt>
+						<alt>VE</alt>
+						<alt>VEN</alt>
+					</alias_def>
+					<alias_def>
+						<alt>British Virgin Islands</alt>
+						<alt>VG</alt>
+						<alt>VGB</alt>
+					</alias_def>
+					<alias_def>
+						<alt>US Virgin Islands</alt>
+						<alt>VI</alt>
+						<alt>VIR</alt>
+						<alt>U.S. Virgin Islands</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Vietnam</alt>
+						<alt>VN</alt>
+						<alt>VNM</alt>
+						<alt>Việt Nam</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Vanuatu</alt>
+						<alt>VU</alt>
+						<alt>VUT</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Wallis and Futuna</alt>
+						<alt>WF</alt>
+						<alt>WLF</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Samoa</alt>
+						<alt>WS</alt>
+						<alt>WSM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Yemen</alt>
+						<alt>YE</alt>
+						<alt>YEM</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Mayotte</alt>
+						<alt>YT</alt>
+						<alt>MYT</alt>
+					</alias_def>
+					<alias_def>
+						<alt>South Africa</alt>
+						<alt>ZA</alt>
+						<alt>ZAF</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Zambia</alt>
+						<alt>ZM</alt>
+						<alt>ZMB</alt>
+					</alias_def>
+					<alias_def>
+						<alt>Zimbabwe</alt>
+						<alt>ZW</alt>
+						<alt>ZWE</alt>
+					</alias_def>
+				</alias_list>
+			</section>
+			<!--This section defines POI types and their aliases.-->
+			<section desc="POI types">
+				<def name="restaurant" is_alias_list="true">
+					<alt>restaurant</alt>
+					<alt>restaurants</alt>
+					<alt>food</alt>
+					<alt>dining</alt>
+					<alt>eatery</alt>
+					<alt>eateries</alt>
+					<alt>place to eat</alt>
+					<alt>places to eat</alt>
+				</def>
+				<def name="shopping" is_alias_list="true">
+					<alt>shop</alt>
+					<alt>shops</alt>
+					<alt>shopping</alt>
+					<alt>store</alt>
+					<alt>stores</alt>
+					<alt>retail</alt>
+					<alt>retailer</alt>
+					<alt>retailers</alt>
+					<alt>seller</alt>
+					<alt>sellers</alt>
+				</def>
+			</section>
+			<section desc="Location">
+				<def name="Location">
+					<alt ref="GazetteerLocation" selector="GazetteerLocationEnabled"/>
+					<alt ref="GeneralLocation" selector="GeneralLocationEnabled"/>
+					<alt ref="CityLocation" selector="CityLocationEnabled"/>
+				</def>
+			</section>
+			<section desc="Gazetteer elements">
+				<def name="GazetteerLocation">
+					<alt>
+						<elt ref="FullNameGazetteer" separator_list=".,;|/"/>
+					</alt>
+					<alt fallback_score="95">
+						<elt ref="Gazetteer" separator_list=".,;|/"/>
+					</alt>
+					<alt ref="Coordinates"/>
+					<alt ref="SpatialOperator"/>
+				</def>
+				<def name="FullNameGazetteer">
+					<alt>
+						<elt ref="FullPlaceName" search_context="nameSearch" weight="50" post_separator="required"/>
+						<elt ref="CityStateandCountryStrict" search_context="nameSearch" weight="50"/>
+						<result tag="Address">
+							<search_value ref="nameSearch"/>
+							<format_ref ref="format_normal_place_name"/>
+						</result>
+					</alt>
+					<alt fallback_score="99">
+						<elt ref="FullPlaceName" search_context="nameSearch" weight="50"/>
+						<result tag="Address">
+							<search_value ref="nameSearch"/>
+							<format_ref ref="format_normal_place_name"/>
+						</result>
+					</alt>
+					<alt fallback_score="99">
+						<elt ref="FullPlaceName" search_context="nameSearch" weight="50"/>
+						<elt ref="OptConnector" weight="0" pre_separator="required"/>
+						<elt ref="CityStateandCountry" search_context="nameSearch" weight="50" pre_separator="required"/>
+						<result tag="Address">
+							<search_value ref="nameSearch"/>
+							<format_ref ref="format_normal_place_name"/>
+						</result>
+					</alt>
+				</def>
+				<def name="Gazetteer">
+					<alt>
+						<elt ref="PlaceNameandType" search_context="nameSearch" weight="50"/>
+						<elt ref="OptConnector" weight="0" pre_separator="required"/>
+						<elt ref="CityStateandCountry" search_context="nameSearch" weight="50" pre_separator="required"/>
+						<result tag="Address">
+							<search_value ref="nameSearch"/>
+							<format_ref ref="format_normal_place_name"/>
+						</result>
+					</alt>
+					<alt>
+						<elt ref="CityStateandCountry" search_context="nameSearch" weight="50"/>
+						<elt ref="PlaceNameandType" search_context="nameSearch" weight="50" pre_separator="required"/>
+						<result tag="Address">
+							<search_value ref="nameSearch"/>
+							<format_ref ref="format_normal_place_name"/>
+						</result>
+					</alt>
+				</def>
+				<def name="FullPlaceName">
+					<alias_list_ref ref="PlaceNameAliases"/>
+					<alt ref="wordlist"/>
+				</def>
+				<def name="PlaceName">
+					<alias_list_ref ref="PlaceNameAliases"/>
+					<alt ref="wordlist"/>
+				</def>
+				<def name="Type">
+					<alias_list_ref ref="TypeAliases"/>
+					<alt ref="wordlist"/>
+				</def>
+				<def name="OptPlaceName">
+					<alt ref="PlaceName"/>
+					<alt/>
+				</def>
+				<def name="OptConnector" optimize="true">
+					<alt ref="Connectors"/>
+					<alt/>
+				</def>
+				<def name="OptType">
+					<alt ref="Type"/>
+					<alt/>
+				</def>
+				<def name="OptPlaceNameNoSearch">
+					<alt>
+						<elt ref="PlaceNameNoSearch" match_as="PlaceName"/>
+					</alt>
+					<alt/>
+				</def>
+				<def name="PlaceNameNoSearch">
+					<alias_list_ref ref="PlaceNameAliases"/>
+					<alt ref="wordlist"/>
+				</def>
+				<def name="OptTypeNoSearch">
+					<alt>
+						<elt ref="TypeNoSearch" match_as="Type"/>
+					</alt>
+					<alt/>
+				</def>
+				<def name="TypeNoSearch">
+					<alias_list_ref ref="TypeAliases"/>
+					<alt ref="wordlist"/>
+				</def>
+				<def name="PlaceNameandType">
+					<alt>
+						<elt ref="PlaceName" weight="50" post_separator="required"/>
+						<elt ref="OptType" weight="50"/>
+					</alt>
+					<alt>
+						<elt ref="OptPlaceName" weight="50" post_separator="required"/>
+						<elt ref="Type" weight="50"/>
+					</alt>
+					<alt fallback="true">
+						<elt ref="OptType" weight="50" post_separator="required"/>
+						<elt ref="PlaceName" weight="50"/>
+					</alt>
+					<alt fallback="true">
+						<elt ref="Type" weight="50" post_separator="required"/>
+						<elt ref="OptPlaceName" weight="50"/>
+					</alt>
+					<alt fallback="true">
+						<elt ref="PlaceName" weight="50" post_separator="required"/>
+						<elt ref="OptTypeNoSearch" weight="10"/>
+					</alt>
+					<alt fallback="true">
+						<elt ref="OptPlaceNameNoSearch" weight="10" post_separator="required"/>
+						<elt ref="Type" weight="50"/>
+					</alt>
+					<alt fallback="true">
+						<elt ref="OptTypeNoSearch" weight="10" post_separator="required"/>
+						<elt ref="PlaceName" weight="50"/>
+					</alt>
+					<alt fallback="true">
+						<elt ref="Type" weight="50" post_separator="required"/>
+						<elt ref="OptPlaceNameNoSearch" weight="10"/>
+					</alt>
+				</def>
+				<def name="CityStateandCountry">
+					<alt>
+						<elt ref="OptCity" weight="50"/>
+						<elt ref="OptState" weight="50"/>
+						<elt ref="OptCountry" weight="50"/>
+					</alt>
+					<alt>
+						<elt ref="City" weight="50"/>
+						<elt ref="OptStateNoSearch" weight="10"/>
+						<elt ref="OptCountryNoSearch" weight="10"/>
+					</alt>
+					<alt fallback_score="99">
+						<elt ref="OptCityNoSearch" weight="10"/>
+						<elt ref="State" weight="50"/>
+						<elt ref="OptCountryNoSearch" weight="10"/>
+					</alt>
+					<alt fallback_score="99">
+						<elt ref="OptCityNoSearch" weight="10"/>
+						<elt ref="OptStateNoSearch" weight="10"/>
+						<elt ref="Country" weight="50"/>
+					</alt>
+					<alt fallback_score="99">
+						<elt ref="City" weight="50"/>
+						<elt ref="OptStateNoSearch" weight="10"/>
+						<elt ref="Country" weight="50"/>
+					</alt>
+					<alt fallback_score="99">
+						<elt ref="OptCityNoSearch" weight="10"/>
+						<elt ref="State" weight="50"/>
+						<elt ref="Country" weight="50"/>
+					</alt>
+					<alt fallback_score="99">
+						<elt ref="City" weight="50"/>
+						<elt ref="State" weight="50"/>
+						<elt ref="OptCountryNoSearch" weight="10"/>
+					</alt>
+				</def>
+				<def name="CityStateandCountryStrict">
+					<alt>
+						<elt ref="City" weight="50"/>
+					</alt>
+					<alt fallback="true">
+						<elt ref="State" weight="50"/>
+					</alt>
+					<alt ffallback="true">
+						<elt ref="Country" weight="50"/>
+					</alt>
+					<alt fallback="true">
+						<elt ref="City" weight="50"/>
+						<elt ref="Country" weight="50"/>
+					</alt>
+					<alt fallback="true">
+						<elt ref="State" weight="50"/>
+						<elt ref="Country" weight="50"/>
+					</alt>
+					<alt fallback="true">
+						<elt ref="City" weight="50"/>
+						<elt ref="State" weight="50"/>
+					</alt>
+					<alt fallback_score="99">
+						<elt ref="City" weight="50"/>
+						<elt ref="State" weight="50"/>
+						<elt ref="Country" weight="50"/>
+					</alt>
+				</def>
+			</section>
+			<section desc="City State Country elements">
+				<def name="CityLocation">
+					<alt>
+						<elt ref="CityStateCountry" pre_separator="required" post_separator="required" separator_list=".,;|"/>
+					</alt>
+					<alt ref="Coordinates"/>
+					<alt ref="SpatialOperator"/>
+				</def>
+				<def name="CityStateCountry">
+					<alt>
+						<elt ref="FullCityName" search_context="nameSearch" weight="70" pre_separator="required" post_separator="required"/>
+						<elt ref="OptStateCountry" weight="30" pre_separator="required" post_separator="required"/>
+						<result>
+							<search_value ref="nameSearch"/>
+							<format_ref ref="format_city_state_country_name"/>
+						</result>
+					</alt>
+				</def>
+				<def name="FullCityName">
+					<alt>
+						<elt ref="CompleteCity" weight="100"/>
+					</alt>
+				</def>
+			</section>
+			<section desc="General address elements">
+				<def name="GeneralLocation">
+					<alt>
+						<elt ref="SingleField" search_context="addressSearch" separator_list=".,;|"/>
+						<result tag="Address">
+							<search_value ref="addressSearch"/>
+							<format_ref ref="key_field_format"/>
+						</result>
+					</alt>
+					<alt ref="Coordinates"/>
+					<alt ref="SpatialOperator"/>
+				</def>
+				<def name="SingleField">
+					<alt ref="wordlist"/>
+				</def>
+			</section>
+			<!--This section defines the coordinates - the metadata of the reference data indexes-->
+			<section desc="Coordinates">
+				<def name="OptCoordsysID">
+					<alt>WGS_1984</alt>
+					<alt/>
+				</def>
+				<def name="CoordSeparator">
+					<alt>,</alt>
+					<alt>;</alt>
+					<alt>|</alt>
+					<!--<alt />-->
+				</def>
+				<def name="Coordinates">
+					<alt>
+						<elt ref="longitudePrefix"/>
+						<elt ref="positiveRealNumber" pre_separator="optional"/>
+						<elt ref="CoordSeparator" pre_separator="optional"/>
+						<elt ref="latitudePrefix" pre_separator="optional"/>
+						<elt ref="positiveRealNumber" pre_separator="optional"/>
+						<elt ref="OptCoordsysID"/>
+						<result tag="Coordinates">
+							<method ref="create_point">
+								<init_properties>
+									<prop name="CoordinateSystem">WGS_1984</prop>
+								</init_properties>
+								<parameter>
+									<component_value component="_1"/>
+								</parameter>
+								<parameter>
+									<component_value component="_2"/>
+								</parameter>
+								<parameter>
+									<component_value component="_4"/>
+								</parameter>
+								<parameter>
+									<component_value component="_5"/>
+								</parameter>
+								<parameter>
+									<component_value component="_6"/>
+								</parameter>
+							</method>
+						</result>
+					</alt>
+				</def>
+				<def name="longitudePrefix">
+					<alt>w</alt>
+					<alt>e</alt>
+					<alt>-</alt>
+					<alt>+</alt>
+					<alt/>
+				</def>
+				<def name="latitudePrefix">
+					<alt>n</alt>
+					<alt>s</alt>
+					<alt>-</alt>
+					<alt>+</alt>
+					<alt/>
+				</def>
+			</section>
+			<!--This section defnes the grammar for spatial offset on a found location, e.g. 
+      100 feet northwest from <location>. It specifies the linear units and bearing directions. -->
+			<section desc="Spatial Operators">
+				<def name="SpatialOperator">
+					<alt ref="DirectedOffset"/>
+				</def>
+				<def name="DirectedOffset">
+					<alt>
+						<elt ref="positiveRealNumber" weight="0"/>
+						<elt ref="LinearUnits" weight="0"/>
+						<elt ref="Bearing" weight="0"/>
+						<elt ref="From" weight="0"/>
+						<elt ref="Location"/>
+						<result tag="SpatialOperator">
+							<method ref="directed_offset">
+								<parameter>
+									<component_value component="_1"/>
+								</parameter>
+								<parameter>
+									<component_value component="_2"/>
+								</parameter>
+								<parameter>
+									<component_value component="_3"/>
+								</parameter>
+								<parameter>
+									<component_value component="_5"/>
+								</parameter>
+							</method>
+							<format>
+								<component_value component="Distance"/>
+								<component_value component="Units" pre_separator=" "/>
+								<value xml:space="preserve"> bearing </value>
+								<component_value component="Bearing"/>
+								<value xml:space="preserve"> from </value>
+								<component_value component="Match_addr" record="1"/>
+							</format>
+						</result>
+					</alt>
+				</def>
+				<def name="From">
+					<alt>from</alt>
+				</def>
+				<def name="Bearing">
+					<alt>
+						<elt ref="north"/>
+						<result type="float">0.</result>
+					</alt>
+					<alt>
+						<elt>nne</elt>
+						<result type="float">22.5</result>
+					</alt>
+					<alt>
+						<elt ref="northeast"/>
+						<result type="float">45.</result>
+					</alt>
+					<alt>
+						<elt>ene</elt>
+						<result type="float">67.5</result>
+					</alt>
+					<alt>
+						<elt ref="east"/>
+						<result type="float">90.</result>
+					</alt>
+					<alt>
+						<elt>ese</elt>
+						<result type="float">112.5</result>
+					</alt>
+					<alt>
+						<elt ref="southeast"/>
+						<result type="float">135.</result>
+					</alt>
+					<alt>
+						<elt>sse</elt>
+						<result type="float">157.5</result>
+					</alt>
+					<alt>
+						<elt ref="south"/>
+						<result type="float">180.</result>
+					</alt>
+					<alt>
+						<elt>ssw</elt>
+						<result type="float">202.5</result>
+					</alt>
+					<alt>
+						<elt ref="southwest"/>
+						<result type="float">225.</result>
+					</alt>
+					<alt>
+						<elt>wsw</elt>
+						<result type="float">247.5</result>
+					</alt>
+					<alt>
+						<elt ref="west"/>
+						<result type="float">270.</result>
+					</alt>
+					<alt>
+						<elt>wnw</elt>
+						<result type="float">292.5</result>
+					</alt>
+					<alt>
+						<elt ref="northwest"/>
+						<result type="float">315.</result>
+					</alt>
+					<alt>
+						<elt>nnw</elt>
+						<result type="float">337.5</result>
+					</alt>
+					<alt>
+						<elt>bearing</elt>
+						<elt ref="realNumber">
+						</elt>
+						<result>
+							<component_value component="_2"/>
+						</result>
+					</alt>
+				</def>
+			</section>
+			<section desc="Basic elements">
+				<def name="Separator">
+					<alt>,</alt>
+					<alt>;</alt>
+					<alt>|</alt>
+				</def>
+				<def name="OptSeparator">
+					<alt>
+						<elt ref="Separator" pre_separator="optional" post_separator="optional"/>
+					</alt>
+					<alt/>
+				</def>
+				<def name="realNumber">
+					<alt>
+						<elt ref="OptHyphen"/>
+						<elt ref="positiveRealNumber"/>
+					</alt>
+				</def>
+				<def name="positiveRealNumber">
+					<alt>
+						<elt ref="number"/>
+						<elt ref="OptDecimal"/>
+					</alt>
+				</def>
+				<def name="OptDecimal">
+					<alt>
+						<elt pre_separator="none">.</elt>
+						<elt ref="number" pre_separator="none"/>
+					</alt>
+					<alt/>
+				</def>
+				<def name="number">
+					<alt>`[0-9]+`</alt>
+				</def>
+				<def name="wordlist">
+					<alt ref="word"/>
+					<alt fallback_score="95">
+						<elt ref="word" pre_separator="required" post_separator="required"/>
+						<elt ref="wordlist" pre_separator="required" post_separator="required"/>
+					</alt>
+				</def>
+				<def name="word">
+					<alt>`[^ \t,;#$%^&amp;*@!~|":]+`</alt>
+				</def>
+				<def name="Hyphen">
+					<alt>-</alt>
+				</def>
+				<def name="OptHyphen">
+					<alt>
+						<elt ref="Hyphen" pre_separator="optional" post_separator="optional"/>
+					</alt>
+					<alt>
+					</alt>
+				</def>
+			</section>
+			<section desc="Directions">
+				<def name="west" is_alias_list="true">
+					<alt>w</alt>
+					<alt>west</alt>
+				</def>
+				<def name="east" is_alias_list="true">
+					<alt>e</alt>
+					<alt>east</alt>
+				</def>
+				<def name="south" is_alias_list="true">
+					<alt>s</alt>
+					<alt>south</alt>
+				</def>
+				<def name="north" is_alias_list="true">
+					<alt>n</alt>
+					<alt>north</alt>
+				</def>
+				<def name="southeast" is_alias_list="true">
+					<alt>se</alt>
+					<alt>southeast</alt>
+				</def>
+				<def name="southwest" is_alias_list="true">
+					<alt>sw</alt>
+					<alt>southwest</alt>
+				</def>
+				<def name="northeast" is_alias_list="true">
+					<alt>ne</alt>
+					<alt>northeast</alt>
+				</def>
+				<def name="northwest" is_alias_list="true">
+					<alt>nw</alt>
+					<alt>northwest</alt>
+				</def>
+				<def name="northbound" is_alias_list="true">
+					<alt>nb</alt>
+					<alt>northbound</alt>
+				</def>
+				<def name="southbound" is_alias_list="true">
+					<alt>sb</alt>
+					<alt>southbound</alt>
+				</def>
+				<def name="eastbound" is_alias_list="true">
+					<alt>eb</alt>
+					<alt>eastbound</alt>
+				</def>
+				<def name="westbound" is_alias_list="true">
+					<alt>wb</alt>
+					<alt>westbound</alt>
+				</def>
+			</section>
+			<section desc="Street directions">
+				<def name="dir">
+					<alt ref="strictdir"/>
+					<alt ref="halfdir"/>
+					<alt ref="bounddir"/>
+				</def>
+				<def name="strictdir">
+					<alt ref="west"/>
+					<alt ref="east"/>
+					<alt ref="south"/>
+					<alt ref="north"/>
+				</def>
+				<def name="halfdir">
+					<alt ref="southeast"/>
+					<alt ref="southwest"/>
+					<alt ref="northeast"/>
+					<alt ref="northwest"/>
+				</def>
+				<def name="bounddir">
+					<alt ref="northbound"/>
+					<alt ref="southbound"/>
+					<alt ref="eastbound"/>
+					<alt ref="westbound"/>
+				</def>
+			</section>
+			<section desc="Linear Units">
+				<def name="LinearUnits">
+					<!-- parsed linear units return corresponding esriSystem.esriUnits values -->
+					<alt>
+						<elt ref="Inches"/>
+						<result type="Int">1</result>
+					</alt>
+					<alt>
+						<elt ref="Points"/>
+						<result type="Int">2</result>
+					</alt>
+					<alt>
+						<elt ref="Feet"/>
+						<result type="Int">3</result>
+					</alt>
+					<alt>
+						<elt ref="Yards"/>
+						<result type="Int">4</result>
+					</alt>
+					<alt>
+						<elt ref="Miles"/>
+						<result type="Int">5</result>
+					</alt>
+					<alt>
+						<elt ref="NauticalMiles"/>
+						<result type="Int">6</result>
+					</alt>
+					<alt>
+						<elt ref="Millimeters"/>
+						<result type="Int">7</result>
+					</alt>
+					<alt>
+						<elt ref="Centimeters"/>
+						<result type="Int">8</result>
+					</alt>
+					<alt>
+						<elt ref="Decimeters"/>
+						<result type="Int">12</result>
+					</alt>
+					<alt>
+						<elt ref="Meters"/>
+						<result type="Int">9</result>
+					</alt>
+					<alt>
+						<elt ref="Kilometers"/>
+						<result type="Int">10</result>
+					</alt>
+				</def>
+				<def name="Inches">
+					<alt>
+						<elt post_separator="required" pre_separator="optional">"</elt>
+					</alt>
+					<alt>In</alt>
+					<alt>Inch</alt>
+					<alt>Inches</alt>
+				</def>
+				<def name="Points">
+					<alt>Pt</alt>
+					<alt>Point</alt>
+					<alt>Points</alt>
+				</def>
+				<def name="Feet">
+					<alt>
+						<elt post_separator="required" pre_separator="optional">'</elt>
+					</alt>
+					<alt>Ft</alt>
+					<alt>Foot</alt>
+					<alt>Feet</alt>
+				</def>
+				<def name="Yards">
+					<alt>Yd</alt>
+					<alt>Yrd</alt>
+					<alt>Yrds</alt>
+					<alt>Yard</alt>
+					<alt>Yards</alt>
+				</def>
+				<def name="Miles">
+					<alt>mi</alt>
+					<alt>Mile</alt>
+					<alt>Miles</alt>
+				</def>
+				<def name="NauticalMiles">
+					<alt>Nautical Mile</alt>
+					<alt>Nautical Miles</alt>
+				</def>
+				<def name="Millimeters">
+					<alt>mm</alt>
+					<alt>Millimeter</alt>
+					<alt>Millimeters</alt>
+				</def>
+				<def name="Centimeters">
+					<alt>cm</alt>
+					<alt>Centimeter</alt>
+					<alt>Centimeters</alt>
+				</def>
+				<def name="Decimeters">
+					<alt>dm</alt>
+					<alt>Decimeter</alt>
+					<alt>Decimeters</alt>
+				</def>
+				<def name="Meters">
+					<alt>m</alt>
+					<alt>Meter</alt>
+					<alt>Meters</alt>
+				</def>
+				<def name="Kilometers">
+					<alt>km</alt>
+					<alt>Kilometer</alt>
+					<alt>Kilometers</alt>
+					<alt>Klick</alt>
+					<alt>Klicks</alt>
+				</def>
+			</section>
+			<section desc="Zones">
+				<def name="Zone">
+					<alt>
+						<elt ref="City" weight="30"/>
+						<elt ref="OptStateCountry" weight="70"/>
+					</alt>
+					<alt>
+						<elt ref="State" weight="30"/>
+						<elt ref="OptCountry" weight="70"/>
+					</alt>
+					<alt>
+						<elt ref="OptStateCountry" weight="100"/>
+					</alt>
+					<alt>
+						<elt ref="Country" weight="100"/>
+					</alt>
+				</def>
+				<def name="City">
+					<alias_list_ref ref="CityAliases"/>
+					<alt ref="wordlist"/>
+				</def>
+				<def name="OptCity">
+					<alt ref="City" pre_separator="required" post_separator="required"/>
+					<alt/>
+				</def>
+				<def name="State">
+					<alias_list_ref ref="StateAliases"/>
+				</def>
+				<def name="OptState">
+					<alt ref="State"/>
+					<alt/>
+				</def>
+				<def name="Country">
+					<alias_list_ref ref="CountryAliases"/>
+				</def>
+				<def name="OptCountry">
+					<alt ref="Country"/>
+					<alt/>
+				</def>
+				<def name="OptCityNoSearch">
+					<alt>
+						<elt ref="CityNoSearch" pre_separator="required" post_separator="required" match_as="City"/>
+					</alt>
+					<alt/>
+				</def>
+				<def name="CityNoSearch">
+					<alias_list_ref ref="CityAliases"/>
+					<alt ref="wordlist"/>
+				</def>
+				<def name="OptStateNoSearch">
+					<alt>
+						<elt ref="StateNoSearch" pre_separator="required" post_separator="required" match_as="State"/>
+					</alt>
+					<alt/>
+				</def>
+				<def name="StateNoSearch">
+					<alias_list_ref ref="StateAliases"/>
+					<alt ref="wordlist"/>
+				</def>
+				<def name="OptCountryNoSearch">
+					<alt>
+						<elt ref="CountryNoSearch" match_as="Country"/>
+					</alt>
+					<alt/>
+				</def>
+				<def name="CountryNoSearch">
+					<alias_list_ref ref="CountryAliases"/>
+					<alt ref="wordlist"/>
+				</def>
+				<def name="OptStateCountry">
+					<alt/>
+					<alt>
+						<elt ref="OptState" weight="30"/>
+						<elt ref="OptCountry" weight="70"/>
+					</alt>
+				</def>
+			</section>
+			<section desc="Gazetteer Connectors">
+				<def name="Connectors">
+					<alt ref="_in"/>
+					<alt ref="_at"/>
+					<alt ref="_near"/>
+				</def>
+				<def name="_in" is_alias_list="true">
+					<alt>in</alt>
+				</def>
+				<def name="_at" is_alias_list="true">
+					<alt>at</alt>
+				</def>
+				<def name="_near" is_alias_list="true">
+					<alt>near</alt>
+				</def>
+			</section>
+			<section desc="Standardization">
+				<def name="CompleteCity">
+					<alt>
+						<elt ref="CityPrefixDir" weight="2" stan_weight="15" pre_separator="required" post_separator="required"/>
+						<elt ref="CityPrefixType" weight="5" stan_weight="20" pre_separator="required" post_separator="required"/>
+						<elt ref="City" weight="96" stan_weight="10" pre_separator="required" post_separator="required" separator_list=",;"/>
+						<elt ref="CitySuffixType" weight="5" stan_weight="20" pre_separator="required" post_separator="required"/>
+					</alt>
+				</def>
+				<def name="CityPrefixDir" optimize="true">
+					<alt ref="dir"/>
+					<alt/>
+				</def>
+				<def name="CityPrefixType" optimize="true">
+					<alt>
+						<elt ref="CityType" weight="1" stan_weight="10"/>
+						<elt ref="CityTypeConnector" weight="0" stan_weight="9"/>
+					</alt>
+					<alt/>
+				</def>
+				<def name="CityTypeConnector">
+					<alt>of</alt>
+					<alt/>
+				</def>
+				<def name="CitySuffixType" optimize="true">
+					<alt>
+						<elt ref="CityType" weight="1" stan_weight="10"/>
+						<elt ref="CityTypeConnector" weight="0" stan_weight="9"/>
+					</alt>
+					<alt/>
+				</def>
+				<def name="CityType">
+					<alt ref="_ctAlturas"/>
+					<alt ref="_ctBeach"/>
+					<alt ref="_ctBorough"/>
+					<alt ref="_ctByTheSea"/>
+					<alt ref="_ctCampamento"/>
+					<alt ref="_ctCampo"/>
+					<alt ref="_ctCasa"/>
+					<alt ref="_ctCDP"/>
+					<alt ref="_ctCentral"/>
+					<alt ref="_ctCentro"/>
+					<alt ref="_ctCity"/>
+					<alt ref="_ctColinas"/>
+					<alt ref="_ctColonia"/>
+					<alt ref="_ctComunidad"/>
+					<alt ref="_ctCreek"/>
+					<alt ref="_ctEstancias"/>
+					<alt ref="_ctEstates"/>
+					<alt ref="_ctExtension"/>
+					<alt ref="_ctHacienda"/>
+					<alt ref="_ctHeights"/>
+					<alt ref="_ctHistorical"/>
+					<alt ref="_ctIsland"/>
+					<alt ref="_ctJardines"/>
+					<alt ref="_ctLa"/>
+					<alt ref="_ctMetro"/>
+					<alt ref="_ctMobileHomePark"/>
+					<alt ref="_ctMonte"/>
+					<alt ref="_ctParcelas"/>
+					<alt ref="_ctParque"/>
+					<alt ref="_ctPaseo"/>
+					<alt ref="_ctPlantation"/>
+					<alt ref="_ctPlaya"/>
+					<alt ref="_ctPueblo"/>
+					<alt ref="_ctPunta"/>
+					<alt ref="_ctQuintas"/>
+					<alt ref="_ctReparto"/>
+					<alt ref="_ctResidencial"/>
+					<alt ref="_ctRio"/>
+					<alt ref="_ctSector"/>
+					<alt ref="_ctSprings"/>
+					<alt ref="_ctSubdivision"/>
+					<alt ref="_ctTerrace"/>
+					<alt ref="_ctTown"/>
+					<alt ref="_ctTownship"/>
+					<alt ref="_ctUrbanizacion"/>
+					<alt ref="_ctValle"/>
+					<alt ref="_ctValley"/>
+					<alt ref="_ctView"/>
+					<alt ref="_ctVilla"/>
+					<alt ref="_ctVillage"/>
+					<alt ref="_ctVista"/>
+					<alt ref="_ctAirForce"/>
+				</def>
+				<def name="_ctAirForce" is_alias_list="true">
+					<alt>air force base</alt>
+					<alt>afb</alt>
+					<alt>arb</alt>
+					<alt>afs</alt>
+					<alt>afa</alt>
+					<alt>air reserve base</alt>
+					<alt>air force station</alt>
+					<alt>air force academy</alt>
+					<alt>a f b</alt>
+					<alt>a r b</alt>
+					<alt>a f s</alt>
+					<alt>a f a</alt>
+					<alt>naval auxiliary air station</alt>
+				</def>
+				<def name="_ctAlturas" is_alias_list="true">
+					<alt>Alturas</alt>
+					<alt>Alturas de</alt>
+				</def>
+				<def name="_ctBeach" is_alias_list="true">
+					<alt>Beach</alt>
+					<alt>Bch</alt>
+				</def>
+				<def name="_ctBorough" is_alias_list="true">
+					<alt>Borough</alt>
+					<alt>Boro</alt>
+					<alt>Borough of</alt>
+				</def>
+				<def name="_ctByTheSea" is_alias_list="true">
+					<alt>by the sea</alt>
+					<alt>by-the-sea</alt>
+					<alt>by sea</alt>
+				</def>
+				<def name="_ctCasa" is_alias_list="true">
+					<alt>Casa</alt>
+					<alt>Casa del</alt>
+				</def>
+				<def name="_ctCampamento" is_alias_list="true">
+					<alt>Campamento</alt>
+				</def>
+				<def name="_ctCampo" is_alias_list="true">
+					<alt>Campo</alt>
+				</def>
+				<def name="_ctCDP" is_alias_list="true">
+					<alt>Census Designated Place</alt>
+					<alt>CDP</alt>
+				</def>
+				<def name="_ctCentro" is_alias_list="true">
+					<alt>Centro</alt>
+				</def>
+				<def name="_ctCentral" is_alias_list="true">
+					<alt>Central</alt>
+				</def>
+				<def name="_ctCity" is_alias_list="true">
+					<alt>City</alt>
+					<alt>Cty</alt>
+					<alt>Ct</alt>
+				</def>
+				<def name="_ctColonia" is_alias_list="true">
+					<alt>Colonia</alt>
+				</def>
+				<def name="_ctComunidad" is_alias_list="true">
+					<alt>Comunidad</alt>
+					<alt>Estancias</alt>
+				</def>
+				<def name="_ctColinas" is_alias_list="true">
+					<alt>Colinas</alt>
+					<alt>Colinas de</alt>
+				</def>
+				<def name="_ctCreek" is_alias_list="true">
+					<alt>Creek</alt>
+					<alt>Crk</alt>
+				</def>
+				<def name="_ctEstates" is_alias_list="true">
+					<alt>Estates</alt>
+					<alt>Est</alt>
+					<alt>Ests</alt>
+				</def>
+				<def name="_ctExtension" is_alias_list="true">
+					<alt>Extension</alt>
+				</def>
+				<def name="_ctEstancias" is_alias_list="true">
+					<alt>Estancion</alt>
+					<alt>Estancias</alt>
+				</def>
+				<def name="_ctJardines" is_alias_list="true">
+					<alt>Jardines</alt>
+					<alt>Jardines de</alt>
+				</def>
+				<def name="_ctMetro" is_alias_list="true">
+					<alt>Metro</alt>
+					<alt>Metro Area</alt>
+					<alt>Metropolitan</alt>
+					<alt>Metropolitan Area</alt>
+				</def>
+				<def name="_ctHacienda" is_alias_list="true">
+					<alt>Hacienda</alt>
+					<alt>Hacienda La</alt>
+					<alt>Hacienda Las</alt>
+				</def>
+				<def name="_ctHeights" is_alias_list="true">
+					<alt>Heights</alt>
+					<alt>Hghts</alt>
+					<alt>Hhts</alt>
+					<alt>Hts</alt>
+				</def>
+				<def name="_ctHistorical" is_alias_list="true">
+					<alt>Historical</alt>
+				</def>
+				<def name="_ctIsland" is_alias_list="true">
+					<alt>Island</alt>
+					<alt>Islnd</alt>
+					<alt>Is</alt>
+					<alt>Islands</alt>
+					<alt>Islnds</alt>
+					<alt>Iss</alt>
+				</def>
+				<def name="_ctLa" is_alias_list="true">
+					<alt>La</alt>
+				</def>
+				<def name="_ctMobileHomePark" is_alias_list="true">
+					<alt>Mobile Home Park</alt>
+					<alt>Mobile Homes Park</alt>
+					<alt>Trailer Park</alt>
+				</def>
+				<def name="_ctMonte" is_alias_list="true">
+					<alt>Monte</alt>
+				</def>
+				<def name="_ctParcelas" is_alias_list="true">
+					<alt>Parcelas</alt>
+				</def>
+				<def name="_ctParque" is_alias_list="true">
+					<alt>Parque</alt>
+				</def>
+				<def name="_ctPaseo" is_alias_list="true">
+					<alt>Paseo</alt>
+				</def>
+				<def name="_ctPlantation" is_alias_list="true">
+					<alt>Plantation</alt>
+					<alt>Plt</alt>
+					<alt>Pltn</alt>
+				</def>
+				<def name="_ctPlaya" is_alias_list="true">
+					<alt>Playa</alt>
+					<alt>Playa de</alt>
+					<alt>Playaita</alt>
+				</def>
+				<def name="_ctPueblo" is_alias_list="true">
+					<alt>Pueblo</alt>
+					<alt>Pueblo of</alt>
+					<alt>Pueblito de</alt>
+					<alt>Pueblito del</alt>
+				</def>
+				<def name="_ctPunta" is_alias_list="true">
+					<alt>Punta</alt>
+				</def>
+				<def name="_ctQuintas" is_alias_list="true">
+					<alt>Quintas</alt>
+					<alt>Quintas de</alt>
+					<alt>Quintas del</alt>
+				</def>
+				<def name="_ctReparto" is_alias_list="true">
+					<alt>Reparto</alt>
+				</def>
+				<def name="_ctResidencial" is_alias_list="true">
+					<alt>Residencial</alt>
+				</def>
+				<def name="_ctRio" is_alias_list="true">
+					<alt>Rio</alt>
+				</def>
+				<def name="_ctRiver" is_alias_list="true">
+					<alt>River</alt>
+					<alt>Riv</alt>
+				</def>
+				<def name="_ctSector" is_alias_list="true">
+					<alt>Sector</alt>
+					<alt>Sector la</alt>
+					<alt>Sector las</alt>
+					<alt>Sector los</alt>
+				</def>
+				<def name="_ctSprings" is_alias_list="true">
+					<alt>Springs</alt>
+					<alt>Sprgs</alt>
+					<alt>Spgs</alt>
+				</def>
+				<def name="_ctSubdivision" is_alias_list="true">
+					<alt>Subdivision</alt>
+					<alt>Sub</alt>
+				</def>
+				<def name="_ctTerrace" is_alias_list="true">
+					<alt>Terrace</alt>
+					<alt>Ter</alt>
+				</def>
+				<def name="_ctTown" is_alias_list="true">
+					<alt>Town</alt>
+					<alt>Twn</alt>
+				</def>
+				<def name="_ctTownship" is_alias_list="true">
+					<alt>Township</alt>
+					<alt>Town Ship</alt>
+					<alt>Twp</alt>
+					<alt>Twshp</alt>
+					<alt>Tw</alt>
+					<alt>Ts</alt>
+				</def>
+				<def name="_ctUrbanizacion" is_alias_list="true">
+					<alt>Urbanizacion</alt>
+					<alt>Urb</alt>
+					<alt>Urbana</alt>
+					<alt>Zona Urbana</alt>
+				</def>
+				<def name="_ctValle" is_alias_list="true">
+					<alt>Valle</alt>
+				</def>
+				<def name="_ctValley" is_alias_list="true">
+					<alt>Valley</alt>
+					<alt>Vly</alt>
+					<alt>Vally</alt>
+					<alt>Vlly</alt>
+				</def>
+				<def name="_ctView" is_alias_list="true">
+					<alt>View</alt>
+					<alt>Vw</alt>
+				</def>
+				<def name="_ctVilla" is_alias_list="true">
+					<alt>Villa</alt>
+					<alt>Villas de</alt>
+				</def>
+				<def name="_ctVillage" is_alias_list="true">
+					<alt>Village</alt>
+					<alt>Vlg</alt>
+					<alt>Vill</alt>
+					<alt>Villag</alt>
+					<alt>Villg</alt>
+					<alt>Villiage</alt>
+				</def>
+				<def name="_ctVista" is_alias_list="true">
+					<alt>Vista</alt>
+					<alt>Vistas de</alt>
+				</def>
+			</section>
+		</grammar>
+		<!--This section specifies the plug-in functions for calculating offset distance,
+    polygon centroid, etc.
+    DO NOT EDIT this section.-->
+		<plugins>
+			<plugin name="match_house_to_range">
+				<builtin>MatchHouseToRange</builtin>
+			</plugin>
+			<plugin name="create_point">
+				<builtin>CreatePoint</builtin>
+			</plugin>
+			<plugin name="calculate_score">
+				<builtin>CalculatePermutableScore</builtin>
+			</plugin>
+			<plugin name="calculate_score_simple">
+				<builtin>CalculateScore</builtin>
+			</plugin>
+			<plugin name="directed_offset">
+				<desc>
+          Calculates location given bearing and location. <br/>
+          Parameters: <br/>
+					<span class="pluginParam">distance</span> (as double),
+          <br/>
+					<span class="pluginParam">units</span> (as esriUnits integer value),
+          <br/>
+					<span class="pluginParam">bearing</span> (decimal degrees angle, clockwise),
+          <br/>
+					<span class="pluginParam">location</span> (some location as IPropertySet)
+        </desc>
+				<builtin>DirectedOffset</builtin>
+			</plugin>
+			<plugin name="calc_polygon_centroid">
+				<desc>Expects one parameter as a IGeometry object (polygon). Returns IGeometry (point) as a centroid of the passed polygon.</desc>
+				<builtin>CalculatePolygonCentroid</builtin>
+			</plugin>
+			<plugin name="reverse_MGRS">
+				<desc>Reverse geocode location and return result as MGRS string</desc>
+				<builtin>ReverseMGRS</builtin>
+			</plugin>
+		</plugins>
+		<mapping_schemas>
+			<!--This section defines the SingleField mapping schema. It specifies the fields for the 
+    reference data, dictionary for indexing, relationships of the address components, and output 
+    components for single field addresses with the geometry type as point.-->
+			<mapping_schema name="SingleField" geom_type="point">
+				<desc>Single Field</desc>
+				<desc>This is used for point features containing a single key field.</desc>
+				<fields>
+					<field name="Shape" type="geometry">
+						<desc>Shape field</desc>
+					</field>
+					<field name="ID">
+						<desc>Unique ID field</desc>
+					</field>
+					<field name="KeyField" grammar_ref="SingleField">
+						<desc>Single Field</desc>
+						<preferred_name>NAME</preferred_name>
+						<scoring_method ref="calculate_score">
+							<init_properties>
+								<prop name="CharacterTable">scoring</prop>
+							</init_properties>
+							<parameter>
+								<input_value/>
+							</parameter>
+							<parameter>
+								<field_value ref="KeyField"/>
+							</parameter>
+						</scoring_method>
+					</field>
+					<field name="User_fld">
+						<desc>Additional Field</desc>
+					</field>
+				</fields>
+				<conversions>
+					<conversion>
+						<mapping base_ref="Shape">
+							<method ref="calc_polygon_centroid">
+								<parameter>
+									<field_value ref="Shape"/>
+								</parameter>
+							</method>
+						</mapping>
+					</conversion>
+				</conversions>
+				<selection_clause dbms="default">
+					<field_ref ref="KeyField"/> &lt;&gt; '' AND
+          <field_ref ref="KeyField"/> &lt;&gt; ' '
+        </selection_clause>
+				<selection_clause dbms="Oracle">
+					<field_ref ref="KeyField"/> IS NOT NULL AND
+          <field_ref ref="KeyField"/> &lt;&gt; ' '
+        </selection_clause>
+				<index>
+					<dictionary ref="KeyField" search="true" type="word"/>
+					<dictionary ref="ID" type="ids"/>
+					<dictionary ref="User_fld" type="ids"/>
+					<relationship>
+						<field_ref ref="KeyField"/>
+					</relationship>
+					<reverse_relationship>
+						<field_ref ref="KeyField"/>
+						<field_ref ref="ID"/>
+						<field_ref ref="User_fld"/>
+					</reverse_relationship>
+				</index>
+				<properties>
+					<prop name="GeneralLocationEnabled" type="Boolean">true</prop>
+					<prop name="StoreStandardizedRefData">false</prop>
+				</properties>
+				<outputs>
+					<output component="Shape" type="geometry"/>
+					<output component="Status" candidate_mode="false" length="1"/>
+					<output component="Score" type="float" decimal_digits="2"/>
+					<output component="Match_addr" length="120"/>
+					<output name="Ref_ID" ref="ID" type="string" length="40" selector="WriteReferenceIDField"/>
+					<output name="X" component="X" type="float" decimal_digits="6" selector="WriteXYCoordFields"/>
+					<output name="Y" component="Y" type="float" decimal_digits="6" selector="WriteXYCoordFields"/>
+					<output ref="User_fld" type="string" length="120" selector="WriteAdditionalOutputFields"/>
+					<output component="Addr_type" length="20"/>
+					<output component="Match_time" type="float" selector="ShowElapsedTime"/>
+				</outputs>
+				<!--This section handles the reverse geocoding method and output formats.-->
+				<reverse_geocoding>
+					<reverse_geocoding_method name="Address">
+						<outputs>
+							<output component="Shape" type="geometry"/>
+							<output name="SingleKey" ref="KeyField" length="120"/>
+							<output component="Match_time" type="float" selector="ShowElapsedTime"/>
+						</outputs>
+					</reverse_geocoding_method>
+				</reverse_geocoding>
+				<!--This section handles the standardization process for building the locator and
+        the Standardize Addresses Geoprocessing tool.-->
+				<standardization>
+					<build>
+						<use_standard_values>false</use_standard_values>
+						<format>
+							<field_value ref="KeyField"/>
+						</format>
+						<grammar>
+							<alt>
+								<elt ref="SingleField"/>
+							</alt>
+						</grammar>
+						<outputs>
+							<output name="SingleKey" component="SingleField" length="120"/>
+						</outputs>
+					</build>
+					<tool>
+						<use_standard_values>true</use_standard_values>
+						<grammar>
+							<alt>
+								<elt ref="SingleField"/>
+							</alt>
+						</grammar>
+						<outputs>
+							<output name="ADDR_K1" alias="KeyField" component="SingleField" length="120"/>
+						</outputs>
+					</tool>
+				</standardization>
+			</mapping_schema>
+			<!--<!{1}**This section defines the Gazetteer mapping schema. It specifies the fields for the 
+    reference data, dictionary for indexing, relationships of the address components, and output 
+    components for Gazetteer addresses with the geometry type as point.**{1}>
+
+			<!{1}**The GazetteerCentroid mapping schema inherits the mapping schema of "Gazetteer", 
+    but defines the geometry type as polygon.**{1}>
+
+			<mapping_schema name="GazetteerPolygon" base="Gazetteer" geom_type="polygon">
+				<desc>Single Name (Polygons)</desc>
+			</mapping_schema>
+
+			<!{1}**The GazetteerCentroid mapping schema inherits the mapping schema of "Gazetteer", 
+    but defines the geometry type as polygon and uses the polygon centroid as the shape.**{1}>
+
+			<mapping_schema name="GazetteerCentroid" base="Gazetteer" geom_type="polygon">
+				<desc>Single Name (Polygon centroids)</desc>
+				<conversions>
+					<conversion>
+						<mapping base_ref="Shape">
+							<method ref="calc_polygon_centroid">
+								<parameter>
+									<field_value ref="Shape" />
+								</parameter>
+							</method>
+						</mapping>
+					</conversion>
+				</conversions>
+			</mapping_schema>-->
+		</mapping_schemas>
+		<!--This section defines the reference data styles, including reference data tables, fields,
+    preferred field names, reference to the mapping schema, and join clauses for the primary 
+    and alternate name tables if it applies. The name of the style is displayed on ArcGIS 
+    geocoding Select Address Locator dialog box.-->
+		<!--This section handles the geocoding properties such as minimum match score,
+    spelling sensitivity, output field options.-->
+		<properties>
+			<prop name="MinimumMatchScore">80</prop>
+			<prop name="MinimumCandidateScore">10</prop>
+			<prop name="SpellingSensitivity">50</prop>
+			<prop name="MatchIfScoresTie">true</prop>
+			<prop name="WriteXYCoordFields">true</prop>
+			<prop name="WriteStandardizedAddressField">false</prop>
+			<prop name="WriteReferenceIDField">true</prop>
+			<prop name="WriteAdditionalOutputFields">true</prop>
+			<prop name="WriteLocatorSpecificOutputFields">false</prop>
+			<prop name="WriteDisplayExtentFields">true</prop>
+			<prop name="WritePercentAlongField">true</prop>
+			<prop name="RuntimeMemoryLimit">511705088</prop>
+			<prop name="ShowElapsedTime">true</prop>
+			<prop name="reportScorePerComponent">true</prop>
+			<prop name="MaxCandidates">2000</prop>
+			<prop name="MaxPerfectCandidates">2000</prop>
+			<prop name="SearchTimeout">100</prop>
+			<prop name="NumThreads" type="Int">1</prop>
+			<prop name="GeneralLocationEnabled">true</prop>
+			<prop name="StoreStandardizedRefData">false</prop>
+			<prop name="CLSID">{DA70B7E3-10B2-42E3-BFF7-6C81355862BC}</prop>
+			<prop name="LocatorWorkspaceString">ProgID = esriDataSourcesFile.ShapefileWorkspaceFactory; Path = M:\ISD\arcgis-locator-102-cloud\</prop>
+			<prop name="LocFileUseUTF8">True</prop>
+			<prop name="RD.WksGDBVersion">sde.DEFAULT</prop>
+			<prop name="RebuildStartTime">130752204946500000</prop>
+			<prop name="RebuildStartTimeAscii">1:41:34 PM</prop>
+			<prop name="SafeLocatorName">coa_opendata_property_Create</prop>
+			<prop name="UICLSID">{AE5A3A0E-F756-11D2-9F4F-00C04F8ED1C4}</prop>
+			<prop name="UseMultithreading">True</prop>
+			<prop name="DefaultPath">M:\ISD\arcgis-locator-102-cloud\</prop>
+			<prop name="WriteLocatorSpecificFields">true</prop>
+			<prop name="SideOffset">0</prop>
+			<prop name="SideOffsetUnits">ReferenceDataUnits</prop>
+			<prop name="EndOffset">0</prop>
+			<prop name="EndOffsetUnits">Percent</prop>
+			<prop name="IntersectionConnectors"></prop>
+			<prop name="supportsEmptyHouseNumber">true</prop>
+			<prop name="supportsOptionalZone">true</prop>
+			<prop name="Interpolate.SideValue.Left">L</prop>
+			<prop name="Interpolate.SideValue.Right">R</prop>
+			<prop name="BatchPresortInputs"></prop>
+			<prop name="BatchPresortCacheSize" type="Int">50000</prop>
+			<prop name="UseRelativePaths">true</prop>
+		</properties>
+		<!--This section defines the output formats and the order of fields.-->
+		<output_formats>
+			<format_definition name="format_score_per_component">
+				<value>;</value>
+				<component_value component="component_score.PlaceName" pre_separator="PlaceName="/>
+				<component_value component="component_score.FullPlaceName" pre_separator="; FullPlaceName="/>
+				<component_value component="component_score.Type" pre_separator="; Type="/>
+				<component_value component="component_score.CityPrefixDir" pre_separator="; CityPrefixDir="/>
+				<component_value component="component_score.CityPrefixType" pre_separator="; CityPrefixType="/>
+				<component_value component="component_score.City" pre_separator="; City="/>
+				<component_value component="component_score.CitySuffixType" pre_separator="; CitySuffixType="/>
+				<component_value component="component_score.State" pre_separator="; State="/>
+				<component_value component="component_score.Country" pre_separator="; Country="/>
+			</format_definition>
+			<format_definition name="key_field_format">
+				<field_value ref="KeyField"/>
+			</format_definition>
+			<format_definition name="format_normal_place_name">
+				<field_value ref="PlaceName"/>
+				<field_value ref="City" pre_separator=", "/>
+				<field_value ref="State" pre_separator=", "/>
+				<field_value ref="Country" pre_separator=", "/>
+			</format_definition>
+			<format_definition name="format_city_state_country_name">
+				<field_value ref="CityPrefixDir"/>
+				<field_value ref="CityPrefixType" pre_separator=" "/>
+				<field_value ref="City" pre_separator=" "/>
+				<field_value ref="CitySuffixType" pre_separator=" "/>
+				<field_value ref="State" pre_separator=", "/>
+				<field_value ref="Country" pre_separator=", "/>
+			</format_definition>
+			<format_definition name="format_complete_city_name">
+				<field_value ref="CityPrefixDir"/>
+				<field_value ref="CityPrefixType" pre_separator=" "/>
+				<field_value ref="City" pre_separator=" "/>
+				<field_value ref="CitySuffixType" pre_separator=" "/>
+			</format_definition>
+		</output_formats>
+		<ref_data><table_roles>
+				<table_role name="Primary">
+					<display_name>Primary Table</display_name>
+					<desc>KeyField feature class</desc>
+					<field_roles>
+						<field_role name="Primary.Shape" is_geometry="true">
+							<display_name>Geometry</display_name>
+							<preferred_name>Shape</preferred_name>
+							<field_name>shape</field_name></field_role>
+						<field_role name="Primary.ID" required="false">
+							<display_name>Feature ID</display_name>
+							<preferred_name>ObjectID</preferred_name>
+							<preferred_name>FID</preferred_name>
+							<field_name>ObjectID</field_name></field_role>
+						<field_role name="Primary.KeyField" required="true">
+							<display_name>KeyField</display_name>
+							<preferred_name>Name</preferred_name>
+							<field_name>owner</field_name></field_role>
+						<field_role name="Primary.User_fld">
+							<display_name>Additional Field</display_name>
+							<preferred_name>BLOCKID</preferred_name>
+							<preferred_name>BLOCK_ID</preferred_name>
+							<preferred_name>BLOCK</preferred_name>
+							<field_name>pinnum</field_name></field_role>
+						<field_role name="Primary.Alt_JoinID">
+							<display_name>Altname JoinID</display_name>
+							<field_name>pinnum</field_name></field_role>
+					</field_roles>
+					<table_name>coagis.gisowner.coa_opendata_property</table_name></table_role>
+			</table_roles>
+			<data_source type="indexed">
+				<mapping_schema ref="SingleField"/>
+				<workspace_properties><factory_progid>esriDataSourcesGDB.SdeWorkspaceFactory.1</factory_progid><connection_properties><server>54.225.191.233</server><instance>sde:postgresql:54.225.191.233</instance><database>coagis</database><authentication_mode>DBMS</authentication_mode><user>gisowner</user><password>{{17}}[2,0,0,0,48,0,0,0,46,104,67,98,100,71,79,80,104,53,71,85,86,89,83,47,57,98,50,82,74,120,68,54,98,118,67,100,56,73,100,54,107,120,72,88,55,90,87,104,112,79,122,88,81,61,42,0]</password><transactional_version>sde.DEFAULT</transactional_version></connection_properties></workspace_properties><queries>
+					<query>
+						<tables>
+							<table role_ref="Primary">coagis.gisowner.coa_opendata_property</table>
+						</tables>
+						<fields>
+							<field ref="Shape" field_role_ref="Primary.Shape">coagis.gisowner.coa_opendata_property.shape</field>
+							<field ref="ID" field_role_ref="Primary.ID">coagis.gisowner.coa_opendata_property.ObjectID</field>
+							<field ref="KeyField" field_role_ref="Primary.KeyField">coagis.gisowner.coa_opendata_property.owner</field>
+							<field ref="User_fld" field_role_ref="Primary.User_fld">coagis.gisowner.coa_opendata_property.pinnum</field>
+							<field ref="Alt_JoinID" field_role_ref="Primary.Alt_JoinID">coagis.gisowner.coa_opendata_property.pinnum</field>
+						</fields>
+					</query>
+				</queries>
+			</data_source>
+		</ref_data><style_name>General - Single Field</style_name><style_desc>Single Field</style_desc><metadata><dataIdInfo><envirDesc Sync="TRUE">Microsoft Windows 7 Version 6.1 (Build 7601) Service Pack 1; Esri ArcGIS 10.2.2.3552</envirDesc><dataLang><languageCode value="eng" Sync="TRUE"></languageCode><countryCode value="USA" Sync="TRUE"></countryCode></dataLang><spatRpType><SpatRepTypCd value="001" Sync="TRUE"></SpatRepTypCd></spatRpType></dataIdInfo><mdLang><languageCode value="eng" Sync="TRUE"></languageCode><countryCode value="USA" Sync="TRUE"></countryCode></mdLang><Esri><SyncDate>20150504</SyncDate><SyncTime>13481800</SyncTime><ModDate>20150504</ModDate><ModTime>13481800</ModTime><DataProperties><coordRef><type Sync="TRUE">Geographic</type><geogcsn Sync="TRUE">GCS_WGS_1984</geogcsn><csUnits Sync="TRUE">Angular Unit: Degree (0.017453)</csUnits><peXml Sync="TRUE">&lt;GeographicCoordinateSystem xsi:type='typens:GeographicCoordinateSystem' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:typens='http://www.esri.com/schemas/ArcGIS/10.1'&gt;&lt;WKT&gt;GEOGCS[&amp;quot;GCS_WGS_1984&amp;quot;,DATUM[&amp;quot;D_WGS_1984&amp;quot;,SPHEROID[&amp;quot;WGS_1984&amp;quot;,6378137.0,298.257223563]],PRIMEM[&amp;quot;Greenwich&amp;quot;,0.0],UNIT[&amp;quot;Degree&amp;quot;,0.0174532925199433],AUTHORITY[&amp;quot;EPSG&amp;quot;,4326]]&lt;/WKT&gt;&lt;XOrigin&gt;-400&lt;/XOrigin&gt;&lt;YOrigin&gt;-400&lt;/YOrigin&gt;&lt;XYScale&gt;999999999.99999988&lt;/XYScale&gt;&lt;ZOrigin&gt;-100000&lt;/ZOrigin&gt;&lt;ZScale&gt;10000&lt;/ZScale&gt;&lt;MOrigin&gt;-100000&lt;/MOrigin&gt;&lt;MScale&gt;10000&lt;/MScale&gt;&lt;XYTolerance&gt;8.983152841195215e-009&lt;/XYTolerance&gt;&lt;ZTolerance&gt;0.001&lt;/ZTolerance&gt;&lt;MTolerance&gt;0.001&lt;/MTolerance&gt;&lt;HighPrecision&gt;true&lt;/HighPrecision&gt;&lt;LeftLongitude&gt;-180&lt;/LeftLongitude&gt;&lt;WKID&gt;4326&lt;/WKID&gt;&lt;LatestWKID&gt;4326&lt;/LatestWKID&gt;&lt;/GeographicCoordinateSystem&gt;</peXml></coordRef></DataProperties></Esri><mdDateSt Sync="TRUE">20150504</mdDateSt><DatasetName>coa_opendata_property_Create</DatasetName><DatasetType>Address Locator</DatasetType><refSysInfo><RefSystem><refSysID><identCode code="4326" Sync="TRUE"></identCode><idCodeSpace Sync="TRUE">EPSG</idCodeSpace><idVersion Sync="TRUE">8.2.6</idVersion></refSysID></RefSystem></refSysInfo></metadata>
+		<placename_alias_table><alias_field><field_name></field_name></alias_field><address_fields/></placename_alias_table></locator>
+</locators>

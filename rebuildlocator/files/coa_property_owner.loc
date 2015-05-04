@@ -1,0 +1,59 @@
+
+LocFileUseUTF8 = True
+Category = Address
+Description = Single Field
+
+UseRelativePaths = true
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;  Properties Required by ArcGIS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+CLSID = {DA70B7E3-10B2-42E3-BFF7-6C81355862BC}
+UICLSID = {AE5A3A0E-F756-11D2-9F4F-00C04F8ED1C4}
+
+Interpolate.SideValue.Left = L
+Interpolate.SideValue.Right = R
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;  Esri Geocoder Misc Optional Properties
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+IntersectionConnectors = 
+MinimumMatchScore = 80
+MinimumCandidateScore = 10
+EndOffset = 0
+SideOffset = 0
+SideOffsetUnits = ReferenceDataUnits
+SpellingSensitivity = 50
+MatchIfScoresTie = true
+WriteXYCoordFields = true
+WriteStandardizedAddressField = false
+WriteReferenceIDField = true
+WritePercentAlongField = true
+
+RD.WksGDBVersion = sde.DEFAULT
+
+BatchPresortCacheSize = 50000
+BatchPresortInputs = 
+EndOffsetUnits = Percent
+GeneralLocationEnabled = true
+LocatorWorkspaceString = ProgID = esriDataSourcesFile.ShapefileWorkspaceFactory; Path = M:\ISD\arcgis-locator-102-cloud\
+MaxCandidates = 2000
+MaxPerfectCandidates = 2000
+NumThreads = 1
+RebuildStartTime = 130752207612410000
+RebuildStartTimeAscii = 1:46:01 PM
+RuntimeMemoryLimit = 511705088
+SafeLocatorName = coa_opendata_property_Create
+SearchTimeout = 100
+ShowElapsedTime = true
+StoreStandardizedRefData = false
+UseMultithreading = True
+WriteAdditionalOutputFields = true
+WriteDisplayExtentFields = true
+WriteLocatorSpecificFields = true
+WriteLocatorSpecificOutputFields = false
+reportScorePerComponent = true
+supportsEmptyHouseNumber = true
+supportsOptionalZone = true
