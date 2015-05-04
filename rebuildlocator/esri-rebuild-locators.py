@@ -82,7 +82,13 @@ def createLocator(locator):
 
 #rebuild geocoder
 def rebuildLocator(locator):
-    arcpy.RebuildAddressLocator_geocoding(locator)
+    print "Rebuilding the locator: " + locator + "."
+    try:
+        arcpy.RebuildAddressLocator_geocoding(locator)
+        print "Succcesfully Rebuild the locator: " + locator + "."
+    except:
+        log.error('Error rebuilding geoccoder : ' + locator + '.  ' + arcpy.GetMessages(2))
+
 
 def publishLocator(info):
     #Overwrite any existing outputs
@@ -106,6 +112,8 @@ def publishLocator(info):
     max_batch_size = info['max_batch_size']
     suggested_batch_size = info['max_batch_size']
     supported_operations = info['supported_operations']
+
+    print "Starting to public the geocode service " + service_name  + "."
 
     #stagging
     out_service_definition = info['out_service_definition']
