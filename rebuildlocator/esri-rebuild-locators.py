@@ -86,8 +86,6 @@ def rebuildLocator(locator):
 
 def publishLocator(info):
     #Overwrite any existing outputs
-    print info['workspace']
-    print
 
     arcpy.env.overwriteOutput = True
     arcpy.env.workspace = info['workspace']
@@ -117,10 +115,6 @@ def publishLocator(info):
                                     server_type, connection_file_path, copy_data_to_server,
                                     folder_name, summary, tags, max_candidates,
                                     max_batch_size, suggested_batch_size, supported_operations)
-    #Create the sd draft file
-    #analyze_messages  = arcpy.CreateGeocodeSDDraft(locator_path, sddraft_file, service_name,
-    #                           connection_file_path=gis_server_connection_file,
-    #                           summary=summary, tags=tags)
 
     #stage and upload the service if the sddraft analysis did not contain errors
     if analyze_messages['errors'] == {}:
@@ -129,14 +123,13 @@ def publishLocator(info):
             arcpy.server.StageService(out_sddraft, out_service_definition)
             # Execute UploadServiceDefinition to publish the service definition file as a service
             arcpy.server.UploadServiceDefinition(out_service_definition, connection_file_path)
-            print "The geocode service was successfully published"
+            print "The geocode service " + service_name  + "was successfully published"
         except arcpy.ExecuteError as ex:
-            print "An error occured"
-            print arcpy.GetMessages(2)
+            log.error ("An error occured " + arcpy.GetMessages(2))
+
     else:
         # if the sddraft analysis contained errors, display them
-        print "Error were returned when creating service definition draft"
-        pprint.pprint(analyze_messages['errors'], indent=2)
+        log.error( "Error were returned when creating service definition draft" + analyze_messages['errors'] )
 
 #get yaml configuration file
 with open("config/config.yml", 'r') as ymlfile:
