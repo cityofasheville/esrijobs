@@ -85,7 +85,7 @@ def rebuildLocator(locator):
     print "Rebuilding the locator: " + locator + "."
     try:
         arcpy.RebuildAddressLocator_geocoding(locator)
-        print "Succcesfully Rebuild the locator: " + locator + "."
+        print "Succcesfully Rebuild the locator: " + locator + "!"
     except:
         log.error('Error rebuilding geoccoder : ' + locator + '.  ' + arcpy.GetMessages(2))
 
@@ -113,7 +113,7 @@ def publishLocator(info):
     suggested_batch_size = info['max_batch_size']
     supported_operations = info['supported_operations']
 
-    print "Starting to public the geocode service " + service_name  + "."
+    print "Starting to publish the geocode service " + service_name  + "..."
 
     #stagging
     out_service_definition = info['out_service_definition']
@@ -131,13 +131,14 @@ def publishLocator(info):
             arcpy.server.StageService(out_sddraft, out_service_definition)
             # Execute UploadServiceDefinition to publish the service definition file as a service
             arcpy.server.UploadServiceDefinition(out_service_definition, connection_file_path)
-            print "The geocode service " + service_name  + "was successfully published"
+            print "The geocode service " + service_name  + " was successfully published"
+            print " "
         except arcpy.ExecuteError as ex:
             log.error ("An error occured " + arcpy.GetMessages(2))
 
     else:
         # if the sddraft analysis contained errors, display them
-        log.error( "Error were returned when creating service definition draft" + analyze_messages['errors'] )
+        log.error( "Error were returned when creating service definition draft " + analyze_messages['errors'] )
 
 #get yaml configuration file
 with open("config/config.yml", 'r') as ymlfile:
