@@ -32,7 +32,6 @@ def emaillogger( configkey ):
   logger.addHandler(infolog)
   logger.addHandler(LOG)
 
-
 #delete sde connections
 def deleteconn(configkey):
   #delte existing sde file if it exsists
@@ -87,7 +86,7 @@ def rebuildLocator(locator):
         arcpy.RebuildAddressLocator_geocoding(locator)
         print "Succcesfully Rebuilt the locator: " + locator + "!"
     except:
-        log.error('Error rebuilding geoccoder : ' + locator + '.  ' + arcpy.GetMessages(2))
+        logger.error('Error rebuilding geoccoder : ' + locator + '.  ' + arcpy.GetMessages(2))
 
 
 def publishLocator(info):
@@ -134,11 +133,11 @@ def publishLocator(info):
             print "The geocode service " + service_name  + " was successfully published."
             print " "
         except arcpy.ExecuteError as ex:
-            log.error ("An error occured " + arcpy.GetMessages(2))
+            logger.error ("An error occured " + arcpy.GetMessages(2))
 
     else:
         # if the sddraft analysis contained errors, display them
-        log.error( "Error were returned when creating service definition draft " + analyze_messages['errors'] )
+        logger.error( "Error were returned when creating service definition draft " + analyze_messages['errors'] )
 
 #get yaml configuration file
 with open("config/config.yml", 'r') as ymlfile:
