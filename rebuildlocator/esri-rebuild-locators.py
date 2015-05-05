@@ -140,6 +140,8 @@ def publishLocator(info):
         logger.error( "Error were returned when creating service definition draft " )
         logger.error( analyze_messages['errors'] )
 
+    arcpy.ClearWorkspaceCache_management() 
+
 #get yaml configuration file
 with open("config/config.yml", 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
