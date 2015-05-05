@@ -137,7 +137,8 @@ def publishLocator(info):
 
     else:
         # if the sddraft analysis contained errors, display them
-        logger.error( "Error were returned when creating service definition draft " + analyze_messages['errors'] )
+        logger.error( "Error were returned when creating service definition draft " )
+        logger.error( analyze_messages['errors'] )
 
 #get yaml configuration file
 with open("config/config.yml", 'r') as ymlfile:
