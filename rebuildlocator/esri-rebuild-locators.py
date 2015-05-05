@@ -88,14 +88,24 @@ def createLocator(locator):
 
 #create composite
 def createComposite(info):
-    arcpy.env.workspace = info['workspace']
+        arcpy.env.workspace = info['workspace']
 
-    in_address_locators = info['in_address_locators']
-    in_field_map = info['in_field_map']
-    in_selection_criteria = info['in_selection_criteria']
-    out_composite_address_locator = info['out_composite_address_locator']
+        in_address_locators = info['in_address_locators']
+        in_field_map = info['in_field_map']
+        in_selection_criteria = info['in_selection_criteria']
+        out_composite_address_locator = info['out_composite_address_locator']
 
-    arcpy.CreateCompositeAddressLocator_geocoding(in_address_locators, in_field_map, in_selection_criteria, out_composite_address_locator)
+
+    print "Rebuilding the composite locator: " + out_composite_address_locator + "."
+    try:
+
+        arcpy.CreateCompositeAddressLocator_geocoding(in_address_locators, in_field_map, in_selection_criteria, out_composite_address_locator)
+        print "Succcesfully Rebuilt the composite locator: " + out_composite_address_locator + "!"
+    except:
+        print 'Error rebuilding compsite geoccoder : ' + out_composite_address_locator + '.'
+        print  arcpy.GetMessages(2)
+        logger.error('Error rebuilding compsite geoccoder : ' + out_composite_address_locator + '.')
+        logger.error(arcpy.GetMessages(2))
 
 #rebuild geocoder
 def rebuildLocator(locator):
@@ -104,7 +114,10 @@ def rebuildLocator(locator):
         arcpy.RebuildAddressLocator_geocoding(locator)
         print "Succcesfully Rebuilt the locator: " + locator + "!"
     except:
-        logger.error('Error rebuilding geoccoder : ' + locator + '.  ' + arcpy.GetMessages(2))
+        print 'Error rebuilding geoccoder : ' + locator + '.'
+        print  arcpy.GetMessages(2)
+        logger.error('Error rebuilding geoccoder : ' + locator + '.')
+        logger.error(arcpy.GetMessages(2))
 
 
 def publishLocator(info):
@@ -151,7 +164,8 @@ def publishLocator(info):
             print "The geocode service " + service_name  + " was successfully published."
             print " "
         except arcpy.ExecuteError as ex:
-            print ("An error occured " + arcpy.GetMessages(2))
+            print "An error occured! "
+            print arcpy.GetMessages(2)
             print " "
             logger.error ("An error occured " + arcpy.GetMessages(2))
 
