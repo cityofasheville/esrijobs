@@ -189,17 +189,19 @@ for k in ags:
     connags(k)
 
 
-#Create
-for k in createComposite:
-#loop version keys and re-create versions
-    if 'in_address_locator' in k:
-        if k['in_address_locator'] is not None:
-            rebuildLocator( k )
-            publishLocator( k )
+
 
 for k in geocoder:
 #loop version keys and re-create versions
     if 'in_address_locator' in k:
         if k['in_address_locator'] is not None:
-            createComposite( k['in_address_locator'] )
+            rebuildLocator( k['in_address_locator'] )
             publishLocator(k)
+
+#Create
+for k in createComposite:
+#loop version keys and re-create versions
+    if 'in_address_locator' in k:
+        if k['in_address_locator'] is not None:
+            createComposite( k )
+            publishLocator( k )
