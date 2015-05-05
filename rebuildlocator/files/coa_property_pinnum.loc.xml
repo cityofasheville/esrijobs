@@ -6735,9 +6735,9 @@
 			<prop name="LocatorWorkspaceString">ProgID = esriDataSourcesFile.ShapefileWorkspaceFactory; Path = M:\ISD\arcgis-locator-102-cloud\</prop>
 			<prop name="LocFileUseUTF8">True</prop>
 			<prop name="RD.WksGDBVersion">sde.DEFAULT</prop>
-			<prop name="RebuildStartTime">130752197112660000</prop>
-			<prop name="RebuildStartTimeAscii">1:28:31 PM</prop>
-			<prop name="SafeLocatorName">test-pinnum</prop>
+			<prop name="RebuildStartTime">130753085433760000</prop>
+			<prop name="RebuildStartTimeAscii">2:09:03 PM</prop>
+			<prop name="SafeLocatorName">property_pinnum</prop>
 			<prop name="UICLSID">{AE5A3A0E-F756-11D2-9F4F-00C04F8ED1C4}</prop>
 			<prop name="UseMultithreading">True</prop>
 			<prop name="DefaultPath">M:\ISD\arcgis-locator-102-cloud\</prop>
@@ -6810,7 +6810,7 @@
 						<field_role name="Primary.KeyField" required="true">
 							<display_name>KeyField</display_name>
 							<preferred_name>Name</preferred_name>
-							<field_name>pinnum</field_name></field_role>
+							<field_name>owner</field_name></field_role>
 						<field_role name="Primary.User_fld">
 							<display_name>Additional Field</display_name>
 							<preferred_name>BLOCKID</preferred_name>
@@ -6825,7 +6825,7 @@
 			</table_roles>
 			<data_source type="indexed">
 				<mapping_schema ref="SingleField"/>
-				<workspace_properties><factory_progid>esriDataSourcesGDB.SdeWorkspaceFactory.1</factory_progid><connection_properties><server>54.225.191.233</server><instance>sde:postgresql:54.225.191.233</instance><database>coagis</database><authentication_mode>DBMS</authentication_mode><user>gisowner</user><password>{{17}}[2,0,0,0,48,0,0,0,46,104,67,98,100,71,79,80,104,53,71,85,86,89,83,47,57,98,50,82,74,120,68,54,98,118,67,100,56,73,100,54,107,120,72,88,55,90,87,104,112,79,122,88,81,61,42,0]</password><transactional_version>sde.DEFAULT</transactional_version></connection_properties></workspace_properties><queries>
+				<workspace_properties><factory_progid>esriDataSourcesGDB.SdeWorkspaceFactory.1</factory_progid><connection_properties><server>54.225.191.233</server><instance>sde:postgresql:54.225.191.233</instance><database>coagis</database><authentication_mode>DBMS</authentication_mode><user>gisowner</user><password>{{17}}[2,0,0,0,48,0,0,0,46,104,65,108,49,106,70,110,54,111,54,57,122,57,82,81,68,89,97,70,104,74,72,98,76,52,73,49,102,81,56,71,74,101,102,47,70,72,70,119,57,54,70,52,119,61,42,0]</password><transactional_version>sde.DEFAULT</transactional_version></connection_properties></workspace_properties><queries>
 					<query>
 						<tables>
 							<table role_ref="Primary">coagis.gisowner.coa_opendata_property</table>
@@ -6833,13 +6833,13 @@
 						<fields>
 							<field ref="Shape" field_role_ref="Primary.Shape">coagis.gisowner.coa_opendata_property.shape</field>
 							<field ref="ID" field_role_ref="Primary.ID">coagis.gisowner.coa_opendata_property.ObjectID</field>
-							<field ref="KeyField" field_role_ref="Primary.KeyField">coagis.gisowner.coa_opendata_property.pinnum</field>
+							<field ref="KeyField" field_role_ref="Primary.KeyField">coagis.gisowner.coa_opendata_property.owner</field>
 							<field ref="User_fld" field_role_ref="Primary.User_fld">coagis.gisowner.coa_opendata_property.pinnum</field>
 							<field ref="Alt_JoinID" field_role_ref="Primary.Alt_JoinID">coagis.gisowner.coa_opendata_property.pinnum</field>
 						</fields>
 					</query>
 				</queries>
 			</data_source>
-		</ref_data><style_name>General - Single Field</style_name><style_desc>Single Field</style_desc><metadata><dataIdInfo><envirDesc Sync="TRUE">Microsoft Windows 7 Version 6.1 (Build 7601) Service Pack 1; Esri ArcGIS 10.2.2.3552</envirDesc><dataLang><languageCode value="eng" Sync="TRUE"></languageCode><countryCode value="USA" Sync="TRUE"></countryCode></dataLang><spatRpType><SpatRepTypCd value="001" Sync="TRUE"></SpatRepTypCd></spatRpType></dataIdInfo><mdLang><languageCode value="eng" Sync="TRUE"></languageCode><countryCode value="USA" Sync="TRUE"></countryCode></mdLang><Esri><SyncDate>20150504</SyncDate><SyncTime>13345700</SyncTime><ModDate>20150504</ModDate><ModTime>13345700</ModTime><DataProperties><coordRef><type Sync="TRUE">Geographic</type><geogcsn Sync="TRUE">GCS_WGS_1984</geogcsn><csUnits Sync="TRUE">Angular Unit: Degree (0.017453)</csUnits><peXml Sync="TRUE">&lt;GeographicCoordinateSystem xsi:type='typens:GeographicCoordinateSystem' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:typens='http://www.esri.com/schemas/ArcGIS/10.1'&gt;&lt;WKT&gt;GEOGCS[&amp;quot;GCS_WGS_1984&amp;quot;,DATUM[&amp;quot;D_WGS_1984&amp;quot;,SPHEROID[&amp;quot;WGS_1984&amp;quot;,6378137.0,298.257223563]],PRIMEM[&amp;quot;Greenwich&amp;quot;,0.0],UNIT[&amp;quot;Degree&amp;quot;,0.0174532925199433],AUTHORITY[&amp;quot;EPSG&amp;quot;,4326]]&lt;/WKT&gt;&lt;XOrigin&gt;-400&lt;/XOrigin&gt;&lt;YOrigin&gt;-400&lt;/YOrigin&gt;&lt;XYScale&gt;999999999.99999988&lt;/XYScale&gt;&lt;ZOrigin&gt;-100000&lt;/ZOrigin&gt;&lt;ZScale&gt;10000&lt;/ZScale&gt;&lt;MOrigin&gt;-100000&lt;/MOrigin&gt;&lt;MScale&gt;10000&lt;/MScale&gt;&lt;XYTolerance&gt;8.983152841195215e-009&lt;/XYTolerance&gt;&lt;ZTolerance&gt;0.001&lt;/ZTolerance&gt;&lt;MTolerance&gt;0.001&lt;/MTolerance&gt;&lt;HighPrecision&gt;true&lt;/HighPrecision&gt;&lt;LeftLongitude&gt;-180&lt;/LeftLongitude&gt;&lt;WKID&gt;4326&lt;/WKID&gt;&lt;LatestWKID&gt;4326&lt;/LatestWKID&gt;&lt;/GeographicCoordinateSystem&gt;</peXml></coordRef></DataProperties></Esri><mdDateSt Sync="TRUE">20150504</mdDateSt><DatasetName>test-pinnum</DatasetName><DatasetType>Address Locator</DatasetType><refSysInfo><RefSystem><refSysID><identCode code="4326" Sync="TRUE"></identCode><idCodeSpace Sync="TRUE">EPSG</idCodeSpace><idVersion Sync="TRUE">8.2.6</idVersion></refSysID></RefSystem></refSysInfo></metadata>
+		</ref_data><style_name>General - Single Field</style_name><style_desc>Single Field</style_desc><metadata><dataIdInfo><envirDesc Sync="TRUE">Microsoft Windows 7 Version 6.1 (Build 7601) Service Pack 1; Esri ArcGIS 10.2.2.3552</envirDesc><dataLang><languageCode value="eng" Sync="TRUE"></languageCode><countryCode value="USA" Sync="TRUE"></countryCode></dataLang><spatRpType><SpatRepTypCd value="001" Sync="TRUE"></SpatRepTypCd></spatRpType></dataIdInfo><mdLang><languageCode value="eng" Sync="TRUE"></languageCode><countryCode value="USA" Sync="TRUE"></countryCode></mdLang><Esri><SyncDate>20150505</SyncDate><SyncTime>14143600</SyncTime><ModDate>20150505</ModDate><ModTime>14143600</ModTime><DataProperties><coordRef><type Sync="TRUE">Geographic</type><geogcsn Sync="TRUE">GCS_WGS_1984</geogcsn><csUnits Sync="TRUE">Angular Unit: Degree (0.017453)</csUnits><peXml Sync="TRUE">&lt;GeographicCoordinateSystem xsi:type='typens:GeographicCoordinateSystem' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:typens='http://www.esri.com/schemas/ArcGIS/10.1'&gt;&lt;WKT&gt;GEOGCS[&amp;quot;GCS_WGS_1984&amp;quot;,DATUM[&amp;quot;D_WGS_1984&amp;quot;,SPHEROID[&amp;quot;WGS_1984&amp;quot;,6378137.0,298.257223563]],PRIMEM[&amp;quot;Greenwich&amp;quot;,0.0],UNIT[&amp;quot;Degree&amp;quot;,0.0174532925199433],AUTHORITY[&amp;quot;EPSG&amp;quot;,4326]]&lt;/WKT&gt;&lt;XOrigin&gt;-400&lt;/XOrigin&gt;&lt;YOrigin&gt;-400&lt;/YOrigin&gt;&lt;XYScale&gt;999999999.99999988&lt;/XYScale&gt;&lt;ZOrigin&gt;-100000&lt;/ZOrigin&gt;&lt;ZScale&gt;10000&lt;/ZScale&gt;&lt;MOrigin&gt;-100000&lt;/MOrigin&gt;&lt;MScale&gt;10000&lt;/MScale&gt;&lt;XYTolerance&gt;8.983152841195215e-009&lt;/XYTolerance&gt;&lt;ZTolerance&gt;0.001&lt;/ZTolerance&gt;&lt;MTolerance&gt;0.001&lt;/MTolerance&gt;&lt;HighPrecision&gt;true&lt;/HighPrecision&gt;&lt;LeftLongitude&gt;-180&lt;/LeftLongitude&gt;&lt;WKID&gt;4326&lt;/WKID&gt;&lt;LatestWKID&gt;4326&lt;/LatestWKID&gt;&lt;/GeographicCoordinateSystem&gt;</peXml></coordRef></DataProperties></Esri><mdDateSt Sync="TRUE">20150505</mdDateSt><DatasetName>property_pinnum</DatasetName><DatasetType>Address Locator</DatasetType><refSysInfo><RefSystem><refSysID><identCode code="4326" Sync="TRUE"></identCode><idCodeSpace Sync="TRUE">EPSG</idCodeSpace><idVersion Sync="TRUE">8.2.6</idVersion></refSysID></RefSystem></refSysInfo></metadata>
 		<placename_alias_table><alias_field><field_name></field_name></alias_field><address_fields/></placename_alias_table></locator>
 </locators>
