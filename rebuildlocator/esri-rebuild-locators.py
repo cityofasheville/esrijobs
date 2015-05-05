@@ -199,7 +199,7 @@ for k in geocoder:
             publishLocator(k)
 
 #Create
-for k in createComposite:
+for k in composite:
 #loop version keys and re-create versions
     if 'in_address_locator' in k:
         if k['in_address_locator'] is not None:
