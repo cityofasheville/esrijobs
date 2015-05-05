@@ -79,6 +79,24 @@ def connsde( configkey ):
 def createLocator(locator):
     arcpy.RebuildAddressLocator_geocoding(locator)
 
+    arcpy.env.overwriteOutput = True
+    arcpy.env.workspace = info['workspace']
+
+    loc_path = info['loc_path']
+    out_sddraft = info['out_sddraft']
+    service_name = info['service_name']
+
+#create composite
+def createComposite(info):
+    arcpy.env.workspace = info['workspace']
+
+    in_address_locators = info['in_address_locators']
+    in_field_map = info['in_field_map']
+    in_selection_criteria = info['in_selection_criteria']
+    out_composite_address_locator = info['out_composite_address_locator']
+
+    arcpy.CreateCompositeAddressLocator_geocoding("Atlanta_locator Atlanta;US_Streets_locator US_Streets", "Address 'Street or Intersection' true true false 100 Text 0 0 ,First,#,Atlanta_locator,Address,0,0,US_Streets_locator,Street,0,0;City 'City or Placename' true true false 40 Text 0 0 ,First,#,Atlanta_locator,City,0,0,US_Streets_locator,City,0,0;State 'State' true true false 20 Text 0 0 ,First,#,Atlanta_locator,State,0,0,US_Streets_locator,State,0,0;Zip 'Zipcode' true true false 10 Text 0 0 ,First,#,Atlanta_locator,Zip,0,0,US_Streets_locator,ZIP,0,0","Atlanta '\"City\" = 'Atlanta'';US_Streets #",Atlanta_Composite)
+
 #rebuild geocoder
 def rebuildLocator(locator):
     print "Rebuilding the locator: " + locator + "."
@@ -133,14 +151,19 @@ def publishLocator(info):
             print "The geocode service " + service_name  + " was successfully published."
             print " "
         except arcpy.ExecuteError as ex:
+            print ("An error occured " + arcpy.GetMessages(2))
+            print " "
             logger.error ("An error occured " + arcpy.GetMessages(2))
 
     else:
         # if the sddraft analysis contained errors, display them
+        print "Error were returned when creating service definition draft "
+        print analyze_messages['errors']
+        print ""
         logger.error( "Error were returned when creating service definition draft " )
         logger.error( analyze_messages['errors'] )
 
-    arcpy.ClearWorkspaceCache_management() 
+    arcpy.ClearWorkspaceCache_management()
 
 #get yaml configuration file
 with open("config/config.yml", 'r') as ymlfile:
@@ -149,6 +172,7 @@ with open("config/config.yml", 'r') as ymlfile:
 #traverse yaml create sde conenction string to remove,create, and alter versions
 connections =  cfg['sde_connections']
 geocoder = cfg['geocoder']
+composite = cfg['composite']
 ags = cfg['ags_connections']
 emails = cfg['logging']
 
@@ -164,10 +188,18 @@ for k in connections:
 for k in ags:
     connags(k)
 
+
 #Create
+for k in createComposite:
+#loop version keys and re-create versions
+    if 'in_address_locator' in k:
+        if k['in_address_locator'] is not None:
+            rebuildLocator( k )
+            publishLocator( k )
+
 for k in geocoder:
 #loop version keys and re-create versions
     if 'in_address_locator' in k:
         if k['in_address_locator'] is not None:
-            rebuildLocator( k['in_address_locator'] )
+            createComposite( k['in_address_locator'] )
             publishLocator(k)
