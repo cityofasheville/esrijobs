@@ -95,7 +95,7 @@ def createComposite(info):
     in_selection_criteria = info['in_selection_criteria']
     out_composite_address_locator = info['out_composite_address_locator']
 
-    arcpy.CreateCompositeAddressLocator_geocoding("Atlanta_locator Atlanta;US_Streets_locator US_Streets", "Address 'Street or Intersection' true true false 100 Text 0 0 ,First,#,Atlanta_locator,Address,0,0,US_Streets_locator,Street,0,0;City 'City or Placename' true true false 40 Text 0 0 ,First,#,Atlanta_locator,City,0,0,US_Streets_locator,City,0,0;State 'State' true true false 20 Text 0 0 ,First,#,Atlanta_locator,State,0,0,US_Streets_locator,State,0,0;Zip 'Zipcode' true true false 10 Text 0 0 ,First,#,Atlanta_locator,Zip,0,0,US_Streets_locator,ZIP,0,0","Atlanta '\"City\" = 'Atlanta'';US_Streets #",Atlanta_Composite)
+    arcpy.CreateCompositeAddressLocator_geocoding(in_address_locators, in_field_map, in_selection_criteria, out_composite_address_locator)
 
 #rebuild geocoder
 def rebuildLocator(locator):
