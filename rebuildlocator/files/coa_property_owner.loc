@@ -42,10 +42,10 @@ LocatorWorkspaceString = ProgID = esriDataSourcesFile.ShapefileWorkspaceFactory;
 MaxCandidates = 2000
 MaxPerfectCandidates = 2000
 NumThreads = 1
-RebuildStartTime = 130752207612410000
-RebuildStartTimeAscii = 1:46:01 PM
+RebuildStartTime = 130752896853950000
+RebuildStartTimeAscii = 8:54:45 AM
 RuntimeMemoryLimit = 511705088
-SafeLocatorName = coa_opendata_property_Create
+SafeLocatorName = coa_property_owner
 SearchTimeout = 100
 ShowElapsedTime = true
 StoreStandardizedRefData = false
