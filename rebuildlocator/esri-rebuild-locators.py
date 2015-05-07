@@ -88,15 +88,15 @@ def createLocator(locator):
 
 #create composite
 def createComposite(info):
-        arcpy.env.workspace = info['workspace']
+    arcpy.env.workspace = info['workspace']
 
-        in_address_locators = info['in_address_locators']
-        in_field_map = info['in_field_map']
-        in_selection_criteria = info['in_selection_criteria']
-        out_composite_address_locator = info['out_composite_address_locator']
+    in_address_locators = info['in_address_locators']
+    in_field_map = info['in_field_map']
+    in_selection_criteria = info['in_selection_criteria']
+    out_composite_address_locator = info['out_composite_address_locator']
 
 
-    print "Rebuilding the composite locator: " + out_composite_address_locator
+    print "Rebuilding the composite locator: " + out_composite_address_locator + "."
     try:
 
         arcpy.CreateCompositeAddressLocator_geocoding(in_address_locators, in_field_map, in_selection_criteria, out_composite_address_locator)
