@@ -159,6 +159,15 @@ def publishLocator(info):
         try:
             # Execute StageService to convert sddraft file to a service definition (sd) file
             arcpy.server.StageService(out_sddraft, out_service_definition)
+            print "The geocode service draft" + service_name  + " was successfully created."
+            print " "
+        except arcpy.ExecuteError as ex:
+            print "An error occured! "
+            print arcpy.GetMessages(2)
+            print " "
+            logger.error ("An error occured " + arcpy.GetMessages(2))
+
+        try:
             # Execute UploadServiceDefinition to publish the service definition file as a service
             arcpy.server.UploadServiceDefinition(out_service_definition, connection_file_path)
             print "The geocode service " + service_name  + " was successfully published."
