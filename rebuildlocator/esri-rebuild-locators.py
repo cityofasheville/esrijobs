@@ -86,6 +86,10 @@ def createLocator(info):
     out_address_locator = info['out_address_locator']
     config_keyword = info['config_keyword']
 
+    if info['out_folder_path'] is None:
+        os.path.exists(info['out_address_locator']) and os.remove(info['out_address_locator'])
+
+
     print "Starting to create the locator: " + out_address_locator + "."
 
     try:
