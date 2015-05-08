@@ -202,12 +202,19 @@ with open("config/config.yml", 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 
 #traverse yaml create sde conenction string to remove,create, and alter versions
+
 connections =  cfg['sde_connections']
-geocoder = cfg['geocoder']
-composite = cfg['composite']
+
+if cfg['geocoder']:
+    geocoder = cfg['geocoder']
+
+if  cfg['composite']:
+    composite = cfg['composite']
+if  cfg['creategeocoder']:
+    creategeo = cfg['creategeocoder']
+
 ags = cfg['ags_connections']
 emails = cfg['logging']
-creategeo = cfg['creategeocoder']
 
 #loop keys setup loggind
 for k in emails:
@@ -221,27 +228,26 @@ for k in connections:
 for k in ags:
     connags(k)
 
+if creategeo:
+    for k in creategeo:
+    #loop version keys and re-create versions
+        if 'in_address_locator_style' in k:
+            if k['in_address_locator_style'] is not None:
+                createLocator( k )
 
+if geocoder:
+    for k in geocoder:
+    #loop version keys and re-create versions
+        if 'in_address_locator' in k:
+            if k['in_address_locator'] is not None:
+                rebuildLocator( k['in_address_locator'] )
+                publishLocator(k)
 
-for k in geocoder:
-#loop version keys and re-create versions
-    if 'in_address_locator' in k:
-        if k['in_address_locator'] is not None:
-            rebuildLocator( k['in_address_locator'] )
-            publishLocator(k)
-
-for k in creategeo:
-#loop version keys and re-create versions
-    if 'in_address_locator_style' in k:
-        if k['in_address_locator_style'] is not None:
-            createLocator( k )
-
-
-
-#Create
-for k in composite:
-#loop version keys and re-create versions
-    if 'in_address_locators' in k:
-        if k['in_address_locators'] is not None:
-            createComposite( k )
-            publishLocator( k )
+if composite:
+    #Create
+    for k in composite:
+    #loop version keys and re-create versions
+        if 'in_address_locators' in k:
+            if k['in_address_locators'] is not None:
+                createComposite( k )
+                publishLocator( k )
