@@ -79,7 +79,7 @@ def connsde( configkey ):
 #create geocoder
 def createLocator(info):
     arcpy.env.overwriteOutput = True
-    arcpy.env.workspace = info['workspace']
+    #arcpy.env.workspace = info['workspace']
 
     in_address_locator_style = info['in_address_locator_style']
     in_reference_data = info['in_reference_data']
@@ -92,7 +92,8 @@ def createLocator(info):
         for root, dirs, files in os.walk(info['workspace'], topdown=False):
             for name in files:
                 os.remove(os.path.join(root,name))
-        os.rmdir(info['workspace'])
+
+        os.path.exists( info['workspace'] , os.rmdir(info['workspace'])
         os.makedirs(info['workspace'],0777)
         os.chmod(info['workspace'],0777)
 
