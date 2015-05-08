@@ -92,7 +92,7 @@ def createLocator(info):
             for name in files:
                 os.remove(os.path.join(root,name))
         os.rmdir(info['workspace'])
-        os.makedir(info['workspace'],0777)
+        os.makedirs(info['workspace'],0777)
 
     print "Starting to create the locator: " + out_address_locator + "."
 
