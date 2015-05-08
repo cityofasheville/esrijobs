@@ -208,17 +208,17 @@ connections =  cfg['sde_connections']
 try:
     geocoder = cfg['geocoder']
 except:
-    geocoder is None
+    geocoder = None
 
 try:
     composite = cfg['composite']
 except:
-    composite is None
+    composite = None
 
 try:
     creategeo = cfg['creategeocoder']
 except:
-    creategeo is None
+    creategeo = None
 
 ags = cfg['ags_connections']
 emails = cfg['logging']
