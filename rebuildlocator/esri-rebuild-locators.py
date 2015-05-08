@@ -97,6 +97,7 @@ def createLocator(info):
         logger.error('Error creating geoccoder : ' + out_address_locator + '.')
         logger.error(arcpy.GetMessages(2))
 
+    arcpy.ClearWorkspaceCache_management()
 #create composite
 def createComposite(info):
     arcpy.env.workspace = info['workspace']
@@ -129,6 +130,8 @@ def rebuildLocator(locator):
         print  arcpy.GetMessages(2)
         logger.error('Error rebuilding geoccoder : ' + locator + '.')
         logger.error(arcpy.GetMessages(2))
+
+        arcpy.ClearWorkspaceCache_management()
 
 
 def publishLocator(info):
