@@ -205,17 +205,17 @@ with open("config/config.yml", 'r') as ymlfile:
 
 connections =  cfg['sde_connections']
 
-try cfg['geocoder']:
+try:
     geocoder = cfg['geocoder']
 except:
     geocoder is None
 
-try  cfg['composite']:
+try:
     composite = cfg['composite']
 except:
     composite is None
 
-try cfg['creategeocoder']:
+try:
     creategeo = cfg['creategeocoder']
 except:
     creategeo is None
