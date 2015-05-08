@@ -31,6 +31,7 @@ def emaillogger( configkey ):
 
   logger.addHandler(infolog)
   logger.addHandler(LOG)
+  arcpy.ClearWorkspaceCache_management()
 
 #delete sde connections
 def deleteconn(configkey):
@@ -92,8 +93,9 @@ def createLocator(info):
             for name in files:
                 os.remove(os.path.join(root,name))
         os.rmdir(info['workspace'])
-        os.makedirs(info['workspace'],777)
-
+        os.makedirs(info['workspace'],0777)
+        os.chmod(info['workspace'],0777))
+        
     print "Starting to create the locator: " + out_address_locator + "."
 
     try:
@@ -106,6 +108,7 @@ def createLocator(info):
         print  arcpy.GetMessages(2)
         logger.error('Error creating geoccoder : ' + out_address_locator + '.')
         logger.error(arcpy.GetMessages(2))
+
 
 
     arcpy.ClearWorkspaceCache_management()
@@ -129,6 +132,7 @@ def createComposite(info):
         print  arcpy.GetMessages(2)
         logger.error('Error rebuilding compsite geoccoder : ' + out_composite_address_locator + '.')
         logger.error(arcpy.GetMessages(2))
+        arcpy.ClearWorkspaceCache_management()
 
 #rebuild geocoder
 def rebuildLocator(locator):
@@ -190,6 +194,7 @@ def publishLocator(info):
             print e.message
             print " "
             logger.error ("An error occured " + e.message)
+            arcpy.ClearWorkspaceCache_management()
 
         try:
             # Execute UploadServiceDefinition to publish the service definition file as a service
@@ -200,6 +205,7 @@ def publishLocator(info):
             print e.message
             print " "
             logger.error ("An error occured " + e.message)
+            arcpy.ClearWorkspaceCache_management()
 
     else:
         # if the sddraft analysis contained errors, display them
@@ -208,6 +214,7 @@ def publishLocator(info):
         print ""
         logger.error( "Error were returned when creating service definition draft " )
         logger.error( analyze_messages['errors'] )
+        arcpy.ClearWorkspaceCache_management()
 
     arcpy.ClearWorkspaceCache_management()
 
@@ -233,6 +240,7 @@ try:
     creategeo = cfg['creategeocoder']
 except:
     creategeo = None
+
 
 ags = cfg['ags_connections']
 emails = cfg['logging']
@@ -270,3 +278,5 @@ if composite is not None:
             if k['in_address_locators'] is not None:
                 createComposite( k )
                 publishLocator( k )
+
+arcpy.ClearWorkspaceCache_management()
