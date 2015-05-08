@@ -94,8 +94,8 @@ def createLocator(info):
                 os.remove(os.path.join(root,name))
         os.rmdir(info['workspace'])
         os.makedirs(info['workspace'],0777)
-        os.chmod(info['workspace'],0777))
-        
+        os.chmod(info['workspace'],0777)
+
     print "Starting to create the locator: " + out_address_locator + "."
 
     try:
