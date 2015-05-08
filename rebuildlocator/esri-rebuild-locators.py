@@ -93,7 +93,9 @@ def createLocator(info):
             for name in files:
                 os.remove(os.path.join(root,name))
 
-        os.path.exists( info['workspace'] and os.rmdir(info['workspace']))
+        if os.path.exists( info['workspace']):
+            os.rmdir(info['workspace'])
+            
         os.makedirs(info['workspace'],0777)
         os.chmod(info['workspace'],0777)
 
