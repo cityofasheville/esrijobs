@@ -76,15 +76,26 @@ def connsde( configkey ):
                                             configkey['date'])
 
 #create geocoder
-def createLocator(locator):
+def createLocator(info):
     arcpy.RebuildAddressLocator_geocoding(locator)
 
     arcpy.env.overwriteOutput = True
     arcpy.env.workspace = info['workspace']
 
-    loc_path = info['loc_path']
-    out_sddraft = info['out_sddraft']
-    service_name = info['service_name']
+    in_address_locator_style = info['in_address_locator_style']
+    in_reference_data = info['in_reference_data']
+    in_field_map = info['in_field_map']
+    out_address_locator = info['out_address_locator']
+    config_keyword = info['config_keyword']
+
+    try:
+        arcpy.CreateAddressLocator_geocoding(in_address_locator_style, in_reference_data, in_field_map, out_address_locator, config_keyword)
+        print "Succcesfully Created the composite locator: " + out_address_locator + "!"
+    except:
+        print 'Error creating geoccoder : ' + out_address_locator + '.'
+        print  arcpy.GetMessages(2)
+        logger.error('Error creating geoccoder : ' + out_address_locator + '.')
+        logger.error(arcpy.GetMessages(2))
 
 #create composite
 def createComposite(info):
@@ -96,11 +107,11 @@ def createComposite(info):
     out_composite_address_locator = info['out_composite_address_locator']
 
 
-    print "Rebuilding the composite locator: " + out_composite_address_locator + "."
+    print "Creating the composite locator: " + out_composite_address_locator + "."
     try:
 
         arcpy.CreateCompositeAddressLocator_geocoding(in_address_locators, in_field_map, in_selection_criteria, out_composite_address_locator)
-        print "Succcesfully Rebuilt the composite locator: " + out_composite_address_locator + "!"
+        print "Succcesfully Created the composite locator: " + out_composite_address_locator + "!"
     except:
         print 'Error rebuilding compsite geoccoder : ' + out_composite_address_locator + '.'
         print  arcpy.GetMessages(2)
@@ -161,22 +172,20 @@ def publishLocator(info):
             arcpy.server.StageService(out_sddraft, out_service_definition)
             print "The geocode service draft " + service_name  + " was successfully created."
             print " "
-        except arcpy.ExecuteError as ex:
-            print "An error occured! "
-            print arcpy.GetMessages(2)
+        except Exception, e:
+            print e.message
             print " "
-            logger.error ("An error occured " + arcpy.GetMessages(2))
+            logger.error ("An error occured " + e.message)
 
         try:
             # Execute UploadServiceDefinition to publish the service definition file as a service
             arcpy.server.UploadServiceDefinition(out_service_definition, connection_file_path)
             print "The geocode service " + service_name  + " was successfully published."
             print " "
-        except arcpy.ExecuteError as ex:
-            print "An error occured! "
-            print arcpy.GetMessages(2)
+        except Exception, e:
+            print e.message
             print " "
-            logger.error ("An error occured " + arcpy.GetMessages(2))
+            logger.error ("An error occured " + e.message)
 
     else:
         # if the sddraft analysis contained errors, display them
@@ -198,6 +207,7 @@ geocoder = cfg['geocoder']
 composite = cfg['composite']
 ags = cfg['ags_connections']
 emails = cfg['logging']
+creategeo = cfg['creategeocoder']
 
 #loop keys setup loggind
 for k in emails:
@@ -213,13 +223,20 @@ for k in ags:
 
 
 
-
 for k in geocoder:
 #loop version keys and re-create versions
     if 'in_address_locator' in k:
         if k['in_address_locator'] is not None:
             rebuildLocator( k['in_address_locator'] )
             publishLocator(k)
+
+for k in creategeo:
+#loop version keys and re-create versions
+    if 'in_address_locator_style' in k:
+        if k['in_address_locator_style'] is not None:
+            createLocator( k )
+
+
 
 #Create
 for k in composite:
