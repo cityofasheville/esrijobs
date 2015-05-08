@@ -95,11 +95,14 @@ def createLocator(info):
     try:
         arcpy.CreateAddressLocator_geocoding(in_address_locator_style, in_reference_data, in_field_map, out_address_locator, config_keyword)
         print "Succcesfully Created the composite locator: " + out_address_locator + "!"
+        arcpy.ClearWorkspaceCache_management()
     except:
+        arcpy.ClearWorkspaceCache_management()
         print 'Error creating geoccoder : ' + out_address_locator + '.'
         print  arcpy.GetMessages(2)
         logger.error('Error creating geoccoder : ' + out_address_locator + '.')
         logger.error(arcpy.GetMessages(2))
+
 
     arcpy.ClearWorkspaceCache_management()
 #create composite
