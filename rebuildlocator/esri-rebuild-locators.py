@@ -1,7 +1,7 @@
 #Manage Versions
 import arcpy
 import pprint
-import os
+import os, re
 from arcpy import env
 import yaml
 import logging
@@ -86,9 +86,14 @@ def createLocator(info):
     out_address_locator = info['out_address_locator']
     config_keyword = info['config_keyword']
 
-    if info['out_folder_path'] is None:
-        os.path.exists(info['out_address_locator']) and os.remove(info['out_address_locator'])
 
+    if info['workspace'] is not None:
+        for root, dirs, files in os.walk(info['workspace'], topdown=False):
+            for name in files:
+                os.remove(os.path.join(root,name))
+            for name in dirs:
+                os.rmdir(os.path.join(root,name))
+        os.mkdir(info['workspace'])
 
     print "Starting to create the locator: " + out_address_locator + "."
 
