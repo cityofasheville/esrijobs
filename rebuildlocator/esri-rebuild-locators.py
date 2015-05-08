@@ -77,8 +77,6 @@ def connsde( configkey ):
 
 #create geocoder
 def createLocator(info):
-    arcpy.RebuildAddressLocator_geocoding(locator)
-
     arcpy.env.overwriteOutput = True
     arcpy.env.workspace = info['workspace']
 
@@ -237,18 +235,17 @@ for k in ags:
 
 if creategeo is not None:
     for k in creategeo:
-    #loop version keys and re-create versions
         if 'in_address_locator_style' in k:
             if k['in_address_locator_style'] is not None:
                 createLocator( k )
 
 if geocoder is not None:
     for k in geocoder:
-    #loop version keys and re-create versions
         if 'in_address_locator' in k:
             if k['in_address_locator'] is not None:
                 rebuildLocator( k['in_address_locator'] )
                 publishLocator(k)
+
 if composite is not None:
     #Create
     for k in composite:
