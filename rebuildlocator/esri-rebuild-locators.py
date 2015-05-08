@@ -91,8 +91,7 @@ def createLocator(info):
         for root, dirs, files in os.walk(info['workspace'], topdown=False):
             for name in files:
                 os.remove(os.path.join(root,name))
-            for name in dirs:
-                os.rmdir(os.path.join(root,name))
+        os.rmdir(info['workspace'])
         os.mkdir(info['workspace'])
 
     print "Starting to create the locator: " + out_address_locator + "."
