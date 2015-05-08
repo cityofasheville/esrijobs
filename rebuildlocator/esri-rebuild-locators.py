@@ -86,6 +86,8 @@ def createLocator(info):
     out_address_locator = info['out_address_locator']
     config_keyword = info['config_keyword']
 
+    print "Starting to create the locator: " + out_address_locator + "."
+
     try:
         arcpy.CreateAddressLocator_geocoding(in_address_locator_style, in_reference_data, in_field_map, out_address_locator, config_keyword)
         print "Succcesfully Created the composite locator: " + out_address_locator + "!"
