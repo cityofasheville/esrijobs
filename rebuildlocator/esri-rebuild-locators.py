@@ -105,8 +105,8 @@ def createLocator(info):
     except:
         print 'Error creating file geodatabase'
         print  arcpy.GetMessages(2)
-        logger.error('Error creating geoccoder')
-        logger.error(arcpy.GetMessages(2))
+        #logger.error('Error creating geoccoder')
+        #logger.error(arcpy.GetMessages(2))
 
     print "Exporting temp data."
 
@@ -116,8 +116,8 @@ def createLocator(info):
     except:
         print 'Error creating temp data'
         print  arcpy.GetMessages(2)
-        logger.error('Error creating temp data')
-        logger.error(arcpy.GetMessages(2))
+        #logger.error('Error creating temp data')
+        #logger.error(arcpy.GetMessages(2))
 
     print "Creating the locator: " + out_address_locator + "."
 
@@ -127,8 +127,8 @@ def createLocator(info):
     except:
         print 'Error creating geoccoder : ' + out_address_locator + '.'
         print  arcpy.GetMessages(2)
-        logger.error('Error creating geoccoder : ' + out_address_locator + '.')
-        logger.error(arcpy.GetMessages(2))
+        #logger.error('Error creating geoccoder : ' + out_address_locator + '.')
+        #logger.error(arcpy.GetMessages(2))
 
     if os.path.exists( info['workspace'] + "/output.gdb"):
         arcpy.Delete_management( info['workspace'] + "/output.gdb")
@@ -152,8 +152,8 @@ def createComposite(info):
     except:
         print 'Error rebuilding compsite geoccoder : ' + out_composite_address_locator + '.'
         print  arcpy.GetMessages(2)
-        logger.error('Error rebuilding compsite geoccoder : ' + out_composite_address_locator + '.')
-        logger.error(arcpy.GetMessages(2))
+        #logger.error('Error rebuilding compsite geoccoder : ' + out_composite_address_locator + '.')
+        #logger.error(arcpy.GetMessages(2))
 
 #rebuild geocoder
 def rebuildLocator(locator):
@@ -164,8 +164,8 @@ def rebuildLocator(locator):
     except:
         print 'Error rebuilding geoccoder : ' + locator + '.'
         print  arcpy.GetMessages(2)
-        logger.error('Error rebuilding geoccoder : ' + locator + '.')
-        logger.error(arcpy.GetMessages(2))
+        #logger.error('Error rebuilding geoccoder : ' + locator + '.')
+        #logger.error(arcpy.GetMessages(2))
 
 def publishLocator(info):
     #Overwrite any existing outputs
@@ -216,7 +216,7 @@ def publishLocator(info):
         except Exception, e:
             print e.message
             print " "
-            logger.error ("An error occured " + e.message)
+            #logger.error ("An error occured " + e.message)
 
         try:
             # Execute UploadServiceDefinition to publish the service definition file as a service
@@ -226,15 +226,15 @@ def publishLocator(info):
         except Exception, e:
             print e.message
             print " "
-            logger.error ("An error occured " + e.message)
+            #logger.error ("An error occured " + e.message)
 
     else:
         # if the sddraft analysis contained errors, display them
         print "Error were returned when creating service definition draft "
         print analyze_messages['errors']
         print ""
-        logger.error( "Error were returned when creating service definition draft " )
-        logger.error( analyze_messages['errors'] )
+        #logger.error( "Error were returned when creating service definition draft " )
+        #logger.error( analyze_messages['errors'] )
 
 #get yaml configuration file
 with open("config/config.yml", 'r') as ymlfile:
