@@ -83,7 +83,7 @@ def createLocator(info):
     in_address_locator_style = info['in_address_locator_style']
     in_reference_data = info['in_reference_data']
     in_field_map = info['in_field_map']
-    out_address_locator = info['out_address_locator']
+    out_address_locator = info['loc_path']
     config_keyword = info['config_keyword']
     in_data = info['in_data']
 
