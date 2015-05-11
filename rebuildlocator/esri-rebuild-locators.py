@@ -5,6 +5,7 @@ import os, re
 from arcpy import env
 import yaml
 import logging
+import time
 from logging import handlers
 
 # create logger with
@@ -129,6 +130,8 @@ def createLocator(info):
         #logger.error(arcpy.GetMessages(2))
 
     print "Creating the locator: " + out_address_locator + "."
+    arcpy.ClearWorkspaceCache_management()
+    time.sleep(5)
 
     try:
         arcpy.CreateAddressLocator_geocoding(in_address_locator_style, in_reference_data, in_field_map, out_address_locator, config_keyword)
