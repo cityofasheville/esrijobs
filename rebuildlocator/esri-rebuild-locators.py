@@ -94,6 +94,10 @@ def createLocator(info):
     #        for name in files:
     #            os.remove(os.path.join(root,name))
 
+    os.remove(out_address_locator+'loc')
+    os.remove(out_address_locator+'loc.xml')
+    os.remove(out_address_locator+'lox')
+
     if os.path.exists( info['workspace'] + "/output.gdb"):
         arcpy.Delete_management( info['workspace'] + "/output.gdb")
 
@@ -130,10 +134,6 @@ def createLocator(info):
         #logger.error('Error creating geoccoder : ' + out_address_locator + '.')
         #logger.error(arcpy.GetMessages(2))
 
-    #if os.path.exists( info['workspace'] + "/output.gdb"):
-    #    arcpy.Delete_management( info['workspace'] + "/output.gdb")
-
-
 #create composite
 def createComposite(info):
     arcpy.env.workspace = info['workspace']
@@ -152,8 +152,8 @@ def createComposite(info):
     except:
         print 'Error rebuilding compsite geoccoder : ' + out_composite_address_locator + '.'
         print  arcpy.GetMessages(2)
-        #logger.error('Error rebuilding compsite geoccoder : ' + out_composite_address_locator + '.')
-        #logger.error(arcpy.GetMessages(2))
+        logger.error('Error rebuilding compsite geoccoder : ' + out_composite_address_locator + '.')
+        logger.error(arcpy.GetMessages(2))
 
 #rebuild geocoder
 def rebuildLocator(locator):
@@ -164,8 +164,8 @@ def rebuildLocator(locator):
     except:
         print 'Error rebuilding geoccoder : ' + locator + '.'
         print  arcpy.GetMessages(2)
-        #logger.error('Error rebuilding geoccoder : ' + locator + '.')
-        #logger.error(arcpy.GetMessages(2))
+        logger.error('Error rebuilding geoccoder : ' + locator + '.')
+        logger.error(arcpy.GetMessages(2))
 
 def publishLocator(info):
     #Overwrite any existing outputs
@@ -192,8 +192,6 @@ def publishLocator(info):
 
     print "Starting to publish the geocode service " + service_name  + "..."
 
-    #remove old
-    os.remove(loc_path)
     os.remove(out_sddraft)
     os.remove(out_service_definition)
 
