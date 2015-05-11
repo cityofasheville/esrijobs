@@ -94,7 +94,7 @@ def createLocator(info):
     #        for name in files:
     #            os.remove(os.path.join(root,name))
 
-    if os.path.isfile( out_address_locator+'.lox' ):
+    if os.path.isfile( out_address_locator+'.loc' ):
         os.remove(out_address_locator+'.loc')
 
     if os.path.isfile( out_address_locator+'.loc.xml' ):
@@ -195,53 +195,61 @@ def publishLocator(info):
     suggested_batch_size = info['max_batch_size']
     supported_operations = info['supported_operations']
 
-    print "Starting to publish the geocode service " + service_name  + "..."
+    if os.path.isfile( loc_path + '.loc' ):
 
-    #stagging
-    out_service_definition = info['out_service_definition']
+        print "Starting to publish the geocode service " + service_name  + "..."
+
+        #stagging
+        out_service_definition = info['out_service_definition']
 
 
-    if os.path.isfile( out_sddraft):
-        os.remove(out_sddraft)
+        if os.path.isfile( out_sddraft):
+            os.remove(out_sddraft)
 
-    if os.path.isfile( out_service_definition ):
-        os.remove(out_service_definition)
+        if os.path.isfile( out_service_definition ):
+            os.remove(out_service_definition)
 
-    #Create the sd draft file
-    analyze_messages  = arcpy.CreateGeocodeSDDraft (loc_path, out_sddraft, service_name,
-                                    server_type, connection_file_path, copy_data_to_server,
-                                    folder_name, summary, tags, max_candidates,
-                                    max_batch_size, suggested_batch_size, supported_operations)
+        #Create the sd draft file
+        analyze_messages  = arcpy.CreateGeocodeSDDraft (loc_path, out_sddraft, service_name,
+                                        server_type, connection_file_path, copy_data_to_server,
+                                        folder_name, summary, tags, max_candidates,
+                                        max_batch_size, suggested_batch_size, supported_operations)
 
-    #stage and upload the service if the sddraft analysis did not contain errors
-    if analyze_messages['errors'] == {}:
-        try:
-            # Execute StageService to convert sddraft file to a service definition (sd) file
-            arcpy.server.StageService(out_sddraft, out_service_definition)
-            print "The geocode service draft " + service_name  + " was successfully created."
-            print " "
-        except Exception, e:
-            print e.message
-            print " "
-            #logger.error ("An error occured " + e.message)
+        #stage and upload the service if the sddraft analysis did not contain errors
+        if analyze_messages['errors'] == {}:
+            try:
+                # Execute StageService to convert sddraft file to a service definition (sd) file
+                arcpy.server.StageService(out_sddraft, out_service_definition)
+                print "The geocode service draft " + service_name  + " was successfully created."
+                print " "
+            except Exception, e:
+                print e.message
+                print " "
+                #logger.error ("An error occured " + e.message)
 
-        try:
-            # Execute UploadServiceDefinition to publish the service definition file as a service
-            arcpy.server.UploadServiceDefinition(out_service_definition, connection_file_path)
-            print "The geocode service " + service_name  + " was successfully published."
-            print " "
-        except Exception, e:
-            print e.message
-            print " "
-            #logger.error ("An error occured " + e.message)
+            try:
+                # Execute UploadServiceDefinition to publish the service definition file as a service
+                arcpy.server.UploadServiceDefinition(out_service_definition, connection_file_path)
+                print "The geocode service " + service_name  + " was successfully published."
+                print " "
+            except Exception, e:
+                print e.message
+                print " "
+                #logger.error ("An error occured " + e.message)
+
+        else:
+            # if the sddraft analysis contained errors, display them
+            print "Error were returned when creating service definition draft "
+            print analyze_messages['errors']
+            print ""
+            #logger.error( "Error were returned when creating service definition draft " )
+            #logger.error( analyze_messages['errors'] )
 
     else:
-        # if the sddraft analysis contained errors, display them
-        print "Error were returned when creating service definition draft "
-        print analyze_messages['errors']
-        print ""
-        #logger.error( "Error were returned when creating service definition draft " )
-        #logger.error( analyze_messages['errors'] )
+        print "No locator found " + loc_path
+
+
+
 
 #get yaml configuration file
 with open("config/config.yml", 'r') as ymlfile:
