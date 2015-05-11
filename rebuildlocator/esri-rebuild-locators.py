@@ -94,9 +94,14 @@ def createLocator(info):
     #        for name in files:
     #            os.remove(os.path.join(root,name))
 
-    os.remove(out_address_locator+'loc')
-    os.remove(out_address_locator+'loc.xml')
-    os.remove(out_address_locator+'lox')
+    if os.path.isfile( out_address_locator+'.lox' ):
+        os.remove(out_address_locator+'.loc')
+
+    if os.path.isfile( out_address_locator+'.loc.xml' ):
+        os.remove(out_address_locator+'.loc.xml')
+
+    if os.path.isfile( out_address_locator+'.lox' ):
+        os.remove(out_address_locator+'.lox')
 
     if os.path.exists( info['workspace'] + "/output.gdb"):
         arcpy.Delete_management( info['workspace'] + "/output.gdb")
