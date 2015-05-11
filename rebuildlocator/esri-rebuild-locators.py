@@ -271,6 +271,7 @@ if creategeo is not None:
         if 'in_address_locator_style' in k:
             if k['in_address_locator_style'] is not None:
                 createLocator( k )
+                publishLocator( k )
 
 if geocoder is not None:
     for k in geocoder:
