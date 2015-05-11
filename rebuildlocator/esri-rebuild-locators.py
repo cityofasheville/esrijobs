@@ -81,8 +81,7 @@ def createLocator(info):
     arcpy.env.workspace = info['workspace']
 
     in_address_locator_style = info['in_address_locator_style']
-    in_reference_data = info['workspace'] + "/output.gdb/temp"
-    #nfo['in_reference_data']
+    in_reference_data = info['in_reference_data']
     in_field_map = info['in_field_map']
     out_address_locator = info['out_address_locator']
     config_keyword = info['config_keyword']
