@@ -95,6 +95,8 @@ def createLocator(info):
     if os.path.exists( info['workspace'] + "/output.gdb"):
         arcpy.Delete_management( info['workspace'] + "/output.gdb")
 
+    print "Creating temp file geodatbase."
+
     try:
         arcpy.CreateFileGDB_management(info['workspace'], "output.gdb")
         print "Succcesfully Created the file geodatabase!"
@@ -103,6 +105,8 @@ def createLocator(info):
         print  arcpy.GetMessages(2)
         logger.error('Error creating geoccoder')
         logger.error(arcpy.GetMessages(2))
+
+    print "Exporting temp data."
 
     try:
         arcpy.FeatureClassToFeatureClass_conversion(in_data, info['workspace'] + "/output.gdb" ,"temp")
@@ -113,7 +117,7 @@ def createLocator(info):
         logger.error('Error creating temp data')
         logger.error(arcpy.GetMessages(2))
 
-    print "Starting to create the locator: " + out_address_locator + "."
+    print "Creating the locator: " + out_address_locator + "."
 
     try:
         arcpy.CreateAddressLocator_geocoding(in_address_locator_style, in_reference_data, in_field_map, out_address_locator, config_keyword)
