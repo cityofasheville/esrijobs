@@ -87,6 +87,8 @@ def createLocator(info):
     config_keyword = info['config_keyword']
     in_data = info['in_data']
 
+    print "removing temp files."
+
     if info['workspace'] is not None:
         for root, dirs, files in os.walk(info['workspace'], topdown=False):
             for name in files:
