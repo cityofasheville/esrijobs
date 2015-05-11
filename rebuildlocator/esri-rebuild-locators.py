@@ -31,7 +31,6 @@ def emaillogger( configkey ):
 
   logger.addHandler(infolog)
   logger.addHandler(LOG)
-  arcpy.ClearWorkspaceCache_management()
 
 #delete sde connections
 def deleteconn(configkey):
@@ -79,42 +78,53 @@ def connsde( configkey ):
 #create geocoder
 def createLocator(info):
     arcpy.env.overwriteOutput = True
-    #arcpy.env.workspace = info['workspace']
+    arcpy.env.workspace = info['workspace']
 
     in_address_locator_style = info['in_address_locator_style']
-    in_reference_data = info['in_reference_data']
+    in_reference_data = info['workspace'] + "/output.gdb/temp"
+    #nfo['in_reference_data']
     in_field_map = info['in_field_map']
     out_address_locator = info['out_address_locator']
     config_keyword = info['config_keyword']
-
+    in_data = info['in_data']
 
     if info['workspace'] is not None:
         for root, dirs, files in os.walk(info['workspace'], topdown=False):
             for name in files:
                 os.remove(os.path.join(root,name))
 
-        if os.path.exists( info['workspace']):
-            os.rmdir(info['workspace'])
-            
-        os.makedirs(info['workspace'],0777)
-        os.chmod(info['workspace'],0777)
+    if os.path.exists( info['workspace'] + "/output.gdb"):
+        arcpy.Delete_management( info['workspace'] + "/output.gdb")
+
+    try:
+        arcpy.CreateFileGDB_management(info['workspace'], "output.gdb")
+        print "Succcesfully Created the file geodatabase!"
+    except:
+        print 'Error creating file geodatabase'
+        print  arcpy.GetMessages(2)
+        logger.error('Error creating geoccoder')
+        logger.error(arcpy.GetMessages(2))
+
+    try:
+        arcpy.FeatureClassToFeatureClass_conversion(in_data, info['workspace'] + "/output.gdb" ,"temp")
+        print "Succcesfully Created the temp data!"
+    except:
+        print 'Error creating temp data'
+        print  arcpy.GetMessages(2)
+        logger.error('Error creating temp data')
+        logger.error(arcpy.GetMessages(2))
 
     print "Starting to create the locator: " + out_address_locator + "."
 
     try:
         arcpy.CreateAddressLocator_geocoding(in_address_locator_style, in_reference_data, in_field_map, out_address_locator, config_keyword)
         print "Succcesfully Created the composite locator: " + out_address_locator + "!"
-        arcpy.ClearWorkspaceCache_management()
     except:
-        arcpy.ClearWorkspaceCache_management()
         print 'Error creating geoccoder : ' + out_address_locator + '.'
         print  arcpy.GetMessages(2)
         logger.error('Error creating geoccoder : ' + out_address_locator + '.')
         logger.error(arcpy.GetMessages(2))
 
-
-
-    arcpy.ClearWorkspaceCache_management()
 #create composite
 def createComposite(info):
     arcpy.env.workspace = info['workspace']
@@ -135,7 +145,6 @@ def createComposite(info):
         print  arcpy.GetMessages(2)
         logger.error('Error rebuilding compsite geoccoder : ' + out_composite_address_locator + '.')
         logger.error(arcpy.GetMessages(2))
-        arcpy.ClearWorkspaceCache_management()
 
 #rebuild geocoder
 def rebuildLocator(locator):
@@ -148,9 +157,6 @@ def rebuildLocator(locator):
         print  arcpy.GetMessages(2)
         logger.error('Error rebuilding geoccoder : ' + locator + '.')
         logger.error(arcpy.GetMessages(2))
-
-        arcpy.ClearWorkspaceCache_management()
-
 
 def publishLocator(info):
     #Overwrite any existing outputs
@@ -197,7 +203,6 @@ def publishLocator(info):
             print e.message
             print " "
             logger.error ("An error occured " + e.message)
-            arcpy.ClearWorkspaceCache_management()
 
         try:
             # Execute UploadServiceDefinition to publish the service definition file as a service
@@ -208,7 +213,6 @@ def publishLocator(info):
             print e.message
             print " "
             logger.error ("An error occured " + e.message)
-            arcpy.ClearWorkspaceCache_management()
 
     else:
         # if the sddraft analysis contained errors, display them
@@ -217,9 +221,6 @@ def publishLocator(info):
         print ""
         logger.error( "Error were returned when creating service definition draft " )
         logger.error( analyze_messages['errors'] )
-        arcpy.ClearWorkspaceCache_management()
-
-    arcpy.ClearWorkspaceCache_management()
 
 #get yaml configuration file
 with open("config/config.yml", 'r') as ymlfile:
