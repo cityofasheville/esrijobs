@@ -89,10 +89,10 @@ def createLocator(info):
 
     print "removing temp files."
 
-    if info['workspace'] is not None:
-        for root, dirs, files in os.walk(info['workspace'], topdown=False):
-            for name in files:
-                os.remove(os.path.join(root,name))
+    #if info['workspace'] is not None:
+    #    for root, dirs, files in os.walk(info['workspace'], topdown=False):
+    #        for name in files:
+    #            os.remove(os.path.join(root,name))
 
     if os.path.exists( info['workspace'] + "/output.gdb"):
         arcpy.Delete_management( info['workspace'] + "/output.gdb")
@@ -129,6 +129,10 @@ def createLocator(info):
         print  arcpy.GetMessages(2)
         logger.error('Error creating geoccoder : ' + out_address_locator + '.')
         logger.error(arcpy.GetMessages(2))
+
+    if os.path.exists( info['workspace'] + "/output.gdb"):
+        arcpy.Delete_management( info['workspace'] + "/output.gdb")
+
 
 #create composite
 def createComposite(info):
@@ -187,6 +191,11 @@ def publishLocator(info):
     supported_operations = info['supported_operations']
 
     print "Starting to publish the geocode service " + service_name  + "..."
+
+    #remove old
+    os.remove(loc_path)
+    os.remove(out_sddraft)
+    os.remove(out_service_definition)
 
     #stagging
     out_service_definition = info['out_service_definition']
