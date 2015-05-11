@@ -130,8 +130,8 @@ def createLocator(info):
         #logger.error('Error creating geoccoder : ' + out_address_locator + '.')
         #logger.error(arcpy.GetMessages(2))
 
-    if os.path.exists( info['workspace'] + "/output.gdb"):
-        arcpy.Delete_management( info['workspace'] + "/output.gdb")
+    #if os.path.exists( info['workspace'] + "/output.gdb"):
+    #    arcpy.Delete_management( info['workspace'] + "/output.gdb")
 
 
 #create composite
