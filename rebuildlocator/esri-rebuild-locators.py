@@ -197,14 +197,15 @@ def publishLocator(info):
 
     print "Starting to publish the geocode service " + service_name  + "..."
 
+    #stagging
+    out_service_definition = info['out_service_definition']
+
+
     if os.path.isfile( out_sddraft):
         os.remove(out_sddraft)
 
     if os.path.isfile( out_service_definition ):
         os.remove(out_service_definition)
-
-    #stagging
-    out_service_definition = info['out_service_definition']
 
     #Create the sd draft file
     analyze_messages  = arcpy.CreateGeocodeSDDraft (loc_path, out_sddraft, service_name,
