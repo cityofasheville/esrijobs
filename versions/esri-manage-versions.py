@@ -1,16 +1,19 @@
 #Manage Versions
 import arcpy
 import pprint
-import os
+import os,sys
+from datetime import datetime
 from arcpy import env  
 import yaml
 import logging
 from logging import handlers
 
+print ''
+print 'Start version management %s ' % datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
+
 # create logger with
 logger = logging.getLogger('application')
 logger.setLevel(logging.DEBUG)
-
 
 #setup loggin from config.yaml
 def emaillogger( configkey ):
@@ -44,6 +47,7 @@ def createver(key,workspace):
        #attemp to create new version
        try:
           arcpy.CreateVersion_management(workspace, k['parent-version'], k['version-name'], k['access-permission']) 
+          print ' Create version: %s' %  k['version-name']
        except:
           log.error("Create version " +  k['version-name'] + " Failed.")
        
@@ -63,14 +67,17 @@ def deletever(key,workspace):
      if 'version-name' in key:
       try:
          arcpy.DeleteVersion_management(workspace, k['version-name'],) 
+         print ' Delete version: %s' %  k['version-name']
       except:
          logger.error("Delete version " +  k['version-name'] + " Failed.")
 
 #delete sde connections 
 def deleteconn(configkey):
   #delte existing sde file if it exsists
+  print 'Delete Connections.'
   if configkey['out_folder_path'] is None:
     os.path.exists(configkey['out_name']) and os.remove(configkey['out_name'])
+    print ' Delet connection: %s' % configkey['out_name']
   else:
     os.path.exists(configkey['out_folder_path']+configkey['out_name']) and os.remove(configkey['out_folder_path']+configkey['out_name'])
 
@@ -93,7 +100,8 @@ def connsde( configkey ):
                                             configkey['version'],
                                             configkey['date'])
 #get yaml configuration file
-with open("config/config.yml", 'r') as ymlfile:
+configfile = sys.argv[1]
+with open(configfile, 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 
 #traverse yaml create sde conenction string to remove,create, and alter versions
@@ -111,6 +119,7 @@ for key, value in cfg.items():
 
   #delete
   for k in connections:
+    print 'Start Delete versions.'
     #loop version keys and delete versions if the exist
     if  'versions' in k:
       ver = k['versions']
@@ -121,6 +130,7 @@ for key, value in cfg.items():
  
   #compress
   for k in connections:
+      print 'Start Compress versions.'
        #loop version keys and compress sde this compress state tree
       if k['out_folder_path'] is not None:
         try:
@@ -135,6 +145,7 @@ for key, value in cfg.items():
 
   #Create
   for k in connections:
+    print 'Start Create versions.'
     #loop version keys and re-create versions
     if  'versions' in k:
       ver = k['versions']
@@ -142,3 +153,7 @@ for key, value in cfg.items():
         createver(ver,k['out_folder_path']+k['out_name'])
       else:
         createver(ver,k['out_name']) 
+
+print 'End version management %s ' % datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+print ''
+
