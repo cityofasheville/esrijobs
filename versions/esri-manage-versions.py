@@ -105,54 +105,54 @@ with open(configfile, 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 
 #traverse yaml create sde conenction string to remove,create, and alter versions
-for key, value in cfg.items():
-  connections =  cfg['sde_connections']
-  emails = cfg['logging']
+connections =  cfg['sde_connections']
+emails = cfg['logging']
 
-  #loop keys setup loggind
-  for k in emails:
-    emaillogger(k)
+#loop keys setup loggind
+for k in emails:
+  emaillogger(k)
   
-  #loop keys and create sde connection
-  for k in connections:
-    connsde(k)
+#loop keys and create sde connection
+for k in connections:
+  connsde(k)
 
-  #delete
-  for k in connections:
-    print 'Start Delete versions.'
-    #loop version keys and delete versions if the exist
-    if  'versions' in k:
-      ver = k['versions']
-      if k['out_folder_path'] is not None:
-        deletever(ver,k['out_folder_path']+k['out_name'])
-      else:
-        deletever(ver,k['out_name'])
+#delete
+for k in connections:
+  print 'Start Delete versions.'
+  #loop version keys and delete versions if the exist
+  if  'versions' in k:
+    ver = k['versions']
+    if k['out_folder_path'] is not None:
+      deletever(ver,k['out_folder_path']+k['out_name'])
+    else:
+      deletever(ver,k['out_name'])
  
-  #compress
-  for k in connections:
-      print 'Start Compress versions.'
-       #loop version keys and compress sde this compress state tree
-      if k['out_folder_path'] is not None:
-        try:
-          arcpy.Compress_management(k['out_folder_path']+k['out_name'])
-        except:
-          logger.error("Compress version " +  k['out_folder_path']+k['out_name']  + " Failed.")
-      else:
-        try:
-          arcpy.Compress_management(k['out_name'])
-        except:
-          logger.error("Compress version " +  k['out_name'] + " Failed.")
+#compress
+for k in connections:
+    print 'Start Compress versions.'
+    print k['out_name']
+    #loop version keys and compress sde this compress state tree
+    if k['out_folder_path'] is not None:
+      try:
+        arcpy.Compress_management(k['out_folder_path']+k['out_name'])
+      except:
+        logger.error("Compress version " +  k['out_folder_path']+k['out_name']  + " Failed.")
+    else:
+      try:
+        arcpy.Compress_management(k['out_name'])
+      except:
+        logger.error("Compress version " +  k['out_name'] + " Failed.")
 
-  #Create
-  for k in connections:
-    print 'Start Create versions.'
-    #loop version keys and re-create versions
-    if  'versions' in k:
-      ver = k['versions']
-      if k['out_folder_path'] is not None:
-        createver(ver,k['out_folder_path']+k['out_name'])
-      else:
-        createver(ver,k['out_name']) 
+#Create
+for k in connections:
+  print 'Start Create versions.'
+  #loop version keys and re-create versions
+  if  'versions' in k:
+    ver = k['versions']
+    if k['out_folder_path'] is not None:
+      createver(ver,k['out_folder_path']+k['out_name'])
+    else:
+      createver(ver,k['out_name']) 
 
 print 'End version management %s ' % datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 print ''
