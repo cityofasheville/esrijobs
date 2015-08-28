@@ -87,8 +87,7 @@ def createLocator(info):
     out_address_locator = info['loc_path']
     config_keyword = info['config_keyword']
     in_data = info['in_data']
-    storage_type = info['storage_type']
- 
+
     print "removing temp files."
 
     if os.path.isfile( out_address_locator+'.loc' ):
@@ -204,6 +203,7 @@ def publishLocator(info):
                 # Execute UploadServiceDefinition to publish the service definition file as a service
                 arcpy.server.UploadServiceDefinition(out_service_definition, connection_file_path)
                 print "The geocode service " + service_name  + " was successfully published."
+                arcpy.Delete_management(loc_path)
                 print " "
             except Exception, e:
                 print e.message
@@ -217,8 +217,6 @@ def publishLocator(info):
             print ""
             logger.error( "Error were returned when creating service definition draft " )
             logger.error( analyze_messages['errors'] )
-
-      arcpy.Delete_management(loc_path)
 
     else:
         print "No locator found " + loc_path
