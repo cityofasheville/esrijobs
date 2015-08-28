@@ -1,7 +1,7 @@
 #Manage Versions
 import arcpy
 import pprint
-import os, re
+import os,sys, re
 from arcpy import env
 import yaml
 import logging
@@ -87,13 +87,9 @@ def createLocator(info):
     out_address_locator = info['loc_path']
     config_keyword = info['config_keyword']
     in_data = info['in_data']
-
+    storage_type = info['storage_type']
+ 
     print "removing temp files."
-
-    #if info['workspace'] is not None:
-    #    for root, dirs, files in os.walk(info['workspace'], topdown=False):
-    #        for name in files:
-    #            os.remove(os.path.join(root,name))
 
     if os.path.isfile( out_address_locator+'.loc' ):
         os.remove(out_address_locator+'.loc')
@@ -104,51 +100,23 @@ def createLocator(info):
     if os.path.isfile( out_address_locator+'.lox' ):
         os.remove(out_address_locator+'.lox')
 
-    if os.path.exists( info['workspace'] + "/output.gdb"):
-        arcpy.Delete_management( info['workspace'] + "/output.gdb")
-
-    print "Creating temp file geodatbase."
-
-    try:
-        arcpy.CreateFileGDB_management(info['workspace'], "output.gdb")
-        print "Succcesfully Created the file geodatabase!"
-    except:
-        print 'Error creating file geodatabase'
-        print  arcpy.GetMessages(2)
-        #logger.error('Error creating geoccoder')
-        #logger.error(arcpy.GetMessages(2))
-
-    print "Exporting temp data."
-
-    try:
-        arcpy.FeatureClassToFeatureClass_conversion(in_data, info['workspace'] + "/output.gdb" ,"temp")
-        print "Succcesfully Created the temp data!"
-    except:
-        print 'Error creating temp data'
-        print  arcpy.GetMessages(2)
-        #logger.error('Error creating temp data')
-        #logger.error(arcpy.GetMessages(2))
-
     print "Creating the locator: " + out_address_locator + "."
     arcpy.ClearWorkspaceCache_management()
-    time.sleep(5)
 
     try:
         arcpy.CreateAddressLocator_geocoding(in_address_locator_style, in_reference_data, in_field_map, out_address_locator, config_keyword)
-        print "Succcesfully Created the composite locator: " + out_address_locator + "!"
+        print "Succcesfully Created thelocator: " + out_address_locator + "!"
     except:
         print 'Error creating geoccoder : ' + out_address_locator + '.'
         print  arcpy.GetMessages(2)
-        #logger.error('Error creating geoccoder : ' + out_address_locator + '.')
-        #logger.error(arcpy.GetMessages(2))
+        logger.error('Error creating geoccoder : ' + out_address_locator + '.')
+        logger.error(arcpy.GetMessages(2))
 
-    if os.path.exists( info['workspace'] + "/output.gdb"):
-        arcpy.Delete_management( info['workspace'] + "/output.gdb")
 
 #create composite
 def createComposite(info):
     arcpy.env.workspace = info['workspace']
-
+   
     in_address_locators = info['in_address_locators']
     in_field_map = info['in_field_map']
     in_selection_criteria = info['in_selection_criteria']
@@ -163,8 +131,8 @@ def createComposite(info):
     except:
         print 'Error rebuilding compsite geoccoder : ' + out_composite_address_locator + '.'
         print  arcpy.GetMessages(2)
-        #logger.error('Error rebuilding compsite geoccoder : ' + out_composite_address_locator + '.')
-        #logger.error(arcpy.GetMessages(2))
+        logger.error('Error rebuilding compsite geoccoder : ' + out_composite_address_locator + '.')
+        logger.error(arcpy.GetMessages(2))
 
 #rebuild geocoder
 def rebuildLocator(locator):
@@ -175,12 +143,12 @@ def rebuildLocator(locator):
     except:
         print 'Error rebuilding geoccoder : ' + locator + '.'
         print  arcpy.GetMessages(2)
-        #logger.error('Error rebuilding geoccoder : ' + locator + '.')
-        #logger.error(arcpy.GetMessages(2))
+        logger.error('Error rebuilding geoccoder : ' + locator + '.')
+        logger.error(arcpy.GetMessages(2))
 
 def publishLocator(info):
     #Overwrite any existing outputs
-
+    arcpy.ClearWorkspaceCache_management()
     arcpy.env.overwriteOutput = True
     arcpy.env.workspace = info['workspace']
 
@@ -201,13 +169,12 @@ def publishLocator(info):
     suggested_batch_size = info['max_batch_size']
     supported_operations = info['supported_operations']
 
-    if os.path.isfile( loc_path + '.loc' ):
-
+    #if os.path.isfile( loc_path + '.loc' ):
+    if True:
         print "Starting to publish the geocode service " + service_name  + "..."
 
         #stagging
         out_service_definition = info['out_service_definition']
-
 
         if os.path.isfile( out_sddraft):
             os.remove(out_sddraft)
@@ -231,7 +198,7 @@ def publishLocator(info):
             except Exception, e:
                 print e.message
                 print " "
-                #logger.error ("An error occured " + e.message)
+                logger.error ("An error occured " + e.message)
 
             try:
                 # Execute UploadServiceDefinition to publish the service definition file as a service
@@ -241,15 +208,17 @@ def publishLocator(info):
             except Exception, e:
                 print e.message
                 print " "
-                #logger.error ("An error occured " + e.message)
+                logger.error ("An error occured " + e.message)
 
         else:
             # if the sddraft analysis contained errors, display them
             print "Error were returned when creating service definition draft "
             print analyze_messages['errors']
             print ""
-            #logger.error( "Error were returned when creating service definition draft " )
-            #logger.error( analyze_messages['errors'] )
+            logger.error( "Error were returned when creating service definition draft " )
+            logger.error( analyze_messages['errors'] )
+
+      arcpy.Delete_management(loc_path)
 
     else:
         print "No locator found " + loc_path
@@ -258,8 +227,10 @@ def publishLocator(info):
 
 
 #get yaml configuration file
-with open("config/config.yml", 'r') as ymlfile:
+configfile = sys.argv[1]
+with open(configfile, 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
+
 
 #traverse yaml create sde conenction string to remove,create, and alter versions
 
@@ -301,6 +272,7 @@ if creategeo is not None:
         if 'in_address_locator_style' in k:
             if k['in_address_locator_style'] is not None:
                 createLocator( k )
+                #print 'starting publish'
                 publishLocator( k )
 
 if geocoder is not None:
