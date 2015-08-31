@@ -111,6 +111,8 @@ def createLocator(info):
         logger.error('Error creating geoccoder : ' + out_address_locator + '.')
         logger.error(arcpy.GetMessages(2))
 
+    arcpy.ClearWorkspaceCache_management()
+    arcpy.env.workspace = ""
 
 #create composite
 def createComposite(info):
@@ -132,6 +134,9 @@ def createComposite(info):
         print  arcpy.GetMessages(2)
         logger.error('Error rebuilding compsite geoccoder : ' + out_composite_address_locator + '.')
         logger.error(arcpy.GetMessages(2))
+
+    arcpy.ClearWorkspaceCache_management()
+    arcpy.env.workspace = ""
 
 #rebuild geocoder
 def rebuildLocator(locator):
@@ -203,7 +208,6 @@ def publishLocator(info):
                 # Execute UploadServiceDefinition to publish the service definition file as a service
                 arcpy.server.UploadServiceDefinition(out_service_definition, connection_file_path)
                 print "The geocode service " + service_name  + " was successfully published."
-                arcpy.Delete_management(loc_path)
                 print " "
             except Exception, e:
                 print e.message
@@ -221,14 +225,13 @@ def publishLocator(info):
     else:
         print "No locator found " + loc_path
 
-
-
+    arcpy.ClearWorkspaceCache_management()
+    arcpy.env.workspace = ""
 
 #get yaml configuration file
 configfile = sys.argv[1]
 with open(configfile, 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
-
 
 #traverse yaml create sde conenction string to remove,create, and alter versions
 
@@ -290,3 +293,4 @@ if composite is not None:
                 publishLocator( k )
 
 arcpy.ClearWorkspaceCache_management()
+
