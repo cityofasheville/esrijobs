@@ -93,7 +93,6 @@ def rebuildNetwork(network):
     try:
         #Build the network dataset
         arcpy.na.BuildNetwork(network)
-        #arcpy.BuildNetwork_na(network)
         print "Succcesfully Rebuilt the network: " + network + "!"
     except:
         print 'Error rebuilding networkdataset : ' + network + '.'
