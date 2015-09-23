@@ -135,6 +135,8 @@ for k in connections:
     if k['out_folder_path'] is not None:
       try:
         arcpy.Compress_management(k['out_folder_path']+k['out_name'])
+        arcpy.Compress_management(k['out_folder_path']+k['out_name'])
+        arcpy.Compress_management(k['out_folder_path']+k['out_name'])
       except:
         logger.error("Compress version " +  k['out_folder_path']+k['out_name']  + " Failed.")
     else:
