@@ -11,5 +11,10 @@ rebuildlocator/config/*.yaml
 rebuildlocator/config/*.yml
 rebuildlocator/*.sde
 rebuildlocator/*.ags
+compress/config/*.yaml
+compress/config/*.yml
+compress/*.sde
+compress/config/*.sde
+compress/*.log
 *.log
 versions/*.log

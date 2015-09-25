@@ -1,0 +1,1 @@
+C:\Python27\ArcGIS10.2\python C:\jobs\esrijobs\compress\esri-nightly-compress.py C:\jobs\esrijobs\compress\config\config.yml > C:\jobs\esri-compress.log

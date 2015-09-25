@@ -1,0 +1,1 @@
+C:\Python27\ArcGIS10.2\python C:\jobs\esrijobs\versions\esri-manage-versions.py C:\jobs\esrijobs\versions\config\config.yml > C:\jobs\esri-manage-versions.log

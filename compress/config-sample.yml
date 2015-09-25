@@ -1,0 +1,44 @@
+logging:
+- email-server: emailhost
+  email-to: email @ domain
+  email-from: email @ domain
+  email-subject: Error with versioning!
+sde_connections:
+- out_folder_path: . 
+  out_name: name_one.sde 
+  database_platform: POSTGRESQL 
+  instance: 10.0.0.1
+  account_authentication: DATABASE_AUTH 
+  username: username
+  password: secret
+  save_user_pass: SAVE_USERNAME 
+  database: datbase_name
+  schema: #
+  version_type: #
+  version: #
+  date: #
+  versions:
+    - version-name: test1
+      parent-version: sde.DEFAULT
+      access-permission: PUBLIC
+    - version-name: test2
+      parent-version: sde.DEFAULT
+      access-permission: PUBLIC
+    - version-name: test3
+      parent-version: sde.DEFAULT
+      access-permission: PUBLIC
+- out_folder_path: .
+  out_name: name_two.sde
+  database_platform: POSTGRESQL
+  instance: 10.0.0.2
+  account_authentication: DATABASE_AUTH
+  username: username
+  password: secret
+  save_user_pass: SAVE_USERNAME
+  database: datbase_name
+  schema: #
+  version_type: #
+  version: #
+  date: #
+  versions: #
+
